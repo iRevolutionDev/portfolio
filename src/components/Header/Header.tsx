@@ -71,11 +71,7 @@ type HeaderExports = {
 }
 
 const Header: React.FC<ChildrenProp> & HeaderExports = ({children}) => {
-     return (
-          <header className="relative z-50 px-4 lg:px-20 py-8">
-              {children}
-          </header>
-     );
+     return <header className="relative z-50 px-4 lg:px-20 py-8">{children}</header>;
 };
 
 Header.Container = Container;

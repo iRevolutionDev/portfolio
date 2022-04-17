@@ -28,7 +28,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             </Header>
             <main>{children}</main>
             <Footer>
-                <Footer.Text text={`© ${new Date().getFullYear()} Made with ❤️ Revolution`}/>
+                <Footer.Text text={`© ${new Date().getFullYear()} Made with ❤️️ Revolution`}/>
                 <Footer.Social>
                     <Footer.Social.Item title={"Twitter"} icon={FaTwitter} link={"https://twitter.com/ImRevolutionxk"}/>
                     <Footer.Social.Item title={"Linkedin"} icon={FaLinkedin} link={`https://www.linkedin.com/in/`}/>

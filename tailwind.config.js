@@ -9,20 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'off-black': '#0D0D0D',
-        'off-white': '#ffffff',
-        grey: {
-          0: '#FFFFFF',
-          100: '#E7E7E7',
-          200: '#CFCFCF',
-          300: '#9E9E9E',
-          400: '#868686',
-          500: '#6E6E6E',
-          600: '#565656',
-          700: '#3D3D3D',
-          800: '#252525',
-          900: '#0D0D0D',
-        },
+        'primaryBlack': '#111827',
+        'primaryWhite': '#ffffff',
       },
       fontFamily: {
         sans: ["'Basier Circle'", ...fontFamily.sans],
