@@ -11,7 +11,21 @@ type Props = {
 export const Layout: React.FC<Props> = ({ children }) => {
     return (
         <div className="flex flex-col justify-between min-h-screen">
-            <Header/>
+            <Header>
+                <Header.Container>
+                    <Header.Desktop>
+                        <Header.Nav>
+                            <Header.Nav.Item path="/" title="Home"/>
+                            <Header.Nav.Item path="/" title="About"/>
+                            <Header.Nav.Item path="/" title="Contact"/>
+                        </Header.Nav>
+                    </Header.Desktop>
+                    <Header.Mobile>
+
+                    </Header.Mobile>
+                    <Header.ThemeButton/>
+                </Header.Container>
+            </Header>
             <main>{children}</main>
             <Footer>
                 <Footer.Text text={`© ${new Date().getFullYear()} Revolution`}/>
