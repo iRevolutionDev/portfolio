@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {FiMoon, FiSun} from "react-icons/fi";
 import {useTheme} from "next-themes";
 import Link from "next/link";
+import {AnimatePresence} from "framer-motion";
 
 type ChildrenProp = {
     children?: React.ReactNode;
@@ -12,7 +13,7 @@ const Desktop: React.FC<ChildrenProp> = ({children}) => {
 }
 
 const Mobile: React.FC<ChildrenProp> = ({children}) => {
-    return <nav className="hidden md:hidden">{children}</nav>;
+    return <nav className="block md:hidden">{children}</nav>;
 }
 
 const Container: React.FC<ChildrenProp> = ({children}) => {

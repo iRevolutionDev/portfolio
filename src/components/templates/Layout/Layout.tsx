@@ -1,6 +1,6 @@
 import React from 'react';
-import {Header} from "../Header";
-import {Footer} from "../Footer";
+import {Header} from "../../layouts/Header";
+import {Footer} from "../../layouts/Footer";
 
 import {FaLinkedin, FaTwitter} from "react-icons/fa";
 
@@ -20,12 +20,12 @@ export const Layout: React.FC<Props> = ({ children }) => {
                             <Header.Nav.Item path="/" title="Contact"/>
                         </Header.Nav>
                     </Header.Desktop>
-                    <Header.Mobile>
-
-                    </Header.Mobile>
                     <Header.ThemeButton/>
                 </Header.Container>
             </Header>
+            <Header.Mobile>
+
+            </Header.Mobile>
             <main>{children}</main>
             <Footer>
                 <Footer.Text text={`© ${new Date().getFullYear()} Made with ❤️️ Revolution`}/>

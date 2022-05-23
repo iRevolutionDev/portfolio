@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 
-import {Container} from "../components/Container";
-import {HandWave} from "../components/HandWave";
+import {Container} from "../components/modules/Container";
+import {HandWave} from "../components/elements/HandWave";
 
 const Index: NextPage = () => {
     return (
