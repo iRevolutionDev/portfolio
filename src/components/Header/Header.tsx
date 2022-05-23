@@ -20,7 +20,11 @@ const Container: React.FC<ChildrenProp> = ({children}) => {
 }
 
 const ThemeButton: React.FC = () => {
+    const [mounted, setMounted] = useState(false);
     const {theme, setTheme} = useTheme();
+
+    useEffect(() => setMounted(true), []);
+    if (!mounted) return null;
 
     return (
         <div className="hidden md:block">
