@@ -1,9 +1,10 @@
-import {NextPage} from "next";
-import {FaGithub, FaLinkedin, FaSpotify, SiHackthebox, TiLocation} from "react-icons/all";
+import React from "react";
 import Link from "next/link";
+
+import {FaGithub, FaLinkedin, FaSpotify, SiHackthebox, TiLocation} from "react-icons/all";
 import CopyToClipboard from "@/ui/components/CopyToClipboard";
 
-const Page: NextPage = () => {
+const Page: React.FC = () => {
     return (
         <>
             <section className="space-y-4">
