@@ -92,7 +92,7 @@ const Page: React.FC = () => {
                 </ul>
             </div>
             <div className="space-y-4">
-                <h1 className="text-3xl font-bold sm:text-3xl">Current Positions 🎓</h1>
+                <h1 className="text-3xl font-bold sm:text-3xl">Current Positions 💼</h1>
                 <Card.Container>
                     <Card
                         title={"Katsuhiro"}
