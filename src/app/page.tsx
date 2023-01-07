@@ -22,7 +22,7 @@ const Page: React.FC = () => {
                     <Link href="https://github.com/iRevolutionDev" target="blank">
                         <FaGithub size={32}/>
                     </Link>
-                    <Link href="https://linkedin.com" target="blank">
+                    <Link href="https://www.linkedin.com/in/gustavo-daniel-87761518b" target="blank">
                         <FaLinkedin size={32}/>
                     </Link>
                     <CopyToClipboard text="RevolutionDev#490921">
