@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-color: rgb(20, 20, 20);
+  --card-color: rgb(23, 23, 23);
+  --mouse-x: 0;
+  --mouse-y: 0;
+}
+
 html,
 body {
   font-family: -apple-system, JetBrains Mono, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,

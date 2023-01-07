@@ -17,7 +17,11 @@ module.exports = {
         200: '#1E1B24',
         300: '#19181F',
       },
-      'brand-name': '#fa8787'
+      'brand-name': '#fa8787',
+      'ctp-surface0': '#313244',
+      'ctp-surface1': '#45475a',
+      'ctp-text': '#cdd6f4',
+      'ctp-overlay0': '#a6adc8'
     }
   },
   plugins: [],
