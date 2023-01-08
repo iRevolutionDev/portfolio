@@ -7,7 +7,7 @@ type Props = {
     children?: React.ReactNode;
 }
 
-const CopyToClipboard: React.FC<Props> = ({ text, children }) => {
+const CopyToClipboard: React.FC<Props> = ({text, children}) => {
 
     const _copyToClipboard = async (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         event.preventDefault();

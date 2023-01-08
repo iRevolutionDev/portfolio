@@ -1,5 +1,5 @@
 import React from "react";
-import {SiSpotify} from "react-icons/all";
+import {SiSpotify} from "react-icons/si";
 
 const Spotify: React.FC = () => {
     return (
