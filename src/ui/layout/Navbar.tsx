@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {Squash as Hamburger} from 'hamburger-react';
 import {SiSpotify} from "react-icons/all";
 import Link from "next/link";
+import Spotify from "@/ui/components/Spotify";
 
 const Mobile: React.FC = () => {
     const [isOpen, setOpen] = useState(false);
@@ -54,13 +55,7 @@ const Mobile: React.FC = () => {
                             <Hamburger size={24} onToggle={toggled => setOpen(toggled)} />
                         </button>
                         <div className="overflow-hidden py-2 px-1">
-                            <p className="text-right select-none sm:select-text w-full inline-flex text-lg rounded-sm focus:outline-none focus:opacity-100
-                                      focus:ring items-center space-x-2 no-underline opacity-50 hover:opacity-100 h-12 mt-0.5">
-                                <span>Not playing anything</span>
-                                <span>
-                                <SiSpotify/>
-                            </span>
-                            </p>
+                            <Spotify/>
                         </div>
                     </div>
                 </div>
@@ -77,7 +72,7 @@ const Desktop: React.FC<DesktopProps> = ({ children }) => {
     return (
         <>
             <div className="hidden items-center space-x-2 sm:flex sm:mb-8">
-                <nav className="flex space-x-4">
+                <nav className="flex-1">
                     <ul className="flex space-x-4">
                         <li className="shrink-0">
                             <Link href="/" className="block py-3 text-small hover:bg-dark-50 no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block sm:px-5 sm:hover:bg-ctp-text/20 sm:rounded-full">/</Link>
@@ -90,6 +85,9 @@ const Desktop: React.FC<DesktopProps> = ({ children }) => {
                         </li>
                     </ul>
                 </nav>
+                <div className="overflow-hidden py-2 px-1">
+                    <Spotify/>
+                </div>
             </div>
             {children}
         </>
