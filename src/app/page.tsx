@@ -22,9 +22,9 @@ import {
 
 import {TiLocation} from "react-icons/ti";
 
-import CopyToClipboard from "@/ui/components/CopyToClipboard";
-import Card from "@/ui/components/Card";
-import IconsContainer from "@/ui/components/IconsContainer";
+import CopyToClipboard from "@/components/CopyToClipboard";
+import Card from "@/components/card";
+import IconsContainer from "@/components/IconsContainer";
 
 export default function Page() {
     return (

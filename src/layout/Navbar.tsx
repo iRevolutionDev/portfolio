@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from "react";
 import {Squash as Hamburger} from 'hamburger-react';
 import Link from "next/link";
-import Spotify from "@/ui/components/Spotify";
+import Spotify from "@/components/Spotify";
 
 export function NavbarMobile({children} : {children?: React.ReactNode}) {
     const [isOpen, setOpen] = useState(false);
