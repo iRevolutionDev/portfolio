@@ -2,11 +2,10 @@
 
 import React, {useEffect, useState} from "react";
 import {Squash as Hamburger} from 'hamburger-react';
-import {SiSpotify} from "react-icons/all";
 import Link from "next/link";
 import Spotify from "@/ui/components/Spotify";
 
-const Mobile: React.FC = () => {
+export function NavbarMobile({children} : {children?: React.ReactNode}) {
     const [isOpen, setOpen] = useState(false);
     const [onTop, setOnTop] = useState(false);
 
@@ -28,19 +27,19 @@ const Mobile: React.FC = () => {
                 <h1 className="text-2xl font-bold text-white">Pages</h1>
                 <ul className="grid grid-cols-1 gap-2">
                     <li className="shrink-0">
-                        <Link href="/" className="block py-3 font-mono text-lg hover:text-ctp-text no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block
+                        <Link href="/" className="block py-3 font-mono text-lg hover:text-ctp-text no-underline rounded-md sm:inline-block
                                            sm:px-5 sm:text-sm sm:font-normal sm:hover:bg-ctp-text/20 sm:rounded-full">
                             Home
                         </Link>
                     </li>
                     <li className="shrink-0">
-                        <Link href="/about" className="block py-3 font-mono text-lg hover:text-ctp-text no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block
+                        <Link href="/about" className="block py-3 font-mono text-lg hover:text-ctp-text no-underline rounded-md sm:inline-block
                                              sm:px-5 sm:text-sm sm:font-normal sm:hover:bg-ctp-text/20 sm:rounded-full">
                             About
                         </Link>
                     </li>
                     <li>
-                        <Link href="/blog" className="block py-3 font-mono text-lg hover:text-ctp-text no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block
+                        <Link href="/blog" className="block py-3 font-mono text-lg hover:text-ctp-text no-underline rounded-md sm:inline-block
                                                   sm:px-5 sm:text-sm sm:font-normal sm:hover:bg-ctp-text/20 sm:rounded-full">
                             Blog
                         </Link>
@@ -68,20 +67,20 @@ type DesktopProps = {
     children: React.ReactNode;
 }
 
-const Desktop: React.FC<DesktopProps> = ({ children }) => {
+export function NavbarDesktop({children}: DesktopProps) {
     return (
         <>
             <div className="hidden items-center space-x-2 sm:flex sm:mb-8">
                 <nav className="flex-1">
                     <ul className="flex space-x-4">
                         <li className="shrink-0">
-                            <Link href="/" className="block py-3 text-small hover:bg-dark-50 no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block sm:px-5 sm:hover:bg-ctp-text/20 sm:rounded-full">/</Link>
+                            <Link href="/" className="block py-3 text-small hover:bg-dark-50 no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block sm:px-5 sm:rounded-full">/</Link>
                         </li>
                         <li className="shrink-0">
-                            <Link href="/about" className="block py-3 text-small hover:bg-dark-50 no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block sm:px-5 sm:hover:bg-ctp-text/20 sm:rounded-full">~/about</Link>
+                            <Link href="/about" className="block py-3 text-small hover:bg-dark-50 no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block sm:px-5 sm:rounded-full">~/about</Link>
                         </li>
                         <li className="shrink-0">
-                            <Link href="/blog" className="block py-3 text-small hover:bg-dark-50 no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block sm:px-5 sm:hover:bg-ctp-text/20 sm:rounded-full">~/blog</Link>
+                            <Link href="/blog" className="block py-3 text-small hover:bg-dark-50 no-underline sm:hover:bg-ctp-text/20 rounded-md sm:inline-block sm:px-5 sm:rounded-full">~/blog</Link>
                         </li>
                     </ul>
                 </nav>
@@ -93,25 +92,3 @@ const Desktop: React.FC<DesktopProps> = ({ children }) => {
         </>
     )
 }
-
-type NavbarDefines = {
-    Mobile: typeof Mobile;
-    Desktop: typeof Desktop;
-}
-
-type NavbarProps = {
-    children: React.ReactNode;
-}
-
-const Navbar: React.FC<NavbarProps> & NavbarDefines = ({ children }) => {
-    return (
-        <>
-            {children}
-        </>
-    )
-}
-
-Navbar.Mobile = Mobile;
-Navbar.Desktop = Desktop;
-
-export default Navbar;

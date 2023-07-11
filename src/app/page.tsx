@@ -1,20 +1,32 @@
 import React from "react";
 import Link from "next/link";
 
+import {FaGithub, FaLinkedin, FaSpotify} from "react-icons/fa";
+
 import {
-    FaGithub, FaLinkedin, FaSpotify,
-    SiAndroidstudio, SiCplusplus, SiCsharp,
-    SiDart, SiFlutter, SiGit, SiHackthebox,
-    SiJavascript, SiPython, SiReact,
-    SiRust, SiTailwindcss, SiTypescript,
-    SiYarn, TiLocation,
-} from "react-icons/all";
+    SiAndroidstudio,
+    SiCplusplus,
+    SiCsharp,
+    SiDart,
+    SiFlutter,
+    SiGit,
+    SiHackthebox,
+    SiJavascript,
+    SiPython,
+    SiReact,
+    SiRust,
+    SiTailwindcss,
+    SiTypescript,
+    SiYarn,
+} from "react-icons/si";
+
+import {TiLocation} from "react-icons/ti";
 
 import CopyToClipboard from "@/ui/components/CopyToClipboard";
 import Card from "@/ui/components/Card";
 import IconsContainer from "@/ui/components/IconsContainer";
 
-const Page: React.FC = () => {
+export default function Page() {
     return (
         <main className="mx-auto max-w-3xl space-y-12 md:py-24">
             <div className="space-y-4">
@@ -36,7 +48,9 @@ const Page: React.FC = () => {
                             <div className="bg-dark-50 p-2 rounded-full flex items-center sm:space-x-2">
                                 <TiLocation size={20}/>
                                 <h1 className="">Brazil / São Paulo</h1>
-                                <div className="bg-dark-100 rounded-full w-4 h-4 ml-2"></div>
+                                <div className="bg-dark-100 rounded-full w-4 h-4 ml-2 relative">
+                                    <div className="bg-white rounded-full w-2 h-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"/>
+                                </div>
                             </div>
                         </div>
                     </Link>
@@ -101,5 +115,3 @@ const Page: React.FC = () => {
         </main>
     )
 }
-
-export default Page;
