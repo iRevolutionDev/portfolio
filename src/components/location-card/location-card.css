@@ -1,0 +1,24 @@
+.location-ping {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+    -webkit-animation: pulse 1.5s infinite;
+    -moz-animation: pulse 1.5s infinite;
+    -o-animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        width: 0;
+        height: 0;
+    }
+
+    100% {
+        width: .8rem;
+        height: .8rem;
+        opacity: 0;
+    }
+}
