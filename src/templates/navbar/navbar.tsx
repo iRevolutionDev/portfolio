@@ -1,6 +1,7 @@
 import {FC, PropsWithChildren} from "react";
 import {Grid, Stack} from "@mui/material";
 import {NavButton} from "@/components/nav-button";
+import {SpotifyWatcher} from "@/components/spotify-watcher";
 
 const Item = ({children}: PropsWithChildren) => {
     return (
@@ -14,7 +15,7 @@ type Extensions = {
     Item: typeof Item;
 }
 
-const Navbar: FC<PropsWithChildren> & Extensions = ({ children }) => {
+const Navbar: FC<PropsWithChildren> & Extensions = ({children}) => {
     return (
         <div className="my-5">
             <Stack direction="row">
@@ -24,7 +25,7 @@ const Navbar: FC<PropsWithChildren> & Extensions = ({ children }) => {
 
                 <Grid container justifyContent="flex-end">
                     <Grid item>
-
+                        <SpotifyWatcher/>
                     </Grid>
                 </Grid>
             </Stack>
