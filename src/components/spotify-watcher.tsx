@@ -6,10 +6,10 @@ import {useGetTracksQuery} from "@/redux/services/spotify-api";
 import Image from "next/image";
 
 export const SpotifyWatcher: FC = () => {
-    const {data, isLoading, isFetching} = useGetTracksQuery();
+    const {data, isLoading, isFetching, isError} = useGetTracksQuery();
 
     return (
-        (isLoading || isFetching || !data?.is_playing) ? (
+        (isLoading || isFetching || isError || !data?.is_playing) ? (
             <Stack className="h-full" direction="row" spacing={2} alignContent="center" alignItems="center">
                 <BiLogoSpotify size={24}/>
                 <Typography variant="body1" className="opacity-60">
