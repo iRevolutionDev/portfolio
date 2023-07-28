@@ -3,15 +3,19 @@
 import {Button, styled} from "@mui/material";
 import Link from "next/link";
 import {ReactNode} from "react";
+import {useAppDispatch} from "@/redux/hooks";
+import {closeMenu} from "@/redux/features/menu-slice";
 
 interface NavButtonProps {
     href: string;
+    onClick?: () => void;
     children?: ReactNode;
 }
 
-export const NavButton = styled(
-    ({href, children, ...otherProps}: NavButtonProps) =>
+const NavButtonStyled = styled(
+    ({href, children, onClick, ...otherProps}: NavButtonProps) =>
         <Button component={Link}
+                onClick={onClick}
                 href={href} {...otherProps}>
             {children}
         </Button>)
@@ -30,3 +34,13 @@ export const NavButton = styled(
         justifyContent: "flex-start",
     }
 }));
+
+export const NavButton = ({href, children}: NavButtonProps) => {
+    const dispatch = useAppDispatch();
+
+    return (
+        <NavButtonStyled href={href} onClick={() => dispatch(closeMenu())}>
+            {children}
+        </NavButtonStyled>
+    )
+}
