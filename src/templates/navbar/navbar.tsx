@@ -6,11 +6,17 @@ import {AnimatedAppBar} from "@/components/animated-appbar";
 import MobileMenu from "@/components/mobile-menu";
 import MenuButton from "@/components/menu-button";
 
-const Item = ({children}: PropsWithChildren) => {
+interface ItemProps {
+    href: string;
+}
+
+const Item = ({children, href}: PropsWithChildren<ItemProps>) => {
     return (
-        <li className="text-white list-none w-full md:w-auto">
-            <NavButton>{children}</NavButton>
-        </li>
+        <div className="text-white list-none w-full md:w-auto">
+            <NavButton href={href}>
+                {children}
+            </NavButton>
+        </div>
     );
 }
 

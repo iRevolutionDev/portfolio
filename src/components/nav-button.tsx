@@ -1,8 +1,21 @@
 'use client';
 
 import {Button, styled} from "@mui/material";
+import Link from "next/link";
+import {ReactNode} from "react";
 
-export const NavButton = styled(Button)(({theme}) => ({
+interface NavButtonProps {
+    href: string;
+    children?: ReactNode;
+}
+
+export const NavButton = styled(
+    ({href, children, ...otherProps}: NavButtonProps) =>
+        <Button component={Link}
+                href={href} {...otherProps}>
+            {children}
+        </Button>)
+(({theme}) => ({
     borderRadius: "32px",
     minWidth: "0",
     padding: ".75rem 1.25rem",

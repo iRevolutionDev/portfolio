@@ -6,14 +6,14 @@ export default function Layout({children}: PropsWithChildren<{}>) {
     return (
         <>
             <Navbar>
-                <Navbar.Item>
+                <Navbar.Item href="/">
                     /
                 </Navbar.Item>
-                <Navbar.Item>
-                    ~/about
-                </Navbar.Item>
-                <Navbar.Item>
+                <Navbar.Item href="/projects">
                     ~/projects
+                </Navbar.Item>
+                <Navbar.Item href="/terminal">
+                    ~/terminal
                 </Navbar.Item>
             </Navbar>
             <Container maxWidth="md">
