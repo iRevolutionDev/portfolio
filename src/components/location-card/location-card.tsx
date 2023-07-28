@@ -7,7 +7,8 @@ import Link from "next/link";
 
 export const LocationCard: FC = ({}) => {
     return (
-        <Link href="https://www.google.com/maps/place/S%C3%A3o+Paulo,+State+of+S%C3%A3o+Paulo/">
+        <Link href="https://www.google.com/maps/place/S%C3%A3o+Paulo,+State+of+S%C3%A3o+Paulo/"
+              rel="noopener noreferrer" target="_blank">
             <Paper className="p-2" elevation={0} sx={{borderRadius: 10}} variant="outlined">
                 <Stack direction="row" spacing={2} alignContent="center" alignItems="center">
                     <LocationOn fontSize="small"/>
