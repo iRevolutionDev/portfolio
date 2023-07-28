@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {setupListeners} from "@reduxjs/toolkit/query";
 import {spotifyApi} from "@/redux/services/spotify-api";
+import {menuReducer} from "@/redux/features/menu-slice";
 
 export const store = configureStore({
     reducer: {
+        menu: menuReducer,
         [spotifyApi.reducerPath]: spotifyApi.reducer,
     },
     devTools: process.env.NODE_ENV !== "production",

@@ -10,4 +10,10 @@ export const NavButton = styled(Button)(({theme}) => ({
     lineHeight: "1.25rem",
     fontWeight: "500",
     textTransform: "none",
+
+    [theme.breakpoints.down("md")]: {
+        width: "100%",
+        padding: ".75rem 1rem",
+        justifyContent: "flex-start",
+    }
 }));
