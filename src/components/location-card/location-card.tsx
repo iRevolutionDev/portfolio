@@ -1,6 +1,5 @@
-import "./location-card.css";
-
 import {FC} from "react";
+import "@/components/location-card/location-card.css";
 import {Paper, Stack, Typography} from "@mui/material";
 import {LocationOn} from "@mui/icons-material";
 import Link from "next/link";
