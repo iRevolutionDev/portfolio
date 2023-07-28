@@ -7,9 +7,9 @@ import JobDetailsCard from "@/components/job-details-card";
 
 export default function Page() {
     return (
-        <main className="mx-auto max-w-3xl space-y-12 md:py-24">
+        <main className="mx-auto max-w-3xl space-y-12 py-24">
             <Stack direction="column" spacing={2}>
-                <Stack direction="row" spacing={2} alignContent="center" alignItems="center">
+                <Stack direction={{xs: 'column', sm: 'row'}} spacing={2} alignContent="center" alignItems="center">
                     <SocialLinks/>
                     <LocationCard/>
                 </Stack>
