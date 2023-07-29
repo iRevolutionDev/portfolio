@@ -17,7 +17,9 @@ export default function Layout({children}: PropsWithChildren<{}>) {
                 </Navbar.Item>
             </Navbar>
             <Container maxWidth="md">
-                {children}
+                <main className="mx-auto max-w-3xl space-y-12 py-12 md:py-24">
+                    {children}
+                </main>
             </Container>
         </>
     );
