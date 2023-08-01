@@ -11,3 +11,4 @@ export const PLAYER_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-p
 export const GRANT_TYPE = 'refresh_token';
 export const HOUR_REVALIDATE = 60 * 60;
 export const SHORT_REVALIDATE = 60;
+export const USER = 'revolution';
