@@ -9,6 +9,7 @@ import ColorInterpreter from "@/helpers/color-intepreter";
 import {useAppDispatch, useAppSelector} from "@/redux/hooks";
 import {clearTerminal, printTerminal} from "@/redux/features/terminal-slice";
 import {terminalEventDispatcher} from "@/features/terminal/terminal-event-dispatcher";
+import {terminal} from "@/features/terminal/terminal";
 
 type TerminalProps = {
     commands?: Command[],
@@ -27,6 +28,8 @@ export const Terminal: FC<TerminalProps> = ({welcomeMessage, prompt, commands}) 
 
         terminalEventDispatcher.on('clear', clear)
         terminalEventDispatcher.on('log', sendMessage)
+
+        terminal.setup();
 
         return () => {
             CommandManager.clear()

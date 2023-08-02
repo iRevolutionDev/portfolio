@@ -1,6 +1,8 @@
-import {ClearCommand, HelpCommand} from "@/features/terminal/commands";
+import {CdCommand, ClearCommand, HelpCommand, LsCommand} from "@/features/terminal/commands";
 
 export const commands = [
     new HelpCommand(),
-    new ClearCommand()
+    new ClearCommand(),
+    new LsCommand(),
+    new CdCommand()
 ];
