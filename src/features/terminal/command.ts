@@ -7,7 +7,7 @@ export class Command {
     constructor(
         public readonly name: string,
         public readonly description: string,
-        public readonly args: string[],
+        public readonly args: string[] = [],
     ) {
     }
 
