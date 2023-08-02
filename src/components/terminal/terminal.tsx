@@ -13,10 +13,10 @@ import {terminalEventDispatcher} from "@/features/terminal/terminal-event-dispat
 type TerminalProps = {
     commands?: Command[],
     welcomeMessage?: string,
-    prompt?: string
+    prompt: string
 }
 
-export const Terminal: FC<TerminalProps> = ({commands}) => {
+export const Terminal: FC<TerminalProps> = ({welcomeMessage, prompt, commands}) => {
     const {output} = useAppSelector(state => state.terminal)
     const dispatch = useAppDispatch();
 
@@ -46,10 +46,11 @@ export const Terminal: FC<TerminalProps> = ({commands}) => {
 
     return (
         <Stack direction="column" spacing={1} className="h-full">
+            {welcomeMessage && <ColorInterpreter text={welcomeMessage}/>}
             {output.map((line, index) => (
                 <ColorInterpreter key={index} text={line}/>
             ))}
-            <CommandLine onExecute={onExecute}/>
+            <CommandLine prompt={prompt} onExecute={onExecute}/>
         </Stack>
     )
 }
