@@ -1,17 +1,10 @@
 import React, {ReactNode, useCallback, useMemo} from "react";
 
 /**
- * Get the Tailwind CSS class name for a given color identifier.
+ * Retrieves the color class for a given color identifier.
  *
- * This function converts a color identifier into the corresponding Tailwind CSS class name.
- * If the provided color identifier is a valid lowercase alphabetic string, the function returns the corresponding Tailwind CSS class name with a 500 shade of that color.
- * If the provided color identifier is not valid, the function returns the "text-black" class.
- *
- * Example Usage:
- *   const colorClassName = getColorClassFromTailwind("red"); // returns "text-red-500"
- *
- * @param {string} colorIdentifier - The color identifier.
- * @returns {string} The Tailwind CSS class name for the given color identifier.
+ * @param {string} colorIdentifier - The color identifier to retrieve the color class for.
+ * @returns {string | undefined} The color class for the given color identifier, or undefined if the color identifier is invalid.
  */
 const getColorClass = (colorIdentifier: string): string | undefined => {
     const sanitizedColorIdentifier = colorIdentifier.replace("@", "");
