@@ -21,6 +21,8 @@ export const Terminal: FC<TerminalProps> = ({welcomeMessage, prompt, commands}) 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        sendMessage(welcomeMessage ?? '');
+
         CommandManager.addAll(commands ?? [])
 
         terminalEventDispatcher.on('clear', clear)
@@ -46,7 +48,6 @@ export const Terminal: FC<TerminalProps> = ({welcomeMessage, prompt, commands}) 
 
     return (
         <Stack direction="column" spacing={1} className="h-full">
-            {welcomeMessage && <ColorInterpreter text={welcomeMessage}/>}
             {output.map((line, index) => (
                 <ColorInterpreter key={index} text={line}/>
             ))}

@@ -11,4 +11,17 @@ export const PLAYER_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-p
 export const GRANT_TYPE = 'refresh_token';
 export const HOUR_REVALIDATE = 60 * 60;
 export const SHORT_REVALIDATE = 60;
-export const USER = 'revolution';
+
+// Terminal constants
+export const HOST = 'revolution';
+export const WELOME_MESSAGE = `
+$$$$$$$\\                                $$\\             $$\\     $$\\                     
+$$  __$$\\                               $$ |            $$ |    \\__|                    
+$$ |  $$ | $$$$$$\\ $$\\    $$\\  $$$$$$\\  $$ |$$\\   $$\\ $$$$$$\\   $$\\  $$$$$$\\  $$$$$$$\\  
+$$$$$$$  |$$  __$$\\\\$$\\  $$  |$$  __$$\\ $$ |$$ |  $$ |\\_$$  _|  $$ |$$  __$$\\ $$  __$$\\ 
+$$  __$$< $$$$$$$$ |\\$$\\$$  / $$ /  $$ |$$ |$$ |  $$ |  $$ |    $$ |$$ /  $$ |$$ |  $$ |
+$$ |  $$ |$$   ____| \\$$$  /  $$ |  $$ |$$ |$$ |  $$ |  $$ |$$\\ $$ |$$ |  $$ |$$ |  $$ |
+$$ |  $$ |\\$$$$$$$\\   \\$  /   \\$$$$$$  |$$ |\\$$$$$$  |  \\$$$$  |$$ |\\$$$$$$  |$$ |  $$ |
+\\__|  \\__| \\_______|   \\_/     \\______/ \\__| \\______/    \\____/ \\__| \\______/ \\__|  \\__|
+Welcome to my website! Type 'help' to get started.
+`;
