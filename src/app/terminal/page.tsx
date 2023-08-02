@@ -8,7 +8,7 @@ export default function Page() {
         <div className="p-4 h-full">
             <Terminal
                 commands={commands}
-                prompt={`[@red](${HOST})[@blue](@localhost):[#ff0000](~)$`}
+                prompt={`[@green](${HOST}@localhost):[#ff0000](~)$`}
                 welcomeMessage={WELCOME_MESSAGE}
             />
         </div>
