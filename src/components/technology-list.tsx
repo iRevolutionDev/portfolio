@@ -10,13 +10,14 @@ import {
     BiLogoTailwindCss,
     BiLogoTypescript
 } from "react-icons/bi";
-import {SiCsharp, SiLua, SiRust} from "react-icons/si";
+import {SiCsharp, SiKotlin, SiLua, SiRust} from "react-icons/si";
 import {FaJava} from "react-icons/fa";
 
 export function TechnologyList() {
     return (
         <Card className="p-2" elevation={0} sx={{borderRadius: 10}} variant="outlined">
-            <Stack direction="row" flexWrap="wrap" spacing={2} alignContent="center" alignItems="center" justifyContent="center">
+            <Stack direction="row" flexWrap="wrap" spacing={2} alignContent="center" alignItems="center"
+                   justifyContent="center">
                 <Tooltip title="C++" arrow>
                     <BiLogoCPlusPlus fontSize={40}/>
                 </Tooltip>
@@ -28,6 +29,9 @@ export function TechnologyList() {
                 </Tooltip>
                 <Tooltip title="Java" arrow>
                     <FaJava fontSize={32}/>
+                </Tooltip>
+                <Tooltip title="Kotlin" arrow>
+                    <SiKotlin fontSize={32}/>
                 </Tooltip>
                 <Tooltip title="PHP" arrow>
                     <BiLogoPhp fontSize={40}/>
