@@ -33,11 +33,7 @@ const Item: FC<PropsWithChildren<JobDetailsCardItemProps>> = ({title, children, 
     )
 }
 
-type ExtendedProps = {
-    Item: typeof Item;
-}
-
-const JobDetailsCard: FC<PropsWithChildren> & ExtendedProps = ({children}) => {
+const Root: FC<PropsWithChildren> = ({children}) => {
     return (
         <Grid container spacing={2} alignItems="stretch">
             {children}
@@ -45,5 +41,7 @@ const JobDetailsCard: FC<PropsWithChildren> & ExtendedProps = ({children}) => {
     )
 }
 
-JobDetailsCard.Item = Item;
-export default JobDetailsCard;
+export const JobDetailsCard = {
+    Root,
+    Item
+}

@@ -1,9 +1,10 @@
 import {Divider, Stack, Typography} from "@mui/material";
 import {SocialLinks} from "@/components/social-links";
-import {LocationCard} from "@/components/location-card/location-card";
+import {Location} from "@/components/location-card/location-card";
 import {TechnologyList} from "@/components/technology-list";
 import {TitleWithColor} from "@/components/title-with-color";
-import JobDetailsCard from "@/components/job-details-card";
+import {JobDetailsCard} from "@/components/job-details-card";
+import {LocationOn} from "@mui/icons-material";
 
 export default function Page() {
     return (
@@ -11,7 +12,13 @@ export default function Page() {
             <Stack direction="column" spacing={2}>
                 <Stack direction={{xs: 'column', sm: 'row'}} spacing={2} alignContent="center" alignItems="center">
                     <SocialLinks/>
-                    <LocationCard/>
+                    <Location.Root href="https://www.google.com/maps/place/S%C3%A3o+Paulo,+State+of+S%C3%A3o+Paulo/">
+                        <LocationOn fontSize="small"/>
+                        <Typography variant="body1">
+                            Brazil - São Paulo
+                        </Typography>
+                        <Location.Ping/>
+                    </Location.Root>
                 </Stack>
                 <Stack direction="row" spacing={2} alignContent="center" alignItems="center">
                     <h3 className="text-4xl md:text-6xl font-bold">
@@ -36,7 +43,7 @@ export default function Page() {
             </Stack>
             <Stack direction="column" spacing={2}>
                 <Typography variant="h4" fontWeight={700}>Current Positions 💼</Typography>
-                <JobDetailsCard>
+                <JobDetailsCard.Root>
                     <JobDetailsCard.Item title="Katsuhiro" position="Software Engineer">
                         Katsuhiro is a software development company, specializing in high performance desktop and web
                         applications.
@@ -50,7 +57,7 @@ export default function Page() {
                         Guarumidia is a company that develops institutional websites and software for the city of
                         Guarulhos.
                     </JobDetailsCard.Item>
-                </JobDetailsCard>
+                </JobDetailsCard.Root>
             </Stack>
             <footer className="w-full">
                 <Divider className="w-full" sx={{marginBottom: 2}}/>
