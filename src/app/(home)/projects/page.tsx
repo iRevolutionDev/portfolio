@@ -5,7 +5,11 @@ import {FaStar} from "react-icons/fa";
 import {BiGitRepoForked} from "react-icons/bi";
 
 export default async function Page() {
-    const response = await fetch('https://api.github.com/users/irevolutiondev/repos');
+    const response = await fetch('https://api.github.com/users/irevolutiondev/repos', {
+        next: {
+            revalidate: 60 * 60 * 24
+        }
+    });
     const repos = await response.json() as Repositories;
 
     return (
