@@ -1,5 +1,5 @@
 'use client';
-import {useTheme} from "@mui/material";
+import {useTheme} from "@mui/material/styles";
 import {PropsWithChildren} from "react";
 
 export const TitleWithColor = ({children, ...props}: PropsWithChildren<{}>) => {

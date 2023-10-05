@@ -1,6 +1,7 @@
 'use client';
 
-import {Button, styled} from "@mui/material";
+import {Button} from "@mui/material";
+import {styled} from "@mui/material/styles";
 import Link from "next/link";
 import {ReactNode} from "react";
 import {useAppDispatch} from "@/redux/hooks";

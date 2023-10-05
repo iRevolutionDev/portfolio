@@ -3,7 +3,7 @@
 import {FC, PropsWithChildren} from "react";
 import {useAppSelector} from "@/redux/hooks";
 import {motion} from "framer-motion";
-import {useTheme} from "@mui/material";
+import {useTheme} from "@mui/material/styles";
 
 const MobileMenu: FC<PropsWithChildren> = ({children}) => {
     const {open} = useAppSelector(state => state.menu);

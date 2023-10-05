@@ -1,6 +1,6 @@
 'use client';
 
-import {useTheme} from "@mui/material";
+import {useTheme} from "@mui/material/styles";
 
 export const Circle = () => {
     const theme = useTheme();
