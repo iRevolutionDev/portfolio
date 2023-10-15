@@ -1,6 +1,14 @@
 import {PropsWithChildren} from "react";
 import {Container} from "@mui/material";
 import Navbar from "@/templates/navbar/navbar";
+import {Metadata} from "next";
+import {SEO} from "@/constants/seo";
+
+export const metadata: Metadata = {
+    metadataBase: SEO.metadataBase,
+    keywords: SEO.keywords,
+    openGraph: SEO.openGraph,
+}
 
 export default function Layout({children}: PropsWithChildren<{}>) {
     return (

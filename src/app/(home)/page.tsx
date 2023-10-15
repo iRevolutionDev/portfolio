@@ -5,6 +5,12 @@ import {TechnologyList} from "@/components/technology-list";
 import {TitleWithColor} from "@/components/title-with-color";
 import {JobDetailsCard} from "@/components/job-details-card";
 import {LocationOn} from "@mui/icons-material";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Revolution @ Home",
+    description: "Revolution is a software engineer, and he's passionate Reverse Engineering, C++, game development, and web development.",
+}
 
 export default function Page() {
     return (

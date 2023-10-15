@@ -3,6 +3,23 @@ import {Repositories} from "@/@types/github-repo";
 import Link from "next/link";
 import {FaStar} from "react-icons/fa";
 import {BiGitRepoForked} from "react-icons/bi";
+import {Metadata} from "next";
+
+export const generateMetadata = async (): Promise<Metadata> => {
+    const response = await fetch('https://api.github.com/users/irevolutiondev/repos', {
+        next: {
+            revalidate: 60 * 60 * 24
+        }
+    });
+    const repos = (await response.json() as Repositories)
+        .filter((repo) => !repo.fork)
+        .filter((repo) => !repo.name.startsWith('irevolutiondev'));
+
+    return {
+        title: "Revolution @ Projects",
+        description: `Revolution has ${repos.length} projects on GitHub.`,
+    }
+}
 
 export default async function Page() {
     const response = await fetch('https://api.github.com/users/irevolutiondev/repos', {
