@@ -5,6 +5,7 @@ import {SpotifyWatcher} from "@/components/spotify-watcher";
 import {AnimatedAppBar} from "@/components/animated-appbar";
 import MobileMenu from "@/components/mobile-menu";
 import MenuButton from "@/components/menu-button";
+import {ToggleThemeButton} from "@/components/toggle-theme-button";
 
 interface ItemProps {
     href: string;
@@ -34,9 +35,12 @@ const Navbar: FC<PropsWithChildren> & Extensions = ({children}) => {
                             {children}
                         </Stack>
 
-                        <Grid container justifyContent="flex-end">
+                        <Grid container justifyContent="flex-end" spacing={2}>
                             <Grid item>
                                 <SpotifyWatcher/>
+                            </Grid>
+                            <Grid item>
+                                <ToggleThemeButton/>
                             </Grid>
                         </Grid>
                     </Stack>
