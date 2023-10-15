@@ -3,6 +3,7 @@ import {Container} from "@mui/material";
 import Navbar from "@/templates/navbar/navbar";
 import {Metadata} from "next";
 import {SEO} from "@/constants/seo";
+import {PageWrapper} from "@/app/(home)/page-wrapper";
 
 export const metadata: Metadata = {
     metadataBase: SEO.metadataBase,
@@ -26,7 +27,9 @@ export default function Layout({children}: PropsWithChildren<{}>) {
             </Navbar>
             <Container maxWidth="md">
                 <main className="mx-auto max-w-3xl space-y-12 py-12 md:py-24">
-                    {children}
+                    <PageWrapper>
+                        {children}
+                    </PageWrapper>
                 </main>
             </Container>
         </>
