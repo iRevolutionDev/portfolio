@@ -8,10 +8,7 @@ import React, {ReactNode, useCallback, useMemo} from "react";
  */
 const getColorClass = (colorIdentifier: string): string | undefined => {
     const sanitizedColorIdentifier = colorIdentifier.replace("@", "");
-    if (/^[a-z]+$/.test(sanitizedColorIdentifier)) {
-        console.log(`terminal-${sanitizedColorIdentifier}-color`);
-        return `terminal-${sanitizedColorIdentifier}-color`;
-    }
+    if (/^[a-z]+$/.test(sanitizedColorIdentifier)) return `terminal-${sanitizedColorIdentifier}-color`;
     // Default to black if the provided tailwind class is not valid
 }
 
