@@ -3,6 +3,7 @@ import {createSlice} from "@reduxjs/toolkit";
 type TerminalState = {
     output: Array<string>;
     path: string;
+    initialized?: boolean;
 }
 
 const initialState: TerminalState = {
@@ -22,9 +23,12 @@ const terminalSlice = createSlice({
         },
         pathChange: (state, action) => {
             state.path = action.payload;
+        },
+        initTerminal: (state) => {
+            state.initialized = true;
         }
     }
 })
 
-export const {printTerminal, clearTerminal, pathChange} = terminalSlice.actions;
+export const {printTerminal, clearTerminal, pathChange, initTerminal} = terminalSlice.actions;
 export const terminalReducer = terminalSlice.reducer;

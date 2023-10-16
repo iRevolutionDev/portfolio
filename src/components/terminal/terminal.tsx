@@ -1,5 +1,6 @@
 'use client';
 import "@/components/terminal/colors.css"
+import "@/components/terminal/terminal.css"
 import {FC, useEffect} from "react";
 import {CommandManager} from "@/features/terminal/command-manager";
 import {CommandLine} from "@/components/terminal/command-line";
@@ -7,7 +8,7 @@ import {Stack} from "@mui/material";
 import {Command} from "@/features/terminal/command";
 import ColorInterpreter from "@/helpers/color-intepreter";
 import {useAppDispatch, useAppSelector} from "@/redux/hooks";
-import {clearTerminal, printTerminal} from "@/redux/features/terminal-slice";
+import {clearTerminal, initTerminal, printTerminal} from "@/redux/features/terminal-slice";
 import {terminalEventDispatcher} from "@/features/terminal/terminal-event-dispatcher";
 import {terminal} from "@/features/terminal/terminal";
 
@@ -18,11 +19,13 @@ type TerminalProps = {
 }
 
 export const Terminal: FC<TerminalProps> = ({welcomeMessage, prompt, commands}) => {
-    const {output} = useAppSelector(state => state.terminal)
+    const {output, initialized} = useAppSelector(state => state.terminal)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        sendMessage(welcomeMessage ?? '');
+        if (!initialized) sendMessage(welcomeMessage ?? '');
+
+        dispatch(initTerminal());
 
         CommandManager.addAll(commands ?? [])
 
@@ -34,6 +37,7 @@ export const Terminal: FC<TerminalProps> = ({welcomeMessage, prompt, commands}) 
         return () => {
             CommandManager.clear()
             terminalEventDispatcher.dispose()
+            terminal.dispose()
         }
     }, [])
 
@@ -50,9 +54,9 @@ export const Terminal: FC<TerminalProps> = ({welcomeMessage, prompt, commands}) 
     }
 
     return (
-        <Stack direction="column" spacing={1} className="h-full">
+        <Stack direction="column" spacing={1} className="w-full h-full overflow-x-hidden">
             {output.map((line, index) => (
-                <ColorInterpreter key={index} text={line}/>
+                <ColorInterpreter key={index} text={line} className="terminal-output"/>
             ))}
             <CommandLine prompt={prompt} onExecute={onExecute}/>
         </Stack>

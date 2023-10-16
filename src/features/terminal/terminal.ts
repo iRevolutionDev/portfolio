@@ -35,6 +35,11 @@ export class Terminal {
 
         this.currentDirectory = this.rootFolder;
     }
+
+    public dispose(): void {
+        this.rootFolder = undefined;
+        this.currentDirectory = undefined;
+    }
 }
 
 export const terminal = new Terminal();

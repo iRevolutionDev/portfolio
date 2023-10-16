@@ -20,7 +20,7 @@ export default function Page() {
     }
 
     return (
-        <div className="p-4 h-full">
+        <div className="p-4 w-screen h-screen">
             <Terminal
                 commands={commands}
                 prompt={`[@green](${HOST}@localhost):[#ff0000](${path})$`}
