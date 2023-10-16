@@ -1,4 +1,4 @@
-import React, {ReactNode, useCallback, useMemo} from "react";
+import React, {FC, ReactNode, useCallback, useMemo} from "react";
 
 /**
  * Retrieves the color class for a given color identifier.
@@ -19,6 +19,7 @@ const getColorClass = (colorIdentifier: string): string | undefined => {
  */
 interface ColorInterpreterProps {
     text: string;
+    className?: string;
 }
 
 const interpretLineBreaks = (inputText: string): string[] => {
@@ -29,9 +30,10 @@ const interpretLineBreaks = (inputText: string): string[] => {
  * A React functional component that interprets color codes within a text and renders them accordingly.
  * @param {Object} props - The component props.
  * @param {string} props.text - The text to be interpreted.
+ * @param {string} props.className - The class name to be applied to the rendered text.
  * @returns {ReactNode} The interpreted text with color codes rendered accordingly.
  */
-const ColorInterpreter: React.FC<ColorInterpreterProps> = ({text}: { text: string; }): ReactNode => {
+const ColorInterpreter: FC<ColorInterpreterProps> = ({text, className}: { text: string; className?: string; }): ReactNode => {
     const interpretColors = useCallback((inputText: string): ReactNode[] => {
         // Add Line Break Interpretation
         const lines = interpretLineBreaks(inputText);
@@ -76,7 +78,7 @@ const ColorInterpreter: React.FC<ColorInterpreterProps> = ({text}: { text: strin
     const interpretedText = useMemo(() => interpretColors(text), [text, interpretColors]);
 
     // Render as a div to nest <p> tags
-    return <div key={text}>{interpretedText}</div>;
+    return <div key={text} className={className}>{interpretedText}</div>;
 };
 
 export default ColorInterpreter;
