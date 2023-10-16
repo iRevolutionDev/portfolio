@@ -4,6 +4,7 @@ import {FC, PropsWithChildren} from "react";
 import {useAppSelector} from "@/redux/hooks";
 import {motion} from "framer-motion";
 import {useTheme} from "@mui/material/styles";
+import {ToggleThemeButton} from "@/components/toggle-theme-button";
 
 const MobileMenu: FC<PropsWithChildren> = ({children}) => {
     const {open} = useAppSelector(state => state.menu);
@@ -24,10 +25,15 @@ const MobileMenu: FC<PropsWithChildren> = ({children}) => {
                                 exit={{y: "100%"}}
                                 transition={{duration: 0.2}}>
 
-                        <div className="flex flex-col w-full h-full my-20">
+                        <div className="flex flex-col w-full h-full my-20 relative">
                             <ul className="list-none w-full">
                                 {children}
                             </ul>
+                            <div className="relative w-full h-full">
+                                <div className="absolute right-4 bottom-[6rem]">
+                                    <ToggleThemeButton/>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 </motion.div>
