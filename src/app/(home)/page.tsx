@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <>
+        <Stack direction="column" spacing={4}>
             <Stack direction="column" spacing={2}>
                 <Stack direction={{xs: 'column', sm: 'row'}} spacing={2} alignContent="center" alignItems="center">
                     <SocialLinks/>
@@ -74,6 +74,6 @@ export default function Page() {
                     Made with ❤️ by Revolution © {new Date().getFullYear()} • Software Engineer • All rights reserved
                 </Typography>
             </footer>
-        </>
+        </Stack>
     );
 }
