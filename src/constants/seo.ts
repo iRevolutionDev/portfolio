@@ -10,6 +10,7 @@ export const SEO: Metadata = {
         "Next.js", "TypeScript", "Rust", "React", "Node.js", "C++", "C", "C#"
     ],
     openGraph: {
+        url: "https://revolution.software",
         images: [
             {
                 url: "/assets/profile.png",

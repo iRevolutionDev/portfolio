@@ -18,6 +18,10 @@ export const generateMetadata = async (): Promise<Metadata> => {
     return {
         title: "Revolution @ Projects",
         description: `Revolution has ${repos.length} projects on GitHub.`,
+        openGraph: {
+            title: "Revolution @ Home",
+            description: "Revolution is a software engineer, and he's passionate Reverse Engineering, C++, game development, and web development.",
+        }
     }
 }
 

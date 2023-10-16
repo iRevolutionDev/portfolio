@@ -10,6 +10,10 @@ import {Metadata} from "next";
 export const metadata: Metadata = {
     title: "Revolution @ Home",
     description: "Revolution is a software engineer, and he's passionate Reverse Engineering, C++, game development, and web development.",
+    openGraph: {
+        title: "Revolution @ Home",
+        description: "Revolution is a software engineer, and he's passionate Reverse Engineering, C++, game development, and web development.",
+    }
 }
 
 export default function Page() {
