@@ -36,7 +36,7 @@ export const CommandInput: FC<CommandInputProps> = ({onExecute}) => {
     return (
         <input type="text" className="bg-transparent outline-none border-none w-full h-full ml-2"
                value={command} onChange={e => setCommand(e.target.value)}
-               onKeyDown={onKeyDown} ref={inputRef} autoFocus={true}
+               onKeyDown={onKeyDown} ref={inputRef} autoFocus={true} spellCheck={false}
         />
     )
 }
