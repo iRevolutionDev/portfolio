@@ -47,6 +47,10 @@ export class Folder {
         return false;
     }
 
+    public getFolder(name: string): Folder | undefined {
+        return this.children.find(c => c.name === name && c.isDirectory) as Folder;
+    }
+
     init() {
         this.children.forEach(child => {
             if (child instanceof Folder) {

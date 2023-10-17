@@ -1,6 +1,7 @@
 import {terminalEventDispatcher} from "@/features/terminal/terminal-event-dispatcher";
 import {RootFolder} from "@/features/terminal/system/root-folder";
 import {TerminalStorage} from "@/features/terminal/terminal-storage";
+import {Folder} from "@/features/terminal/system/folder";
 
 export class Terminal {
     public dispatcher = terminalEventDispatcher;
@@ -12,6 +13,47 @@ export class Terminal {
         this.dispatcher.on("cd", (path: string) => {
 
         });
+    }
+
+    public getPath(path: string): Folder | null | undefined {
+        if (!this.rootFolder) return null;
+
+        if (path === "~") return this.rootFolder;
+
+        if (path === "/") return this.rootFolder;
+
+        if (path.startsWith("/")) {
+            path = path.substring(1);
+            return this.getPath(path);
+        }
+
+        if (path.startsWith("~")) {
+            path = path.substring(1);
+            return this.getPath(path);
+        }
+
+        if (path.startsWith("./")) {
+            path = path.substring(2);
+            return this.getPath(`${this.currentDirectory?.path}/${path}`);
+        }
+
+        if (path.startsWith("../")) {
+            if (this.currentDirectory?.isRoot) return null;
+
+            path = path.substring(3);
+            return this.getPath(`${this.currentDirectory?.parent?.path}/${path}`);
+        }
+
+        const folders = path.split("/");
+        let folder: Folder | undefined = this.rootFolder;
+
+        for (const folderName of folders) {
+            if (!folder) return undefined;
+
+            folder = folder.getFolder(folderName);
+        }
+
+        return folder;
     }
 
     public log(message: string): void {
