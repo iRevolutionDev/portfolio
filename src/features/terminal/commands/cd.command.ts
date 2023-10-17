@@ -1,6 +1,5 @@
 import {Command} from "@/features/terminal/command";
 import {terminal} from "@/features/terminal/terminal";
-import {Folder} from "@/features/terminal/system/folder";
 import {terminalEventDispatcher} from "@/features/terminal/terminal-event-dispatcher";
 
 export class CdCommand extends Command {
@@ -14,23 +13,26 @@ export class CdCommand extends Command {
             return;
         }
 
-        const path = args[0];
+        const folder = terminal.getPath(args[0]);
 
-        if (path === "..") {
-            if (terminal.currentDirectory?.name === "home") {
-                terminal.error(`You don't have permission to access this directory.`);
-                return;
-            }
-
-            terminalEventDispatcher.emit("onDirectoryChanged", terminal.currentDirectory?.parent?.path ?? "~")
-            terminal.currentDirectory = terminal.currentDirectory?.parent as Folder;
+        if (!folder || !folder.initialized) {
+            terminal.error(`No such directory: ${args[0]}`);
             return;
         }
 
-        const folder = terminal.currentDirectory?.children.find(c => c.name === path && c.isDirectory) as Folder | undefined;
+        if (!folder.hasPermission) {
+            terminal.error(`You don't have permission to access this directory.`);
+            return;
+        }
 
-        if (!folder) {
-            terminal.error(`No such directory: ${path}`);
+        if (!folder.isDirectory) {
+            terminal.error(`Not a directory: ${args[0]}`);
+            return;
+        }
+
+        if (folder.isRoot) {
+            terminalEventDispatcher.emit("onDirectoryChanged", "~")
+            terminal.currentDirectory = folder;
             return;
         }
 

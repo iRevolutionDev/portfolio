@@ -44,6 +44,18 @@ export class Terminal {
             return this.getPath(`${this.currentDirectory?.parent?.path}/${path}`);
         }
 
+        if (path.startsWith("..")) {
+            if (this.currentDirectory?.isRoot) return null;
+
+            path = path.substring(2);
+            return this.getPath(`${this.currentDirectory?.parent?.path}/${path}`);
+        }
+
+        if (path.startsWith(".")) {
+            path = path.substring(1);
+            return this.getPath(`${this.currentDirectory?.path}/${path}`);
+        }
+
         const folders = path.split("/");
         let folder: Folder | undefined = this.rootFolder;
 
