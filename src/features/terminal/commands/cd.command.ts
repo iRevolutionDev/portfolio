@@ -34,6 +34,7 @@ export class CdCommand extends Command {
             return;
         }
 
+        folder.onOpen();
         terminalEventDispatcher.emit("onDirectoryChanged", folder.path)
         terminal.currentDirectory = folder;
     }

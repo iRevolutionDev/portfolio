@@ -6,12 +6,18 @@ export class Folder {
     name: string;
     parent?: Folder | null;
     children: Array<Folder | File>;
+    initialized: boolean = false;
+    hasPermission: boolean = true;
 
-    constructor(name: string, children?: Array<Folder | File>, parent?: Folder | null) {
+    constructor(name?: string, children?: Array<Folder | File>, parent?: Folder | null) {
         this.hash = Math.random().toString(36).substring(2, 9);
-        this.name = name;
+        this.name = name || "";
         this.parent = parent || null;
         this.children = children || [];
+
+        this.init();
+
+        this.initialized = true;
     }
 
     get path(): string {
@@ -41,6 +47,15 @@ export class Folder {
         return false;
     }
 
+    init() {
+        this.children.forEach(child => {
+            if (child instanceof Folder) {
+                child.parent = this;
+                if (!child.initialized) child.init();
+            }
+        });
+    }
+
     postInit() {
         this.children.forEach(child => {
             if (child instanceof Folder) {
@@ -51,6 +66,7 @@ export class Folder {
     }
 
     addChild(child: Folder | File) {
+        if (child instanceof Folder) child.parent = this;
         this.children.push(child);
     }
 
@@ -73,5 +89,16 @@ export class Folder {
         if (this.parent) {
             this.parent.removeChild(this.name);
         }
+    }
+
+    setHasPermission(hasPermission: boolean) {
+        this.hasPermission = hasPermission;
+    }
+
+    onOpen() {
+    }
+
+    toString() {
+        return this.name;
     }
 }

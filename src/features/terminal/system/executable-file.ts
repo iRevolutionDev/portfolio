@@ -1,9 +1,9 @@
 import {File} from "@/features/terminal/system/file";
 import {Folder} from "@/features/terminal/system/folder";
 
-export class ExecutableFile extends File {
-    constructor(name: string, parent: Folder) {
-        super(name, parent, ".sh");
+export abstract class ExecutableFile extends File {
+    protected constructor(name: string, parent: Folder) {
+        super(name, parent, "");
     }
 
     get isExecutable() {
@@ -12,5 +12,9 @@ export class ExecutableFile extends File {
 
     get isDirectory() {
         return false;
+    }
+
+    execute() {
+        throw new Error("Not implemented");
     }
 }
