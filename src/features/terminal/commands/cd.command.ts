@@ -15,7 +15,7 @@ export class CdCommand extends Command {
 
         const folder = terminal.getPath(args[0]);
 
-        if (!folder || !folder.initialized) {
+        if (!folder) {
             terminal.error(`No such directory: ${args[0]}`);
             return;
         }
