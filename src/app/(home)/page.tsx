@@ -58,6 +58,9 @@ export default function Page() {
                         Katsuhiro is a software development company, specializing in high performance desktop and web
                         applications.
                     </JobDetailsCard.Item>
+                    <JobDetailsCard.Item title="Função Sistemas" position="Software Engineer">
+                        Activities of information technology services.
+                    </JobDetailsCard.Item>
                     <JobDetailsCard.Item title="NovaLumina Studios" position="Software Engineer">
                         NovaLumina Studios is a game development company, specializing in high-quality games with a
                         focus on exploring
