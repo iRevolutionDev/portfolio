@@ -16,56 +16,27 @@ export class Terminal {
     }
 
     public getPath(path: string): Folder | null | undefined {
-        if (!this.rootFolder) return null;
-
-        if (path === "~") return this.rootFolder;
-
-        if (path === "/") return this.rootFolder;
-
-        if (path.startsWith("/")) {
-            path = path.substring(1);
-            return this.getPath(path);
+        if (!this.rootFolder || path.startsWith('../') && this.currentDirectory?.isRoot) {
+            return null;
         }
 
-        if (path.startsWith("~")) {
-            path = path.substring(1);
-            return this.getPath(path);
+        if (path === "~" || path === "/") {
+            return this.rootFolder;
         }
 
-        if (path.startsWith("./")) {
-            path = path.substring(2);
-            return this.getPath(`${this.currentDirectory?.path}/${path}`);
+        if (path.startsWith("/") || path.startsWith("~")) {
+            return this.getPath(path.substring(1));
         }
 
-        if (path.startsWith("../")) {
-            if (this.currentDirectory?.isRoot) return null;
-
-            path = path.substring(3);
-            return this.getPath(`${this.currentDirectory?.parent?.path}/${path}`);
+        if (path.startsWith("./") || path.startsWith(".")) {
+            return this.getPath(`${this.currentDirectory?.path}/${path.substring(path.startsWith("./") ? 2 : 1)}`);
         }
 
-        if (path.startsWith("..")) {
-            if (this.currentDirectory?.isRoot) return null;
-
-            path = path.substring(2);
-            return this.getPath(`${this.currentDirectory?.parent?.path}/${path}`);
+        if (path.startsWith("../") || path.startsWith("..")) {
+            return this.getPath(`${this.currentDirectory?.parent?.path}/${path.substring(path.startsWith("../") ? 3 : 2)}`);
         }
 
-        if (path.startsWith(".")) {
-            path = path.substring(1);
-            return this.getPath(`${this.currentDirectory?.path}/${path}`);
-        }
-
-        const folders = path.split("/");
-        let folder: Folder | undefined = this.rootFolder;
-
-        for (const folderName of folders) {
-            if (!folder) return undefined;
-
-            folder = folder.getFolder(folderName);
-        }
-
-        return folder;
+        return this.retrieveFolderFromPath(path);
     }
 
     public log(message: string): void {
@@ -98,6 +69,21 @@ export class Terminal {
     public dispose(): void {
         this.rootFolder = undefined;
         this.currentDirectory = undefined;
+    }
+
+    private retrieveFolderFromPath(path: string): Folder | undefined | null {
+        const folders = path.split("/");
+        let folder = this.currentDirectory;
+
+        for (const folderName of folders) {
+            if (!folder || !folder.hasPermission) {
+                return null;
+            }
+
+            folder = folder.getFolder(folderName);
+        }
+
+        return folder;
     }
 }
 
