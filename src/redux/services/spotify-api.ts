@@ -1,18 +1,18 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {SpotifyResponse} from "@/@types/spotify-response";
+import type { SpotifyResponse } from "@/@types/spotify-response";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const spotifyApi = createApi({
-    reducerPath: "spotifyApi",
-    refetchOnFocus: true,
-    refetchOnReconnect: true,
-    baseQuery: fetchBaseQuery({
-        baseUrl: `/api/`,
-    }),
-    endpoints: (builder) => ({
-        getTracks: builder.query<SpotifyResponse, void>({
-            query: () => "spotify/me",
-        }),
-    }),
+	reducerPath: "spotifyApi",
+	refetchOnFocus: true,
+	refetchOnReconnect: true,
+	baseQuery: fetchBaseQuery({
+		baseUrl: `/api/`,
+	}),
+	endpoints: (builder) => ({
+		getTracks: builder.query<SpotifyResponse, void>({
+			query: () => "spotify/me",
+		}),
+	}),
 });
 
-export const {useGetTracksQuery} = spotifyApi;
+export const { useGetTracksQuery } = spotifyApi;

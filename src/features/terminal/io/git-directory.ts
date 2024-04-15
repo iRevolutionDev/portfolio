@@ -1,59 +1,63 @@
-import {Folder} from "@/features/terminal/system/folder";
-import {File} from "@/features/terminal/system/file";
-import {terminal} from "@/features/terminal/terminal";
+import { File } from "@/features/terminal/system/file";
+import { Folder } from "@/features/terminal/system/folder";
+import { terminal } from "@/features/terminal/terminal";
 
 export class GitDirectory extends Folder {
-    hasCachedChildren: boolean = false;
+	hasCachedChildren = false;
 
-    constructor(private url: string) {
-        super();
+	constructor(private url: string) {
+		super();
 
-        this.name = url.split("/").pop() || "";
-    }
+		this.name = url.split("/").pop() || "";
+	}
 
-    get isProjectDirectory() {
-        return true;
-    }
+	get isProjectDirectory() {
+		return true;
+	}
 
-    init() {
-        super.init();
-    }
+	init() {
+		super.init();
+	}
 
-    onOpen() {
-        if (this.hasCachedChildren) return;
+	onOpen() {
+		if (this.hasCachedChildren) return;
 
-        this.fetchProjectDirectory(this.url).then((data) => {
-            if (data.length === 0) return;
+		this.fetchProjectDirectory(this.url).then((data) => {
+			if (data.length === 0) return;
 
-            this.children = data?.map((item) => {
-                switch (item.type) {
-                    case "dir":
-                        return new Folder(item.name, [], this);
-                    case "file":
-                        return new File(item.name, this, "");
-                    default:
-                        return new File(item.name, this, "");
-                }
-            });
-        });
+			this.children = data?.map((item) => {
+				switch (item.type) {
+					case "dir":
+						return new Folder(item.name, [], this);
+					case "file":
+						return new File(item.name, this, "");
+					default:
+						return new File(item.name, this, "");
+				}
+			});
+		});
 
-        this.hasCachedChildren = true;
-    }
+		this.hasCachedChildren = true;
+	}
 
-    async fetchProjectDirectory(url: string): Promise<Array<GitHubFile>> {
-        const response = await fetch(`https://api.github.com/repos/${url}/contents`);
-        if (!response.ok) {
-            terminal.error(`Failed to fetch project directory: ${response.statusText}`);
-            return [];
-        }
+	async fetchProjectDirectory(url: string): Promise<Array<GitHubFile>> {
+		const response = await fetch(
+			`https://api.github.com/repos/${url}/contents`,
+		);
+		if (!response.ok) {
+			terminal.error(
+				`Failed to fetch project directory: ${response.statusText}`,
+			);
+			return [];
+		}
 
-        const data = await response.json();
+		const data = await response.json();
 
-        if (data.message) {
-            terminal.error(`Failed to fetch project directory: ${data.message}`);
-            return [];
-        }
+		if (data.message) {
+			terminal.error(`Failed to fetch project directory: ${data.message}`);
+			return [];
+		}
 
-        return data;
-    }
+		return data;
+	}
 }

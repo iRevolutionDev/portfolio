@@ -1,69 +1,65 @@
-import {FC, PropsWithChildren} from "react";
-import {Container, Grid, Stack, Toolbar} from "@mui/material";
-import {NavButton} from "@/components/nav-button";
-import {SpotifyWatcher} from "@/components/spotify-watcher";
-import {AnimatedAppBar} from "@/components/animated-appbar";
-import MobileMenu from "@/components/mobile-menu";
+import { AnimatedAppBar } from "@/components/animated-appbar";
 import MenuButton from "@/components/menu-button";
-import {ToggleThemeButton} from "@/components/toggle-theme-button";
+import MobileMenu from "@/components/mobile-menu";
+import { NavButton } from "@/components/nav-button";
+import { SpotifyWatcher } from "@/components/spotify-watcher";
+import { ToggleThemeButton } from "@/components/toggle-theme-button";
+import { Container, Grid, Stack, Toolbar } from "@mui/material";
+import type { FC, PropsWithChildren } from "react";
 
 interface ItemProps {
-    href: string;
+	href: string;
 }
 
-const Item = ({children, href}: PropsWithChildren<ItemProps>) => {
-    return (
-        <div className="text-white list-none w-full md:w-auto">
-            <NavButton href={href}>
-                {children}
-            </NavButton>
-        </div>
-    );
-}
+const Item = ({ children, href }: PropsWithChildren<ItemProps>) => {
+	return (
+		<div className="text-white list-none w-full md:w-auto">
+			<NavButton href={href}>{children}</NavButton>
+		</div>
+	);
+};
 
 type Extensions = {
-    Item: typeof Item;
-}
+	Item: typeof Item;
+};
 
-const Navbar: FC<PropsWithChildren> & Extensions = ({children}) => {
-    return (
-        <>
-            <Container maxWidth="md" className="!hidden md:!block">
-                <div className="my-5">
-                    <Stack direction="row">
-                        <Stack direction="row" spacing={2}>
-                            {children}
-                        </Stack>
+const Navbar: FC<PropsWithChildren> & Extensions = ({ children }) => {
+	return (
+		<>
+			<Container maxWidth="md" className="!hidden md:!block">
+				<div className="my-5">
+					<Stack direction="row">
+						<Stack direction="row" spacing={2}>
+							{children}
+						</Stack>
 
-                        <Grid container justifyContent="flex-end" spacing={2}>
-                            <Grid item>
-                                <SpotifyWatcher/>
-                            </Grid>
-                            <Grid item>
-                                <ToggleThemeButton/>
-                            </Grid>
-                        </Grid>
-                    </Stack>
-                </div>
-            </Container>
-            <div className="md:hidden">
-                <MobileMenu>
-                    {children}
-                </MobileMenu>
-                <AnimatedAppBar>
-                    <Toolbar>
-                        <MenuButton/>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <SpotifyWatcher/>
-                            </Grid>
-                        </Grid>
-                    </Toolbar>
-                </AnimatedAppBar>
-            </div>
-        </>
-    );
-}
+						<Grid container justifyContent="flex-end" spacing={2}>
+							<Grid item>
+								<SpotifyWatcher />
+							</Grid>
+							<Grid item>
+								<ToggleThemeButton />
+							</Grid>
+						</Grid>
+					</Stack>
+				</div>
+			</Container>
+			<div className="md:hidden">
+				<MobileMenu>{children}</MobileMenu>
+				<AnimatedAppBar>
+					<Toolbar>
+						<MenuButton />
+						<Grid container justifyContent="flex-end">
+							<Grid item>
+								<SpotifyWatcher />
+							</Grid>
+						</Grid>
+					</Toolbar>
+				</AnimatedAppBar>
+			</div>
+		</>
+	);
+};
 
 Navbar.Item = Item;
 export default Navbar;

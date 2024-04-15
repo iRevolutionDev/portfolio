@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useCallback, useMemo} from "react";
+import React, { type FC, type ReactNode, useCallback, useMemo } from "react";
 
 /**
  * Retrieves the color class for a given color identifier.
@@ -7,10 +7,11 @@ import React, {FC, ReactNode, useCallback, useMemo} from "react";
  * @returns {string | undefined} The color class for the given color identifier, or undefined if the color identifier is invalid.
  */
 const getColorClass = (colorIdentifier: string): string | undefined => {
-    const sanitizedColorIdentifier = colorIdentifier.replace("@", "");
-    if (/^[a-z]+$/.test(sanitizedColorIdentifier)) return `terminal-${sanitizedColorIdentifier}-color`;
-    // Default to black if the provided tailwind class is not valid
-}
+	const sanitizedColorIdentifier = colorIdentifier.replace("@", "");
+	if (/^[a-z]+$/.test(sanitizedColorIdentifier))
+		return `terminal-${sanitizedColorIdentifier}-color`;
+	// Default to black if the provided tailwind class is not valid
+};
 
 /**
  * Represents the properties of the ColorInterpreter component.
@@ -18,12 +19,12 @@ const getColorClass = (colorIdentifier: string): string | undefined => {
  * @interface ColorInterpreterProps
  */
 interface ColorInterpreterProps {
-    text: string;
-    className?: string;
+	text: string;
+	className?: string;
 }
 
 const interpretLineBreaks = (inputText: string): string[] => {
-    return inputText.split("\n").filter(line => line !== "");
+	return inputText.split("\n").filter((line) => line !== "");
 };
 
 /**
@@ -33,52 +34,64 @@ const interpretLineBreaks = (inputText: string): string[] => {
  * @param {string} props.className - The class name to be applied to the rendered text.
  * @returns {ReactNode} The interpreted text with color codes rendered accordingly.
  */
-const ColorInterpreter: FC<ColorInterpreterProps> = ({text, className}: { text: string; className?: string; }): ReactNode => {
-    const interpretColors = useCallback((inputText: string): ReactNode[] => {
-        // Add Line Break Interpretation
-        const lines = interpretLineBreaks(inputText);
-        return lines.flatMap((line, lineIdx) => {
-            const pattern = /\[([@#][a-fA-F0-9]{3,6}|[@#]\w+)]\s*\((.*?)\)/g;
-            const parts: ReactNode[] = [];
-            let lastIndex = 0;
-            let match: RegExpExecArray | null;
+const ColorInterpreter: FC<ColorInterpreterProps> = ({
+	text,
+	className,
+}: { text: string; className?: string }): ReactNode => {
+	const interpretColors = useCallback((inputText: string): ReactNode[] => {
+		// Add Line Break Interpretation
+		const lines = interpretLineBreaks(inputText);
+		return lines.flatMap((line, lineIdx) => {
+			const pattern = /\[([@#][a-fA-F0-9]{3,6}|[@#]\w+)]\s*\((.*?)\)/g;
+			const parts: ReactNode[] = [];
+			let lastIndex = 0;
+			let match: RegExpExecArray | null;
 
-            while ((match = pattern.exec(line)) !== null) {
-                const [fullMatch, colorIdentifier, innerText] = match;
-                const start = match.index;
-                const end = start + fullMatch.length;
+			while ((match = pattern.exec(line)) !== null) {
+				const [fullMatch, colorIdentifier, innerText] = match;
+				const start = match.index;
+				const end = start + fullMatch.length;
 
-                if (start > lastIndex) {
-                    parts.push(line.substring(lastIndex, start));
-                }
+				if (start > lastIndex) {
+					parts.push(line.substring(lastIndex, start));
+				}
 
-                const isHexColor = colorIdentifier.charAt(0) === "#";
-                const colorClass = isHexColor ? colorIdentifier : getColorClass(colorIdentifier);
+				const isHexColor = colorIdentifier.charAt(0) === "#";
+				const colorClass = isHexColor
+					? colorIdentifier
+					: getColorClass(colorIdentifier);
 
-                parts.push(
-                    <span
-                        key={`${colorClass}-${innerText}-${lineIdx}`} // modified key to include lineIdx
-                        className={isHexColor ? undefined : colorClass}
-                        style={isHexColor ? {color: colorClass} : undefined}
-                    >
-                        {innerText}
-                    </span>
-                );
+				parts.push(
+					<span
+						key={`${colorClass}-${innerText}-${lineIdx}`} // modified key to include lineIdx
+						className={isHexColor ? undefined : colorClass}
+						style={isHexColor ? { color: colorClass } : undefined}
+					>
+						{innerText}
+					</span>,
+				);
 
-                lastIndex = end;
-            }
+				lastIndex = end;
+			}
 
-            if (lastIndex < line.length) {
-                parts.push(line.substring(lastIndex));
-            }
-            return <pre key={lineIdx}>{parts}</pre>;
-        });
-    }, []);
+			if (lastIndex < line.length) {
+				parts.push(line.substring(lastIndex));
+			}
+			return <pre key={lineIdx}>{parts}</pre>;
+		});
+	}, []);
 
-    const interpretedText = useMemo(() => interpretColors(text), [text, interpretColors]);
+	const interpretedText = useMemo(
+		() => interpretColors(text),
+		[text, interpretColors],
+	);
 
-    // Render as a div to nest <p> tags
-    return <div key={text} className={className}>{interpretedText}</div>;
+	// Render as a div to nest <p> tags
+	return (
+		<div key={text} className={className}>
+			{interpretedText}
+		</div>
+	);
 };
 
 export default ColorInterpreter;
