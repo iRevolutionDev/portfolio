@@ -36,8 +36,8 @@ dependencies:
     specifier: 18.2.19
     version: 18.2.19
   autoprefixer:
-    specifier: 10.4.17
-    version: 10.4.17(postcss@8.4.35)
+    specifier: 10.4.19
+    version: 10.4.19(postcss@8.4.35)
   framer-motion:
     specifier: ^11.0.5
     version: 11.0.28(react-dom@18.2.0)(react@18.2.0)
@@ -751,8 +751,8 @@ packages:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
     dev: false
 
-  /autoprefixer@10.4.17(postcss@8.4.35):
-    resolution: {integrity: sha512-/cpVNRLSfhOtcGflT13P2794gVSgmPgTR+erw5ifnMLZb0UnSlkK4tquLmkd3BhA+nLo5tX8Cu0upUsGKvKbmg==}
+  /autoprefixer@10.4.19(postcss@8.4.35):
+    resolution: {integrity: sha512-BaENR2+zBZ8xXhM4pUaKUxlVdxZ0EZhjvbopwnXmxRUfqDmwSpC2lAi/QXvx7NRdPCo1WKEcEF6mV64si1z4Ew==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
