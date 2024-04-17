@@ -6,7 +6,7 @@ export const spotifyApi = createApi({
 	refetchOnFocus: true,
 	refetchOnReconnect: true,
 	baseQuery: fetchBaseQuery({
-		baseUrl: `/api/`,
+		baseUrl: "/api/",
 	}),
 	endpoints: (builder) => ({
 		getTracks: builder.query<SpotifyResponse, void>({

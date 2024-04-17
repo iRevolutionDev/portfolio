@@ -41,7 +41,6 @@ export const CommandInput: FC<CommandInputProps> = ({ onExecute }) => {
 			onChange={(e) => setCommand(e.target.value)}
 			onKeyDown={onKeyDown}
 			ref={inputRef}
-			autoFocus={true}
 			spellCheck={false}
 		/>
 	);

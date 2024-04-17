@@ -1,4 +1,6 @@
-import querystring from "querystring";
+import querystring from "node:querystring";
+import type { SpotifyResponse } from "@/@types/spotify-response";
+import type { SpotifyAuthenticationResponse } from "@/backend/models/spotify-authentication-response";
 import {
 	BASIC,
 	GRANT_TYPE,
@@ -9,8 +11,15 @@ import {
 	TOKEN_ENDPOINT,
 } from "@/helpers/constants";
 
-export class SpotifyService {
-	static async retrieveAuthToken(data: { [k: string]: any }): Promise<any> {
+type SpotifyAuthTokenData = {
+	grant_type: string;
+	refresh_token: string;
+};
+
+export const SpotifyService = {
+	async retrieveAuthToken(
+		data: SpotifyAuthTokenData,
+	): Promise<SpotifyAuthenticationResponse> {
 		const response = await fetch(TOKEN_ENDPOINT, {
 			method: "POST",
 			headers: {
@@ -28,16 +37,22 @@ export class SpotifyService {
 		}
 
 		return await response.json();
-	}
+	},
 
-	static async getAccessToken(): Promise<any> {
-		return await this.retrieveAuthToken({
+	async getAccessToken(): Promise<SpotifyAuthenticationResponse> {
+		if (!REFRESH_TOKEN) {
+			throw new Error("Refresh token not found");
+		}
+
+		return await SpotifyService.retrieveAuthToken({
 			grant_type: GRANT_TYPE,
 			refresh_token: REFRESH_TOKEN,
 		});
-	}
+	},
 
-	static async getPlayerInformation(access_token: string): Promise<any> {
+	async getPlayerInformation(
+		access_token: string,
+	): Promise<SpotifyResponse | { is_playing: false }> {
 		const response = await fetch(PLAYER_ENDPOINT, {
 			headers: {
 				Authorization: `Bearer ${access_token}`,
@@ -56,5 +71,5 @@ export class SpotifyService {
 		}
 
 		return await response.json();
-	}
-}
+	},
+};

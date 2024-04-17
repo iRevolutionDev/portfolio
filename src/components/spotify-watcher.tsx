@@ -44,13 +44,13 @@ export const SpotifyWatcher: FC = () => {
 			<Stack direction="column" spacing={0}>
 				<Typography variant="body1" className="opacity-60">
 					{data?.item?.name.length > 20
-						? data?.item?.name.substring(0, 20) + "..."
+						? `${data?.item?.name.substring(0, 20)}...`
 						: data?.item?.name}
 				</Typography>
 				<Typography variant="body2" className="opacity-60">
 					{data?.item?.artists.length > 0 &&
 					data?.item?.artists[0]?.name.length > 20
-						? data?.item?.artists[0]?.name.substring(0, 20) + "..."
+						? `${data?.item?.artists[0]?.name.substring(0, 20)}...`
 						: data?.item?.artists[0]?.name}
 				</Typography>
 			</Stack>

@@ -45,9 +45,9 @@ const ColorInterpreter: FC<ColorInterpreterProps> = ({
 			const pattern = /\[([@#][a-fA-F0-9]{3,6}|[@#]\w+)]\s*\((.*?)\)/g;
 			const parts: ReactNode[] = [];
 			let lastIndex = 0;
-			let match: RegExpExecArray | null;
+			let match = pattern.exec(line);
 
-			while ((match = pattern.exec(line)) !== null) {
+			while (match !== null) {
 				const [fullMatch, colorIdentifier, innerText] = match;
 				const start = match.index;
 				const end = start + fullMatch.length;
@@ -63,7 +63,7 @@ const ColorInterpreter: FC<ColorInterpreterProps> = ({
 
 				parts.push(
 					<span
-						key={`${colorClass}-${innerText}-${lineIdx}`} // modified key to include lineIdx
+						key={`${colorClass}-${innerText}`} // modified key to include lineIdx
 						className={isHexColor ? undefined : colorClass}
 						style={isHexColor ? { color: colorClass } : undefined}
 					>
@@ -72,12 +72,13 @@ const ColorInterpreter: FC<ColorInterpreterProps> = ({
 				);
 
 				lastIndex = end;
+				match = pattern.exec(line);
 			}
 
 			if (lastIndex < line.length) {
 				parts.push(line.substring(lastIndex));
 			}
-			return <pre key={lineIdx}>{parts}</pre>;
+			return <pre>{parts}</pre>;
 		});
 	}, []);
 

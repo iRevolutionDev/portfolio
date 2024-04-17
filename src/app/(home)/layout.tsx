@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	openGraph: SEO.openGraph,
 };
 
-export default function Layout({ children }: PropsWithChildren<{}>) {
+export default function Layout({ children }: PropsWithChildren) {
 	return (
 		<>
 			<Navbar>

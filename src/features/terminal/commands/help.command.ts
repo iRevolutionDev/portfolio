@@ -1,4 +1,5 @@
 import { Command } from "@/features/terminal/command";
+import { commandManager } from "@/features/terminal/command-manager";
 import { terminal } from "@/features/terminal/terminal";
 
 export class HelpCommand extends Command {
@@ -8,7 +9,7 @@ export class HelpCommand extends Command {
 
 	public execute(args: string[]) {
 		if (args.length > 0) {
-			const command = this.commandManager.get(args[0]);
+			const command = commandManager.get(args[0]);
 			if (!command) {
 				terminal.error(`Command ${args[0]} not found.`);
 				return;
@@ -19,7 +20,7 @@ export class HelpCommand extends Command {
 		}
 
 		terminal.log("Available commands:");
-		for (const command of this.commandManager.getCommands()) {
+		for (const command of commandManager.getCommands()) {
 			terminal.log(`- ${command.name}`);
 		}
 

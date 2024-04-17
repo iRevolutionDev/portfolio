@@ -3,7 +3,7 @@ import "@/components/terminal/colors.css";
 import { CommandLine } from "@/components/terminal/command-line";
 import "@/components/terminal/terminal.css";
 import type { Command } from "@/features/terminal/command";
-import { CommandManager } from "@/features/terminal/command-manager";
+import { commandManager } from "@/features/terminal/command-manager";
 import { terminal } from "@/features/terminal/terminal";
 import { terminalEventDispatcher } from "@/features/terminal/terminal-event-dispatcher";
 import ColorInterpreter from "@/helpers/color-intepreter";
@@ -35,7 +35,7 @@ export const Terminal: FC<TerminalProps> = ({
 
 		dispatch(initTerminal());
 
-		CommandManager.addAll(commands ?? []);
+		commandManager.addAll(commands ?? []);
 
 		terminalEventDispatcher.on("clear", clear);
 		terminalEventDispatcher.on("log", sendMessage);
@@ -43,14 +43,14 @@ export const Terminal: FC<TerminalProps> = ({
 		terminal.setup();
 
 		return () => {
-			CommandManager.clear();
+			commandManager.clear();
 			terminalEventDispatcher.dispose();
 			terminal.dispose();
 		};
-	}, []);
+	}, [commands, dispatch, initialized, welcomeMessage]);
 
 	const onExecute = (command: string) => {
-		CommandManager.execute(command);
+		commandManager.execute(command);
 	};
 
 	const clear = () => {
@@ -67,8 +67,8 @@ export const Terminal: FC<TerminalProps> = ({
 			spacing={1}
 			className="w-full h-full overflow-x-hidden"
 		>
-			{output.map((line, index) => (
-				<ColorInterpreter key={index} text={line} className="terminal-output" />
+			{output.map((line) => (
+				<ColorInterpreter text={line} className="terminal-output" />
 			))}
 			<CommandLine prompt={prompt} onExecute={onExecute} />
 		</Stack>

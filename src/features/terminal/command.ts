@@ -1,8 +1,4 @@
-import { CommandManager } from "@/features/terminal/command-manager";
-
 export class Command {
-	protected commandManager = CommandManager;
-
 	constructor(
 		public readonly name: string,
 		public readonly description: string,

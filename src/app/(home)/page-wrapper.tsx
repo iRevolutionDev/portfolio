@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";
 
-export const PageWrapper = ({ children }: PropsWithChildren<{}>) => {
+export const PageWrapper = ({ children }: PropsWithChildren) => {
 	const pathname = usePathname();
 
 	return (

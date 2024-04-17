@@ -2,10 +2,7 @@
 import { useTheme } from "@mui/material/styles";
 import type { PropsWithChildren } from "react";
 
-export const TitleWithColor = ({
-	children,
-	...props
-}: PropsWithChildren<{}>) => {
+export const TitleWithColor = ({ children, ...props }: PropsWithChildren) => {
 	const theme = useTheme();
 
 	return (

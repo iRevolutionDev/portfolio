@@ -6,7 +6,7 @@ import Link from "next/link";
 import type { FC } from "react";
 import { SiSpotify } from "react-icons/si";
 
-export const SocialLinks: FC = ({}) => {
+export const SocialLinks: FC = () => {
 	return (
 		<Stack
 			direction="row"

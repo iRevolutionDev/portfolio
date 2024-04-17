@@ -15,7 +15,9 @@ export async function GET(req: NextRequest, res: Response) {
 		const playerData = await SpotifyService.getPlayerInformation(access_token);
 
 		return NextResponse.json(playerData);
-	} catch (error: any) {
-		return NextResponse.json({ error: error.message }, { status: 500 });
+	} catch (error) {
+		if (error instanceof Error) {
+			return NextResponse.json({ error: error.message }, { status: 500 });
+		}
 	}
 }

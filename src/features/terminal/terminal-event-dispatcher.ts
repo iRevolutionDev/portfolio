@@ -1,23 +1,30 @@
+export type TerminalEventFunction = (...args: unknown[]) => void;
+
 export class TerminalEventDispatcher {
-	public events: Map<string, Function[]> = new Map<string, Function[]>();
+	public events: Map<string, TerminalEventFunction[]> = new Map<
+		string,
+		TerminalEventFunction[]
+	>();
 
-	constructor() {}
-
-	public on(event: string, callback: Function): void {
+	public on(event: string, callback: TerminalEventFunction): void {
 		if (!this.events.has(event)) {
 			this.events.set(event, []);
 		}
 		this.events.get(event)?.push(callback);
 	}
 
-	public emit(event: string, ...args: any[]): void {
+	public emit(event: string, ...args: unknown[]): void {
 		if (!this.events.has(event)) {
 			return;
 		}
-		this.events.get(event)?.forEach((callback) => callback(...args));
+
+		const callbacks = this.events.get(event);
+		for (const callback of callbacks || []) {
+			callback(...args);
+		}
 	}
 
-	public removeListener(event: string, callback: Function): void {
+	public removeListener(event: string, callback: TerminalEventFunction): void {
 		if (!this.events.has(event)) {
 			return;
 		}
@@ -35,10 +42,10 @@ export class TerminalEventDispatcher {
 		this.events.delete(event);
 	}
 
-	public once(event: string, callback: Function): void {
-		const onceCallback = (...args: any[]) => {
-			this.removeListener(event, onceCallback);
+	public once(event: string, callback: TerminalEventFunction): void {
+		const onceCallback = (...args: unknown[]) => {
 			callback(...args);
+			this.removeListener(event, onceCallback);
 		};
 		this.on(event, onceCallback);
 	}

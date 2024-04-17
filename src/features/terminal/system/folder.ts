@@ -58,21 +58,21 @@ export class Folder {
 	}
 
 	init() {
-		this.children.forEach((child) => {
+		for (const child of this.children) {
 			if (child instanceof Folder) {
 				child.parent = this;
 				if (!child.initialized) child.init();
 			}
-		});
+		}
 	}
 
 	postInit() {
-		this.children.forEach((child) => {
+		for (const child of this.children) {
 			if (child instanceof Folder) {
 				child.parent = this;
 				child.postInit();
 			}
-		});
+		}
 	}
 
 	addChild(child: Folder | File) {
