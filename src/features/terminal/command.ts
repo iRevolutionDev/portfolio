@@ -1,25 +1,19 @@
-import {CommandManager} from "@/features/terminal/command-manager";
-
 export class Command {
+	constructor(
+		public readonly name: string,
+		public readonly description: string,
+		public readonly args: string[] = [],
+	) {}
 
-    protected commandManager = CommandManager;
+	public help(): string {
+		return `${this.name} - ${this.description}`;
+	}
 
-    constructor(
-        public readonly name: string,
-        public readonly description: string,
-        public readonly args: string[] = [],
-    ) {
-    }
+	public execute(args: string[]): void {
+		throw new Error(`Command ${this.name} not implemented.`);
+	}
 
-    public help(): string {
-        return `${this.name} - ${this.description}`;
-    }
-
-    public execute(args: string[]): void {
-        throw new Error(`Command ${this.name} not implemented.`);
-    }
-
-    public toString(): string {
-        return `${this.name} ${this.args.join(' ')}`;
-    }
+	public toString(): string {
+		return `${this.name} ${this.args.join(" ")}`;
+	}
 }
