@@ -41,7 +41,7 @@ const ColorInterpreter: FC<ColorInterpreterProps> = ({
 	const interpretColors = useCallback((inputText: string): ReactNode[] => {
 		// Add Line Break Interpretation
 		const lines = interpretLineBreaks(inputText);
-		return lines.flatMap((line, lineIdx) => {
+		return lines.flatMap((line) => {
 			const pattern = /\[([@#][a-fA-F0-9]{3,6}|[@#]\w+)]\s*\((.*?)\)/g;
 			const parts: ReactNode[] = [];
 			let lastIndex = 0;
@@ -78,7 +78,7 @@ const ColorInterpreter: FC<ColorInterpreterProps> = ({
 			if (lastIndex < line.length) {
 				parts.push(line.substring(lastIndex));
 			}
-			return <pre>{parts}</pre>;
+			return <pre key={line}>{parts}</pre>;
 		});
 	}, []);
 

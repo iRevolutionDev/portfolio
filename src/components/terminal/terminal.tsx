@@ -34,7 +34,6 @@ export const Terminal: FC<TerminalProps> = ({
 		if (!initialized) sendMessage(welcomeMessage ?? "");
 
 		dispatch(initTerminal());
-
 		commandManager.addAll(commands ?? []);
 
 		terminalEventDispatcher.on("clear", clear);
@@ -68,7 +67,7 @@ export const Terminal: FC<TerminalProps> = ({
 			className="w-full h-full overflow-x-hidden"
 		>
 			{output.map((line) => (
-				<ColorInterpreter text={line} className="terminal-output" />
+				<ColorInterpreter key={line} text={line} className="terminal-output" />
 			))}
 			<CommandLine prompt={prompt} onExecute={onExecute} />
 		</Stack>
