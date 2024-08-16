@@ -5,7 +5,17 @@ import { themeReducer } from "@/redux/features/theme-slice";
 import { spotifyApi } from "@/redux/services/spotify-api";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { persistReducer, persistStore } from "redux-persist";
+import {
+	FLUSH,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+	REHYDRATE,
+	persistReducer,
+	persistStore,
+} from "redux-persist";
+import type { PersistConfig } from "redux-persist/es/types";
 
 export const rootReducers = combineReducers({
 	menu: menuReducer,
@@ -14,9 +24,10 @@ export const rootReducers = combineReducers({
 	[spotifyApi.reducerPath]: spotifyApi.reducer,
 });
 
-const persistConfig = {
+const persistConfig: PersistConfig<ReturnType<typeof rootReducers>> = {
 	key: "root",
 	storage: storage,
+	version: 1,
 	whitelist: ["theme"],
 };
 
@@ -26,7 +37,11 @@ export const store = configureStore({
 	reducer: persistedReducer,
 	devTools: process.env.NODE_ENV !== "production",
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({}).concat([spotifyApi.middleware]),
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}).concat([spotifyApi.middleware]),
 });
 
 setupListeners(store.dispatch);
