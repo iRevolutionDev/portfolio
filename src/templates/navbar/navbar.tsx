@@ -5,6 +5,7 @@ import { NavButton } from "@/components/nav-button";
 import { SpotifyWatcher } from "@/components/spotify-watcher";
 import { ToggleThemeButton } from "@/components/toggle-theme-button";
 import { Container, Grid, Stack, Toolbar } from "@mui/material";
+import { useTranslations } from "next-intl";
 import type { FC, PropsWithChildren } from "react";
 
 interface ItemProps {
@@ -24,6 +25,8 @@ type Extensions = {
 };
 
 const Navbar: FC<PropsWithChildren> & Extensions = ({ children }) => {
+	const t = useTranslations("layout.navbar");
+
 	return (
 		<>
 			<Container maxWidth="md" className="!hidden md:!block">

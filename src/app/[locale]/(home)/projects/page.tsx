@@ -9,11 +9,15 @@ import {
 	Typography,
 } from "@mui/material";
 import type { Metadata } from "next";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { BiGitRepoForked } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 
-export const generateMetadata = async (): Promise<Metadata> => {
+export const generateMetadata = async ({
+	params: { locale },
+}: { params: { locale: string } }): Promise<Metadata> => {
+	const t = await getTranslations({ locale, namespace: "metadata" });
 	const response = await fetch(
 		"https://api.github.com/users/irevolutiondev/repos",
 		{
@@ -27,17 +31,26 @@ export const generateMetadata = async (): Promise<Metadata> => {
 		.filter((repo) => !repo.name.startsWith("irevolutiondev"));
 
 	return {
-		title: "Revolution @ Projects",
-		description: `Revolution has ${repos.length} projects on GitHub.`,
+		title: `Revolution @ ${t("pages.projects.title")}`,
+		description: t("pages.projects.description", {
+			projects: repos.length ?? 0,
+			stars: repos.reduce((acc, repo) => acc + repo.stargazers_count, 0) ?? 0,
+		}),
 		openGraph: {
-			title: "Revolution @ Home",
-			description:
-				"Revolution is a software engineer, and he's passionate Reverse Engineering, C++, game development, and web development.",
+			title: `Revolution @ ${t("pages.projects.title")}`,
+			description: t("pages.projects.description", {
+				projects: repos.length ?? 0,
+				stars: repos.reduce((acc, repo) => acc + repo.stargazers_count, 0) ?? 0,
+			}),
 		},
 	};
 };
 
-export default async function Page() {
+export default async function Page({
+	params: { locale },
+}: { params: { locale: string } }) {
+	unstable_setRequestLocale(locale);
+
 	const response = await fetch(
 		"https://api.github.com/users/irevolutiondev/repos",
 		{
@@ -47,6 +60,8 @@ export default async function Page() {
 		},
 	);
 	const repos = (await response.json()) as Repositories;
+
+	const t = await getTranslations("pages.projects");
 
 	return (
 		<>
@@ -129,7 +144,7 @@ export default async function Page() {
 													target="_blank"
 													rel="noopener noreferrer"
 												>
-													View on GitHub
+													{t("card.viewOnGitHub")}
 												</Button>
 											</CardActions>
 										</Grid>

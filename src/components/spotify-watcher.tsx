@@ -1,11 +1,14 @@
 "use client";
 import { useGetTracksQuery } from "@/redux/services/spotify-api";
 import { Stack, Tooltip, Typography } from "@mui/material";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import type { FC } from "react";
 import { BiLogoSpotify } from "react-icons/bi";
 
 export const SpotifyWatcher: FC = () => {
+	const t = useTranslations("layout.spotifyWidget");
+
 	const { data, isLoading, isFetching, isError } = useGetTracksQuery();
 
 	return isLoading || isFetching || isError || !data?.is_playing ? (
@@ -18,7 +21,7 @@ export const SpotifyWatcher: FC = () => {
 		>
 			<BiLogoSpotify size={24} />
 			<Typography variant="body1" className="opacity-60">
-				Nothing playing right now.
+				{t("status.notPlaying")}
 			</Typography>
 		</Stack>
 	) : (

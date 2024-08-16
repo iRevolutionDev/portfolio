@@ -1,8 +1,11 @@
-import { PageWrapper } from "@/app/(home)/page-wrapper";
+import { PageWrapper } from "@/app/[locale]/(home)/page-wrapper";
+import { Routes } from "@/constants/routes";
 import { SEO } from "@/constants/seo";
 import Navbar from "@/templates/navbar/navbar";
 import { Container } from "@mui/material";
 import type { Metadata } from "next";
+import { useTranslations } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import type { PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
@@ -11,13 +14,22 @@ export const metadata: Metadata = {
 	openGraph: SEO.openGraph,
 };
 
-export default function Layout({ children }: PropsWithChildren) {
+export default function Layout({
+	children,
+	params: { locale },
+}: PropsWithChildren<{ params: { locale: string } }>) {
+	unstable_setRequestLocale(locale);
+
+	const t = useTranslations("layout.navbar");
+
 	return (
 		<>
 			<Navbar>
-				<Navbar.Item href="/">/</Navbar.Item>
-				<Navbar.Item href="/projects">~/projects</Navbar.Item>
-				<Navbar.Item href="/terminal">~/terminal</Navbar.Item>
+				{Routes.map((route) => (
+					<Navbar.Item key="route" href={route.path}>
+						{t(route.name as never)}
+					</Navbar.Item>
+				))}
 			</Navbar>
 			<Container maxWidth="md">
 				<main className="mx-auto max-w-3xl space-y-12 py-12 md:py-24">
