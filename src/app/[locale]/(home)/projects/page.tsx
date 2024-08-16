@@ -9,7 +9,7 @@ import {
 	Typography,
 } from "@mui/material";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { BiGitRepoForked } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
@@ -46,7 +46,11 @@ export const generateMetadata = async ({
 	};
 };
 
-export default async function Page() {
+export default async function Page({
+	params: { locale },
+}: { params: { locale: string } }) {
+	unstable_setRequestLocale(locale);
+
 	const response = await fetch(
 		"https://api.github.com/users/irevolutiondev/repos",
 		{

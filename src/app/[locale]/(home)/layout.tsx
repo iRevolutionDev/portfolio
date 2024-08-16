@@ -18,6 +18,8 @@ export default function Layout({
 	children,
 	params: { locale },
 }: PropsWithChildren<{ params: { locale: string } }>) {
+	unstable_setRequestLocale(locale);
+
 	const t = useTranslations("layout.navbar");
 
 	return (

@@ -8,7 +8,7 @@ import { LocationOn } from "@mui/icons-material";
 import { Divider, Stack, Typography } from "@mui/material";
 import type { Metadata } from "next";
 import { useFormatter, useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
 export const generateMetadata = async ({
 	params: { locale },
@@ -25,7 +25,11 @@ export const generateMetadata = async ({
 	};
 };
 
-export default function Page() {
+export default function Page({
+	params: { locale },
+}: { params: { locale: string } }) {
+	unstable_setRequestLocale(locale);
+
 	const t = useTranslations("pages.home");
 
 	return (
