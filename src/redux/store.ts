@@ -1,5 +1,6 @@
 import storage from "@/redux/custom-storage";
 import { menuReducer } from "@/redux/features/menu-slice";
+import { pageReducer } from "@/redux/features/page-slice";
 import { terminalReducer } from "@/redux/features/terminal-slice";
 import { themeReducer } from "@/redux/features/theme-slice";
 import { spotifyApi } from "@/redux/services/spotify-api";
@@ -21,6 +22,7 @@ export const rootReducers = combineReducers({
 	menu: menuReducer,
 	terminal: terminalReducer,
 	theme: themeReducer,
+	page: pageReducer,
 	[spotifyApi.reducerPath]: spotifyApi.reducer,
 });
 
@@ -35,7 +37,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducers);
 
 export const store = configureStore({
 	reducer: persistedReducer,
-	devTools: process.env.NODE_ENV !== "production",
+	devTools: true,
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {

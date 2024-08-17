@@ -1,10 +1,10 @@
 "use client";
 
+import { Link } from "@/components/link";
 import { closeMenu } from "@/redux/features/menu-slice";
 import { useAppDispatch } from "@/redux/hooks";
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 interface NavButtonProps {
