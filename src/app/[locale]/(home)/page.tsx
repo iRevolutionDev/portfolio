@@ -43,9 +43,15 @@ export default function Page({
 				>
 					<SocialLinks />
 					<Location.Root href="https://www.google.com/maps/place/S%C3%A3o+Paulo,+State+of+S%C3%A3o+Paulo/">
-						<LocationOn fontSize="small" />
-						<Typography variant="body1">{t("location")}</Typography>
-						<Location.Ping />
+						<Location.Item>
+							<LocationOn fontSize="small" />
+						</Location.Item>
+						<Location.Item>
+							<Typography variant="body1">{t("location")}</Typography>
+						</Location.Item>
+						<Location.Item>
+							<Location.Ping />
+						</Location.Item>
 					</Location.Root>
 				</Stack>
 				<Stack

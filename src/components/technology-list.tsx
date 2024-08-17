@@ -1,77 +1,70 @@
+"use client";
+import { Technologies } from "@/constants/technologies";
 import { Card, Stack, Tooltip } from "@mui/material";
-import {
-	BiLogoCPlusPlus,
-	BiLogoFlutter,
-	BiLogoGit,
-	BiLogoJavascript,
-	BiLogoPhp,
-	BiLogoPython,
-	BiLogoReact,
-	BiLogoTailwindCss,
-	BiLogoTypescript,
-} from "react-icons/bi";
-import { FaJava } from "react-icons/fa";
-import { SiCsharp, SiKotlin, SiLua, SiRust } from "react-icons/si";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export function TechnologyList() {
+	const [items, setItems] = useState<typeof Technologies>([Technologies[0]]);
+
+	useEffect(() => {
+		if (items.length === Technologies.length) return;
+
+		const interval = setInterval(() => {
+			setItems((prev) => {
+				return Technologies.slice(0, prev.length + 1);
+			});
+		}, 200);
+
+		return () => {
+			clearInterval(interval);
+		};
+	}, [items]);
+
 	return (
-		<Card
-			className="p-2"
-			elevation={0}
-			sx={{ borderRadius: 10 }}
-			variant="outlined"
-		>
-			<Stack
-				direction="row"
-				flexWrap="wrap"
-				spacing={2}
-				alignContent="center"
-				alignItems="center"
-				justifyContent="center"
+		<div className="w-full h-full flex flex-col items-center justify-center">
+			<Card
+				component={motion.div}
+				className="p-2 flex w-fit min-h-12 transition-all"
+				elevation={0}
+				sx={{ borderRadius: 10 }}
+				variant="outlined"
+				layout
 			>
-				<Tooltip title="C++" arrow>
-					<BiLogoCPlusPlus fontSize={40} />
-				</Tooltip>
-				<Tooltip title="C#" arrow>
-					<SiCsharp fontSize={32} />
-				</Tooltip>
-				<Tooltip title="Rust" arrow>
-					<SiRust fontSize={32} />
-				</Tooltip>
-				<Tooltip title="Java" arrow>
-					<FaJava fontSize={32} />
-				</Tooltip>
-				<Tooltip title="Kotlin" arrow>
-					<SiKotlin fontSize={32} />
-				</Tooltip>
-				<Tooltip title="PHP" arrow>
-					<BiLogoPhp fontSize={40} />
-				</Tooltip>
-				<Tooltip title="Python" arrow>
-					<BiLogoPython fontSize={40} />
-				</Tooltip>
-				<Tooltip title="Flutter" arrow>
-					<BiLogoFlutter fontSize={40} />
-				</Tooltip>
-				<Tooltip title="Lua" arrow>
-					<SiLua fontSize={40} />
-				</Tooltip>
-				<Tooltip title="Typescript" arrow>
-					<BiLogoTypescript fontSize={40} />
-				</Tooltip>
-				<Tooltip title="Javascript" arrow>
-					<BiLogoJavascript fontSize={40} />
-				</Tooltip>
-				<Tooltip title="React" arrow>
-					<BiLogoReact fontSize={40} />
-				</Tooltip>
-				<Tooltip title="TailwindCSS" arrow>
-					<BiLogoTailwindCss fontSize={40} />
-				</Tooltip>
-				<Tooltip title="Git" arrow>
-					<BiLogoGit fontSize={40} />
-				</Tooltip>
-			</Stack>
-		</Card>
+				<Stack
+					direction="row"
+					flexWrap="wrap"
+					spacing={2}
+					alignContent="center"
+					alignItems="center"
+					justifyContent="center"
+				>
+					{items.map((technology) => (
+						<Tooltip key={technology.name} title={technology.name} arrow>
+							<motion.div
+								key={technology.name}
+								initial={{
+									opacity: 0,
+									scale: 0,
+									x: -10,
+								}}
+								animate={{
+									opacity: 1,
+									scale: 1,
+									x: 0,
+								}}
+								transition={{
+									duration: 0.5,
+									delay: 0.1,
+								}}
+								layout
+							>
+								{technology.icon}
+							</motion.div>
+						</Tooltip>
+					))}
+				</Stack>
+			</Card>
+		</div>
 	);
 }
