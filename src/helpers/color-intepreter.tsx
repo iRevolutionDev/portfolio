@@ -1,4 +1,4 @@
-import React, { type FC, type ReactNode, useCallback, useMemo } from "react";
+import { type FC, type ReactNode, useCallback, useMemo } from "react";
 
 /**
  * Retrieves the color class for a given color identifier.
