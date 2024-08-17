@@ -67,7 +67,7 @@ export default async function Page({
 		<>
 			<Stack direction="column" spacing={2}>
 				<Typography variant="h4" fontWeight={700}>
-					Projects 📁
+					{t("title")} 📁
 				</Typography>
 				<Grid container>
 					{repos
