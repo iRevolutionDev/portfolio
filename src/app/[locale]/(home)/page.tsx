@@ -7,7 +7,7 @@ import { TitleWithColor } from "@/components/title-with-color";
 import { LocationOn } from "@mui/icons-material";
 import { Divider, Stack, Typography } from "@mui/material";
 import type { Metadata } from "next";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
 export const generateMetadata = async ({

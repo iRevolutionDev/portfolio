@@ -1,4 +1,5 @@
 import { PageWrapper } from "@/app/[locale]/(home)/page-wrapper";
+import { LoadingWidget } from "@/components/loading-widget";
 import { Routes } from "@/constants/routes";
 import { SEO } from "@/constants/seo";
 import Navbar from "@/templates/navbar/navbar";
@@ -24,6 +25,7 @@ export default function Layout({
 
 	return (
 		<>
+			<LoadingWidget />
 			<Navbar>
 				{Routes.map((route) => (
 					<Navbar.Item key="route" href={route.path}>
