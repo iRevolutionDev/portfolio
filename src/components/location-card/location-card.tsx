@@ -1,5 +1,9 @@
 import "@/components/location-card/location-card.css";
-import { Paper, Stack } from "@mui/material";
+import {
+	AnimatedCard,
+	AnimatedItem,
+} from "@/components/location-card/animations";
+import { Stack } from "@mui/material";
 import Link from "next/link";
 import type { FC, PropsWithChildren } from "react";
 
@@ -11,6 +15,10 @@ const Ping = () => {
 	);
 };
 
+const Item: FC<PropsWithChildren> = ({ children }) => {
+	return <AnimatedItem>{children}</AnimatedItem>;
+};
+
 type RootProps = {
 	href: string;
 };
@@ -18,21 +26,17 @@ type RootProps = {
 const Root: FC<PropsWithChildren<RootProps>> = ({ children, href }) => {
 	return (
 		<Link href={href} rel="noopener noreferrer" target="_blank">
-			<Paper
-				className="p-2"
-				elevation={0}
-				sx={{ borderRadius: 10 }}
-				variant="outlined"
-			>
+			<AnimatedCard>
 				<Stack
 					direction="row"
 					spacing={2}
 					alignContent="center"
 					alignItems="center"
+					className="text-nowrap"
 				>
 					{children}
 				</Stack>
-			</Paper>
+			</AnimatedCard>
 		</Link>
 	);
 };
@@ -40,4 +44,5 @@ const Root: FC<PropsWithChildren<RootProps>> = ({ children, href }) => {
 export const Location = {
 	Root,
 	Ping,
+	Item,
 };
