@@ -76,5 +76,9 @@
         "viewOnGitHub": "View on GitHub"
       }
     }
+  },
+  "languages": {
+    "en": "English",
+    "pt-br": "Portuguese (Brazil)"
   }
 }

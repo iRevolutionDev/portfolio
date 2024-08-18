@@ -1,4 +1,5 @@
 import { AnimatedAppBar } from "@/components/animated-appbar";
+import { LanguageSwitch } from "@/components/language-switch";
 import MenuButton from "@/components/menu-button";
 import MobileMenu from "@/components/mobile-menu";
 import { NavButton } from "@/components/nav-button";
@@ -41,6 +42,9 @@ const Navbar: FC<PropsWithChildren> & Extensions = ({ children }) => {
 						</Grid>
 						<Grid item>
 							<ToggleThemeButton />
+						</Grid>
+						<Grid item>
+							<LanguageSwitch />
 						</Grid>
 					</Grid>
 				</Stack>
