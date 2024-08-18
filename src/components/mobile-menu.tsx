@@ -1,7 +1,9 @@
 "use client";
 
+import { LanguageSwitch } from "@/components/language-switch";
 import { ToggleThemeButton } from "@/components/toggle-theme-button";
 import { useAppSelector } from "@/redux/hooks";
+import { Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import type { FC, PropsWithChildren } from "react";
@@ -35,7 +37,10 @@ const MobileMenu: FC<PropsWithChildren> = ({ children }) => {
 							<ul className="list-none w-full">{children}</ul>
 							<div className="relative w-full h-full">
 								<div className="absolute right-4 bottom-[6rem]">
-									<ToggleThemeButton />
+									<Stack direction="column" spacing={2}>
+										<LanguageSwitch />
+										<ToggleThemeButton />
+									</Stack>
 								</div>
 							</div>
 						</div>
