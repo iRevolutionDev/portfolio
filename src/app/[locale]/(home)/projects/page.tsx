@@ -1,4 +1,5 @@
 import type { Repositories } from "@/@types/github-repo";
+import { CascadeContainer, CascadeItem } from "@/components/cascade-animation";
 import {
 	Button,
 	Card,
@@ -46,7 +47,7 @@ export const generateMetadata = async ({
 	};
 };
 
-export default async function Page({
+export default async function ProjectsPage({
 	params: { locale },
 }: { params: { locale: string } }) {
 	unstable_setRequestLocale(locale);
@@ -69,90 +70,94 @@ export default async function Page({
 				<Typography variant="h4" fontWeight={700}>
 					{t("title")} 📁
 				</Typography>
-				<Grid container>
-					{repos
-						.filter((repo) => !repo.fork)
-						.filter((repo) => !repo.name.startsWith("irevolutiondev"))
-						.sort((a, b) => b.stargazers_count - a.stargazers_count)
-						.map((repo) => (
-							<Grid
-								item
-								key={repo.id}
-								xs={12}
-								md={6}
-								pb={2}
-								pr={{ xs: 0, md: 2 }}
-							>
-								<Card
-									className="!mr-4 md:!mr-0 w-full h-full"
-									elevation={0}
-									variant="outlined"
+				<CascadeContainer>
+					<Grid container>
+						{repos
+							.filter((repo) => !repo.fork)
+							.filter((repo) => !repo.name.startsWith("irevolutiondev"))
+							.sort((a, b) => b.stargazers_count - a.stargazers_count)
+							.map((repo) => (
+								<Grid
+									item
+									key={repo.id}
+									xs={12}
+									md={6}
+									pb={2}
+									pr={{ xs: 0, md: 2 }}
 								>
-									<Stack direction="column" className="h-full" spacing={2}>
-										<CardHeader
-											title={repo.name}
-											subheader={repo.description ?? "No description"}
-										/>
-										<Grid
-											justifyContent="space-between"
-											direction="row"
-											alignItems="flex-end"
-											display="flex"
-											className="h-full"
+									<CascadeItem>
+										<Card
+											className="!mr-4 md:!mr-0 w-full h-full"
+											elevation={0}
+											variant="outlined"
 										>
-											<div className="flex flex-col p-4">
-												<Typography variant="body1" className="opacity-60">
-													{repo.language}
-												</Typography>
-												<Grid container spacing={1} alignItems="center">
-													<Grid item>
-														<Stack
-															direction="row"
-															spacing={1}
-															alignItems="center"
-														>
-															<FaStar className="text-yellow-400" />
-															<Typography
-																variant="body1"
-																className="opacity-60"
-															>
-																{repo.stargazers_count}
-															</Typography>
-														</Stack>
-													</Grid>
-													<Grid item>
-														<Stack
-															direction="row"
-															spacing={1}
-															alignItems="center"
-														>
-															<BiGitRepoForked className="text-gray-400" />
-															<Typography
-																variant="body1"
-																className="opacity-60"
-															>
-																{repo.forks_count}
-															</Typography>
-														</Stack>
-													</Grid>
-												</Grid>
-											</div>
-											<CardActions>
-												<Button
-													component={Link}
-													href={repo.html_url}
-													target="_blank"
-													rel="noopener noreferrer"
+											<Stack direction="column" className="h-full" spacing={2}>
+												<CardHeader
+													title={repo.name}
+													subheader={repo.description ?? "No description"}
+												/>
+												<Grid
+													justifyContent="space-between"
+													direction="row"
+													alignItems="flex-end"
+													display="flex"
+													className="h-full"
 												>
-													{t("card.viewOnGitHub")}
-												</Button>
-											</CardActions>
-										</Grid>
-									</Stack>
-								</Card>
-							</Grid>
-						))}
-				</Grid>
+													<div className="flex flex-col p-4">
+														<Typography variant="body1" className="opacity-60">
+															{repo.language}
+														</Typography>
+														<Grid container spacing={1} alignItems="center">
+															<Grid item>
+																<Stack
+																	direction="row"
+																	spacing={1}
+																	alignItems="center"
+																>
+																	<FaStar className="text-yellow-400" />
+																	<Typography
+																		variant="body1"
+																		className="opacity-60"
+																	>
+																		{repo.stargazers_count}
+																	</Typography>
+																</Stack>
+															</Grid>
+															<Grid item>
+																<Stack
+																	direction="row"
+																	spacing={1}
+																	alignItems="center"
+																>
+																	<BiGitRepoForked className="text-gray-400" />
+																	<Typography
+																		variant="body1"
+																		className="opacity-60"
+																	>
+																		{repo.forks_count}
+																	</Typography>
+																</Stack>
+															</Grid>
+														</Grid>
+													</div>
+													<CardActions>
+														<Button
+															component={Link}
+															href={repo.html_url}
+															target="_blank"
+															rel="noopener noreferrer"
+														>
+															{t("card.viewOnGitHub")}
+														</Button>
+													</CardActions>
+												</Grid>
+											</Stack>
+										</Card>
+									</CascadeItem>
+								</Grid>
+							))}
+					</Grid>
+				</CascadeContainer>
 			</Stack>
 		</>
 	);
