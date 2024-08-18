@@ -24,7 +24,7 @@ export default function Layout({
 	const t = useTranslations("layout.navbar");
 
 	return (
-		<>
+		<Container className="w-full h-full max-w-5xl mx-auto">
 			<LoadingWidget />
 			<Navbar>
 				{Routes.map((route) => (
@@ -33,11 +33,9 @@ export default function Layout({
 					</Navbar.Item>
 				))}
 			</Navbar>
-			<Container maxWidth="md">
-				<main className="mx-auto max-w-3xl space-y-12 py-12 md:py-24">
-					<PageWrapper>{children}</PageWrapper>
-				</main>
-			</Container>
-		</>
+			<main className="space-y-12 py-12 md:py-24">
+				<PageWrapper>{children}</PageWrapper>
+			</main>
+		</Container>
 	);
 }

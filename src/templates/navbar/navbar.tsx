@@ -4,7 +4,7 @@ import MobileMenu from "@/components/mobile-menu";
 import { NavButton } from "@/components/nav-button";
 import { SpotifyWatcher } from "@/components/spotify-watcher";
 import { ToggleThemeButton } from "@/components/toggle-theme-button";
-import { Container, Grid, Stack, Toolbar } from "@mui/material";
+import { Grid, Stack, Toolbar } from "@mui/material";
 import { useTranslations } from "next-intl";
 import type { FC, PropsWithChildren } from "react";
 
@@ -29,25 +29,23 @@ const Navbar: FC<PropsWithChildren> & Extensions = ({ children }) => {
 
 	return (
 		<>
-			<Container maxWidth="md" className="!hidden md:!block">
-				<div className="my-5">
-					<Stack direction="row">
-						<Stack direction="row" spacing={2}>
-							{children}
-						</Stack>
-
-						<Grid container justifyContent="flex-end" spacing={2}>
-							<Grid item>
-								<SpotifyWatcher />
-							</Grid>
-							<Grid item>
-								<ToggleThemeButton />
-							</Grid>
-						</Grid>
+			<nav className="my-5 hidden md:block">
+				<Stack direction="row">
+					<Stack direction="row" spacing={2}>
+						{children}
 					</Stack>
-				</div>
-			</Container>
-			<div className="md:hidden">
+
+					<Grid container justifyContent="flex-end" spacing={2}>
+						<Grid item>
+							<SpotifyWatcher />
+						</Grid>
+						<Grid item>
+							<ToggleThemeButton />
+						</Grid>
+					</Grid>
+				</Stack>
+			</nav>
+			<nav className="md:hidden">
 				<MobileMenu>{children}</MobileMenu>
 				<AnimatedAppBar>
 					<Toolbar>
@@ -59,7 +57,7 @@ const Navbar: FC<PropsWithChildren> & Extensions = ({ children }) => {
 						</Grid>
 					</Toolbar>
 				</AnimatedAppBar>
-			</div>
+			</nav>
 		</>
 	);
 };
