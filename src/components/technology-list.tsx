@@ -14,7 +14,7 @@ export function TechnologyList() {
 			setItems((prev) => {
 				return Technologies.slice(0, prev.length + 1);
 			});
-		}, 200);
+		}, 150);
 
 		return () => {
 			clearInterval(interval);
@@ -29,6 +29,10 @@ export function TechnologyList() {
 				elevation={0}
 				sx={{ borderRadius: 10 }}
 				variant="outlined"
+				transition={{
+					duration: 0.3,
+					delayChildren: 0.1,
+				}}
 				layout
 			>
 				<Stack
