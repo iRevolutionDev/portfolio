@@ -1,5 +1,5 @@
 import type { Position } from "@/@types/position";
-import { JobDetailsCard } from "@/components/job-details-card";
+import { JobDetailsCard } from "@/components/job-details-card/job-details-card";
 import { Location } from "@/components/location-card/location-card";
 import { SocialLinks } from "@/components/social-links";
 import { TechnologyList } from "@/components/technology-list";
