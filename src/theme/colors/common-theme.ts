@@ -9,5 +9,14 @@ export const commonTheme: ThemeOptions = {
 				},
 			},
 		},
+		MuiTooltip: {
+			styleOverrides: {
+				tooltip: {
+					borderRadius: "0.4rem",
+					fontSize: "0.8rem",
+					boxShadow: "0 0 0.4rem rgba(0, 0, 0, 0.2)",
+				},
+			},
+		},
 	},
 };

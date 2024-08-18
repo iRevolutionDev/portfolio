@@ -2,6 +2,7 @@ import { commonTheme } from "@/theme/colors/common-theme";
 import { createTheme } from "@mui/material/styles";
 
 export const darkTheme = createTheme({
+	...commonTheme,
 	palette: {
 		mode: "dark",
 		primary: {
@@ -23,6 +24,19 @@ export const darkTheme = createTheme({
 	},
 	typography: {
 		fontFamily: "JetBrains Mono",
+	},
+	components: {
+		MuiTooltip: {
+			styleOverrides: {
+				tooltip: {
+					backgroundColor: "#601218",
+					color: "#ffb3b1",
+				},
+				arrow: {
+					color: "#601218",
+				},
+			},
+		},
 	},
 	shadows: [
 		"none",
@@ -51,5 +65,4 @@ export const darkTheme = createTheme({
 		"0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12)",
 		"0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12)",
 	],
-	...commonTheme,
 });
