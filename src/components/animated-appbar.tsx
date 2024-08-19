@@ -1,40 +1,58 @@
 "use client";
-
-import { HideOnScroll } from "@/components/hide-on-scroll";
 import { useAppSelector } from "@/redux/hooks";
-import { AppBar, useScrollTrigger } from "@mui/material";
-import type { FC, PropsWithChildren } from "react";
+import { Paper, Toolbar } from "@mui/material";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { type FC, type PropsWithChildren, useState } from "react";
 
-interface Props {
-	window?: () => Window;
-}
-
-export const AnimatedAppBar: FC<PropsWithChildren<Props>> = ({
-	children,
-	window,
-}) => {
+export const AnimatedAppBar: FC<PropsWithChildren> = ({ children }) => {
 	const { open } = useAppSelector((state) => state.menu);
 
-	const trigger =
-		useScrollTrigger({
-			target: window ? window() : undefined,
-			disableHysteresis: true,
-			threshold: 0,
-		}) || open;
+	const { scrollY } = useScroll();
+	const [hidden, setHidden] = useState(false);
+	const [prevScroll, setPrevScroll] = useState(0);
+
+	const isOnTop = scrollY.get() < 100;
+
+	function update(latest: number, prev: number): void {
+		if (latest < prev) {
+			setHidden(false);
+		} else if (latest > 100 && latest > prev) {
+			setHidden(true);
+		}
+	}
+
+	useMotionValueEvent(scrollY, "change", (latest: number) => {
+		update(latest, prevScroll);
+		setPrevScroll(latest);
+	});
 
 	return (
-		<HideOnScroll disable={open}>
-			<AppBar
-				className="!transition-all"
-				sx={{
-					m: trigger ? 0 : 2,
-					borderRadius: trigger ? 0 : "1rem",
-					width: trigger ? "100%" : "unset",
+		<>
+			<Toolbar />
+			<Paper
+				component={motion.nav}
+				initial={{
+					y: 0,
+					position: "fixed",
 				}}
-				position={trigger ? "fixed" : "static"}
+				animate={{
+					y: hidden && !open ? "-100%" : 0,
+					margin: !isOnTop || open ? "0" : "1rem",
+					borderRadius: !isOnTop || open ? "0" : "1rem",
+				}}
+				transition={{
+					ease: [0.1, 0.25, 0.3, 1],
+					duration: 0.6,
+				}}
+				sx={{
+					backgroundColor:
+						"rgba(from var(--mui-palette-background-paper) r g b / 70%)",
+					boxShadow: 10,
+				}}
+				className="top-0 left-0 right-0 z-50 backdrop-blur-md"
 			>
 				{children}
-			</AppBar>
-		</HideOnScroll>
+			</Paper>
+		</>
 	);
 };
