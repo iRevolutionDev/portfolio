@@ -28,6 +28,9 @@ jobs:
       - name: 🧪 Setup Playwright
         uses: microsoft/playwright-github-action@v1
 
+      - name: 🧪 Install dependencies
+        run: bunx playwright install --with-deps
+
       - name: 🎭 Run Playwright tests
         run: bun run e2e:headless
         env:
