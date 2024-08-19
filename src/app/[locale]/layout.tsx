@@ -17,8 +17,6 @@ export default function IntlRootLayout({
 }) {
 	unstable_setRequestLocale(locale);
 
-	unstable_setRequestLocale(locale);
-
 	return (
 		<html lang={locale}>
 			<body>

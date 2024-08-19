@@ -1,26 +1,44 @@
-import { commonTheme } from "@/theme/colors/common-theme";
-import type { ThemeOptions } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
-import { deepmerge } from "@mui/utils";
+"use client";
 
-const darkThemeOptions: ThemeOptions = {
-	palette: {
-		mode: "dark",
-		primary: {
-			main: "#ffb3b1",
-			contrastText: "#601218",
-			dark: "rgb(178, 125, 123)",
-			light: "rgb(255, 194, 192)",
+import { experimental_extendTheme as extendTheme } from "@mui/material/styles";
+
+export const theme = extendTheme({
+	colorSchemes: {
+		light: {
+			palette: {
+				primary: {
+					main: "#9e4042",
+					contrastText: "#ffffff",
+				},
+				secondary: {
+					main: "#775655",
+					contrastText: "#ffffff",
+				},
+				background: {
+					default: "#fffbff",
+					paper: "#f8ebea",
+				},
+			},
 		},
-		secondary: {
-			main: "#e6bdbb",
-			contrastText: "#442929",
-			light: "rgb(235, 202, 200)",
-			dark: "rgb(161, 132, 130)",
-		},
-		background: {
-			default: "#201a1a",
-			paper: "#251e1e",
+		dark: {
+			palette: {
+				primary: {
+					main: "#ffb3b1",
+					contrastText: "#601218",
+					dark: "rgb(178, 125, 123)",
+					light: "rgb(255, 194, 192)",
+				},
+				secondary: {
+					main: "#e6bdbb",
+					contrastText: "#442929",
+					light: "rgb(235, 202, 200)",
+					dark: "rgb(161, 132, 130)",
+				},
+				background: {
+					default: "#201a1a",
+					paper: "#251e1e",
+				},
+			},
 		},
 	},
 	typography: {
@@ -30,11 +48,11 @@ const darkThemeOptions: ThemeOptions = {
 		MuiTooltip: {
 			styleOverrides: {
 				tooltip: {
-					backgroundColor: "#601218",
-					color: "#ffb3b1",
+					backgroundColor: "#9e4042",
+					color: "#ffffff",
 				},
 				arrow: {
-					color: "#601218",
+					color: "#9e4042",
 				},
 			},
 		},
@@ -66,6 +84,4 @@ const darkThemeOptions: ThemeOptions = {
 		"0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12)",
 		"0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12)",
 	],
-};
-
-export const darkTheme = createTheme(deepmerge(commonTheme, darkThemeOptions));
+});
