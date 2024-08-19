@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint:next": "next lint",
-    "format": "pnpm biome format --write ./src",
-    "lint": "pnpm biome lint ./src",
-    "check": "pnpm biome check --write ./src"
+    "format": "bun run biome format --write ./src",
+    "lint": "bun run biome lint ./src",
+    "check": "bun run biome check --write ./src"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
