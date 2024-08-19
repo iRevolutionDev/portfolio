@@ -23,15 +23,12 @@ export class TerminalStorage {
 			return [];
 		}
 
-		const data = await response.json();
+		const data = (await response.json()) as Repositories;
 
-		if (data.message) {
-			this.terminal.error(`Failed to fetch projects: ${data.message}`);
-			return [];
+		if (data.length === 0) {
+			this.terminal.error("No projects found");
 		}
 
-		return (data as Repositories).map(
-			(repo) => new GitDirectory(repo.full_name),
-		);
+		return data.map((repo) => new GitDirectory(repo.full_name));
 	}
 }

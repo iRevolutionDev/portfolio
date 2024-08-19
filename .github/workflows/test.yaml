@@ -1,0 +1,39 @@
+name: 🧪 Jest and Playwright
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: 📦 Install dependencies
+        run: bun install
+
+      - name: 🃏 Run Jest tests
+        run: bun run test
+
+      - name: 🧪 Setup Playwright
+        uses: microsoft/playwright-github-action@v1
+
+      - name: 🧪 Install dependencies
+        run: bunx playwright install --with-deps
+
+      - name: 🎭 Run Playwright tests
+        run: bun run e2e:headless
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_SECRET_KEY: ${{ secrets.SPOTIFY_SECRET_KEY }}
+          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}

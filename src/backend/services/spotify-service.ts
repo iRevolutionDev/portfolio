@@ -1,12 +1,12 @@
 import querystring from "node:querystring";
 import type { SpotifyResponse } from "@/@types/spotify-response";
 import type { SpotifyAuthenticationResponse } from "@/backend/models/spotify-authentication-response";
+import { env } from "@/env";
 import {
 	BASIC,
 	GRANT_TYPE,
 	HOUR_REVALIDATE,
 	PLAYER_ENDPOINT,
-	REFRESH_TOKEN,
 	SHORT_REVALIDATE,
 	TOKEN_ENDPOINT,
 } from "@/helpers/constants";
@@ -36,17 +36,17 @@ export const SpotifyService = {
 			throw new Error(`Failed to fetch token: ${response.statusText}`);
 		}
 
-		return await response.json();
+		return (await response.json()) as SpotifyAuthenticationResponse;
 	},
 
 	async getAccessToken(): Promise<SpotifyAuthenticationResponse> {
-		if (!REFRESH_TOKEN) {
+		if (!env.SPOTIFY_REFRESH_TOKEN) {
 			throw new Error("Refresh token not found");
 		}
 
 		return await SpotifyService.retrieveAuthToken({
 			grant_type: GRANT_TYPE,
-			refresh_token: REFRESH_TOKEN,
+			refresh_token: env.SPOTIFY_REFRESH_TOKEN,
 		});
 	},
 
@@ -70,6 +70,6 @@ export const SpotifyService = {
 			throw new Error(`Failed to fetch player data: ${response.statusText}`);
 		}
 
-		return await response.json();
+		return (await response.json()) as SpotifyResponse;
 	},
 };
