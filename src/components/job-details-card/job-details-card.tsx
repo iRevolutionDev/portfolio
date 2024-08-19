@@ -1,5 +1,9 @@
 import { Circle } from "@/components/circle";
-import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import {
+	JobContainer,
+	JobItem,
+} from "@/components/job-details-card/animations";
+import { Card, CardContent, Stack, Typography } from "@mui/material";
 import type { FC, PropsWithChildren } from "react";
 
 type JobDetailsCardItemProps = {
@@ -13,9 +17,9 @@ const Item: FC<PropsWithChildren<JobDetailsCardItemProps>> = ({
 	position,
 }) => {
 	return (
-		<Grid item xs={12} md={6} className="!pl-0 md:!pl-2" display="flex">
+		<JobItem>
 			<Card
-				className="!mr-4 md:!mr-0"
+				className="w-full"
 				elevation={0}
 				variant="outlined"
 				sx={{
@@ -53,16 +57,12 @@ const Item: FC<PropsWithChildren<JobDetailsCardItemProps>> = ({
 					</Stack>
 				</Stack>
 			</Card>
-		</Grid>
+		</JobItem>
 	);
 };
 
 const Root: FC<PropsWithChildren> = ({ children }) => {
-	return (
-		<Grid container spacing={2} alignItems="stretch">
-			{children}
-		</Grid>
-	);
+	return <JobContainer>{children}</JobContainer>;
 };
 
 export const JobDetailsCard = {

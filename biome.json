@@ -1,26 +1,23 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.6.4/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
-  "formatter": {
-    "enabled": true,
-    "formatWithErrors": false
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
-  },
-  "files": {
-    "include": [
-      "**/*.ts",
-      "**/*.tsx"
-    ],
-    "ignore": [
-      "node_modules",
-      ".next"
-    ]
-  }
+	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noUnusedImports": "error"
+			}
+		}
+	},
+	"files": {
+		"include": ["**/*.ts", "**/*.tsx", "locales/**/*.{json}"],
+		"ignore": ["node_modules", ".next"]
+	}
 }
