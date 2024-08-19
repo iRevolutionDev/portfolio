@@ -1,6 +1,11 @@
 import createNextIntlPlugin from 'next-intl/plugin';
+import { fileURLToPath } from "node:url";
+import createJiti from "jiti";
 
+const jiti = createJiti(fileURLToPath(import.meta.url));
 const withNextIntl = createNextIntlPlugin();
+
+jiti("./src/env");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
