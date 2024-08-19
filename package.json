@@ -21,6 +21,12 @@
     "@mui/material-nextjs": "^5.16.6",
     "@mui/utils": "^5.16.6",
     "@reduxjs/toolkit": "^2.2.7",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^10.1.6",
+    "@semantic-release/npm": "^12.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.1",
     "@t3-oss/env-nextjs": "^0.11.0",
     "@types/node": "20.12.7",
     "@types/react": "18.2.79",
@@ -42,9 +48,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/resources": "^1.25.1",
+    "@opentelemetry/sdk-node": "^0.52.1",
+    "@opentelemetry/sdk-trace-node": "^1.25.1",
+    "@opentelemetry/semantic-conventions": "^1.25.1",
     "@total-typescript/ts-reset": "^0.5.1",
     "husky": "^9.1.4",
-    "lint-staged": "^15.2.9"
+    "lint-staged": "^15.2.9",
+    "postinstall-postinstall": "^2.1.0"
   },
   "lint-staged": {
     "*.{ts,tsx,d.ts}": [
