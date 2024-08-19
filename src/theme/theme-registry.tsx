@@ -10,7 +10,7 @@ export default function ThemeRegistry({
 }: { children: React.ReactNode }) {
 	return (
 		<AppRouterCacheProvider options={{ key: "mui" }}>
-			<CssVarsProvider theme={theme}>
+			<CssVarsProvider theme={theme} defaultMode="system">
 				<InitColorSchemeScript />
 				{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 				<CssBaseline />
