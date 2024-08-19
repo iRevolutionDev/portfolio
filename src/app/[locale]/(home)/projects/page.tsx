@@ -80,6 +80,12 @@ export default async function ProjectsPage({
 								<CascadeItem key={repo.id}>
 									<Card
 										className="!mr-4 md:!mr-0 w-full h-full"
+										sx={{
+											"&:hover": {
+												borderColor: "primary.main",
+												transition: "border-color 0.2s ease-in-out",
+											},
+										}}
 										elevation={0}
 										variant="outlined"
 									>
