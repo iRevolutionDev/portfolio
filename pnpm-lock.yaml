@@ -26,6 +26,9 @@ importers:
       '@mui/material-nextjs':
         specifier: ^5.16.6
         version: 5.16.6(@emotion/cache@11.13.1)(@mui/material@5.16.7(@emotion/react@11.13.0(@types/react@18.2.79)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.2.79)(react@18.3.1))(@types/react@18.2.79)(react@18.3.1))(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.2.79)(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      '@mui/utils':
+        specifier: ^5.16.6
+        version: 5.16.6(@types/react@18.2.79)(react@18.3.1)
       '@reduxjs/toolkit':
         specifier: ^2.2.7
         version: 2.2.7(react-redux@9.1.2(@types/react@18.2.79)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
