@@ -10,12 +10,16 @@
     "format": "bun run biome format --write ./src",
     "lint": "bun run biome lint ./src",
     "check": "bun run biome check --write ./src",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest",
+    "e2e:headless": "playwright test",
+    "e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@jest/globals": "^29.7.0",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "@mui/material-nextjs": "^5.16.6",
@@ -28,6 +32,8 @@
     "@semantic-release/npm": "^12.0.1",
     "@semantic-release/release-notes-generator": "^14.0.1",
     "@t3-oss/env-nextjs": "^0.11.0",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
     "@types/node": "20.12.7",
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
@@ -36,6 +42,7 @@
     "jiti": "^1.21.6",
     "next": "^14.2.5",
     "next-intl": "^3.17.3",
+    "playwright": "^1.46.1",
     "postcss": "8.4.38",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -54,9 +61,14 @@
     "@opentelemetry/sdk-trace-node": "^1.25.1",
     "@opentelemetry/semantic-conventions": "^1.25.1",
     "@total-typescript/ts-reset": "^0.5.1",
+    "@types/jest": "^29.5.12",
+    "@types/mocha": "^10.0.7",
     "husky": "^9.1.4",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.9",
-    "postinstall-postinstall": "^2.1.0"
+    "postinstall-postinstall": "^2.1.0",
+    "ts-jest": "^29.2.4"
   },
   "lint-staged": {
     "*.{ts,tsx,d.ts}": [

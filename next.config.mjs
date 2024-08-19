@@ -5,7 +5,7 @@ import createJiti from "jiti";
 const jiti = createJiti(fileURLToPath(import.meta.url));
 const withNextIntl = createNextIntlPlugin();
 
-jiti("./src/env");
+if (process.env.NODE_ENV !== "test") jiti("./src/env");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

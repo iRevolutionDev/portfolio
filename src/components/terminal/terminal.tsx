@@ -6,7 +6,7 @@ import type { Command } from "@/features/terminal/command";
 import { commandManager } from "@/features/terminal/command-manager";
 import { terminal } from "@/features/terminal/terminal";
 import { terminalEventDispatcher } from "@/features/terminal/terminal-event-dispatcher";
-import ColorInterpreter from "@/helpers/color-intepreter";
+import ColorInterpreter from "@/helpers/color-interpreter";
 import {
 	clearTerminal,
 	initTerminal,

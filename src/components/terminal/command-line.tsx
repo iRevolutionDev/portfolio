@@ -1,5 +1,5 @@
 import { CommandInput } from "@/components/terminal/command-input";
-import ColorInterpreter from "@/helpers/color-intepreter";
+import ColorInterpreter from "@/helpers/color-interpreter";
 import { Stack } from "@mui/material";
 import type { FC } from "react";
 
