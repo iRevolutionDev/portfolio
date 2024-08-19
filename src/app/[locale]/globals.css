@@ -7,3 +7,32 @@
 * {
   font-family: 'JetBrains Mono', monospace;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--mui-palette-primary-main);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--mui-palette-background-paper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--mui-palette-primary-dark);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--mui-palette-primary-light);
+}
+
+::-webkit-scrollbar-corner {
+  background-color: var(--mui-palette-background-paper);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
