@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { type Variants, motion } from "framer-motion";
 import type { FC, PropsWithChildren } from "react";
 
 export const JobItem: FC<PropsWithChildren> = ({ children }) => {
-	const itemVariants = {
+	const itemVariants: Variants = {
 		hidden: {
 			opacity: 0,
 			y: -10,
@@ -19,7 +19,7 @@ export const JobItem: FC<PropsWithChildren> = ({ children }) => {
 };
 
 export const JobContainer: FC<PropsWithChildren> = ({ children }) => {
-	const containerVariants = {
+	const containerVariants: Variants = {
 		visible: {
 			transition: {
 				staggerChildren: 0.3,
@@ -33,6 +33,9 @@ export const JobContainer: FC<PropsWithChildren> = ({ children }) => {
 			variants={containerVariants}
 			initial="hidden"
 			whileInView="visible"
+			viewport={{
+				once: true,
+			}}
 			exit="hidden"
 		>
 			{children}

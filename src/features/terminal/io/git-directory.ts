@@ -51,11 +51,10 @@ export class GitDirectory extends Folder {
 			return [];
 		}
 
-		const data = await response.json();
+		const data = (await response.json()) as Array<GitHubFile>;
 
-		if (data.message) {
-			terminal.error(`Failed to fetch project directory: ${data.message}`);
-			return [];
+		if (data.length === 0) {
+			terminal.error("No files found in this directory");
 		}
 
 		return data;

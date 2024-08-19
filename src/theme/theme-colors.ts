@@ -50,9 +50,23 @@ export const theme = extendTheme({
 				tooltip: {
 					backgroundColor: "#9e4042",
 					color: "#ffffff",
+					'[data-mui-color-scheme="dark"] &': {
+						backgroundColor: "#ffb3b1",
+						color: "#601218",
+					},
 				},
 				arrow: {
 					color: "#9e4042",
+					'[data-mui-color-scheme="dark"] &': {
+						color: "#ffb3b1",
+					},
+				},
+			},
+		},
+		MuiPaper: {
+			styleOverrides: {
+				root: {
+					borderRadius: "0.8rem",
 				},
 			},
 		},
