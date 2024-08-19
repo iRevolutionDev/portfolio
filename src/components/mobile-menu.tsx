@@ -14,7 +14,7 @@ const MobileMenu: FC<PropsWithChildren> = ({ children }) => {
 		<AnimatePresence mode="wait">
 			{open && (
 				<motion.div
-					className="fixed inset-0 bg-black z-50 backdrop-blur-md"
+					className="fixed inset-0 bg-black z-40 backdrop-blur-md"
 					style={{
 						backgroundColor:
 							"rgba(from var(--mui-palette-background-paper) r g b / 90%)",
