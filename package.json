@@ -9,7 +9,8 @@
     "lint:next": "next lint",
     "format": "bun run biome format --write ./src",
     "lint": "bun run biome lint ./src",
-    "check": "bun run biome check --write ./src"
+    "check": "bun run biome check --write ./src",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
@@ -41,6 +42,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@total-typescript/ts-reset": "^0.5.1"
+    "@total-typescript/ts-reset": "^0.5.1",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.9"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,d.ts}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
   }
 }
