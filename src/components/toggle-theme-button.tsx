@@ -14,12 +14,12 @@ const iconVariants = {
 };
 
 export const ToggleThemeButton = () => {
-	const { mode, setMode } = useColorScheme();
+	const { colorScheme, setMode } = useColorScheme();
 
 	return (
 		<IconButton
 			className="w-10 h-10"
-			onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+			onClick={() => setMode(colorScheme === "dark" ? "light" : "dark")}
 		>
 			<AnimatePresence>
 				<motion.div
@@ -30,7 +30,7 @@ export const ToggleThemeButton = () => {
 					exit="hidden"
 					layout
 				>
-					{mode !== "dark" ? (
+					{colorScheme !== "dark" ? (
 						<motion.div
 							className="w-full h-full flex items-center justify-center"
 							variants={iconVariants}
