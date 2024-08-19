@@ -15,7 +15,7 @@ export const LoadingWidget = () => {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
-					className="fixed inset-0 z-50 w-full h-2"
+					className="fixed z-50 w-full h-1 md:inset-0 bottom-0 left-0 right-0 md:bottom-auto md:left-auto"
 				>
 					<LinearProgress color="secondary" />
 				</motion.div>
