@@ -28,6 +28,7 @@ const persistConfig: PersistConfig<ReturnType<typeof rootReducers>> = {
 	key: "root",
 	storage: storage,
 	version: 1,
+	whitelist: [],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
