@@ -2,7 +2,6 @@ import storage from "@/redux/custom-storage";
 import { menuReducer } from "@/redux/features/menu-slice";
 import { pageReducer } from "@/redux/features/page-slice";
 import { terminalReducer } from "@/redux/features/terminal-slice";
-import { themeReducer } from "@/redux/features/theme-slice";
 import { spotifyApi } from "@/redux/services/spotify-api";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
@@ -21,7 +20,6 @@ import type { PersistConfig } from "redux-persist/es/types";
 export const rootReducers = combineReducers({
 	menu: menuReducer,
 	terminal: terminalReducer,
-	theme: themeReducer,
 	page: pageReducer,
 	[spotifyApi.reducerPath]: spotifyApi.reducer,
 });
@@ -30,7 +28,6 @@ const persistConfig: PersistConfig<ReturnType<typeof rootReducers>> = {
 	key: "root",
 	storage: storage,
 	version: 1,
-	whitelist: ["theme"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

@@ -1,7 +1,6 @@
 "use client";
-import { useTheme } from "@/hooks/useTheme";
 import { DarkMode, LightMode } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { IconButton, useColorScheme } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 
 const containerVariants = {
@@ -15,10 +14,13 @@ const iconVariants = {
 };
 
 export const ToggleThemeButton = () => {
-	const { toggleTheme, theme } = useTheme();
+	const { colorScheme, setMode } = useColorScheme();
 
 	return (
-		<IconButton className="w-10 h-10" onClick={toggleTheme}>
+		<IconButton
+			className="w-10 h-10"
+			onClick={() => setMode(colorScheme === "dark" ? "light" : "dark")}
+		>
 			<AnimatePresence>
 				<motion.div
 					className="w-full h-full"
@@ -28,7 +30,7 @@ export const ToggleThemeButton = () => {
 					exit="hidden"
 					layout
 				>
-					{theme !== "dark" ? (
+					{colorScheme !== "dark" ? (
 						<motion.div
 							className="w-full h-full flex items-center justify-center"
 							variants={iconVariants}
