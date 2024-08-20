@@ -12,11 +12,8 @@ signal-hook = "0.3.17"
 tokio = { version = "1.39.3", features = ["macros"] }
 tracing = { version = "0.1.40", features = ["log"] }
 vercel_runtime = "1.1.4"
-reqwest = "0.12.7"
 tracing-subscriber = "0.3.18"
-base64 = "0.22.1"
-chrono = "0.4.38"
-once_cell = "1.19.0"
+app = { path = "src-rs/app" }
 
 [[bin]]
 name = "me"

@@ -1,4 +1,4 @@
-use crate::app::models::spotify::{AccessToken, CurrentPlaying, SpotifyError};
+use crate::models::spotify::{AccessToken, CurrentPlaying, SpotifyError};
 use base64::engine::general_purpose::STANDARD;
 use base64::Engine;
 use once_cell::sync::OnceCell;

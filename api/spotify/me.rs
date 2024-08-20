@@ -1,6 +1,4 @@
-mod app;
-
-use crate::app::services::spotify_service::{SpotifyService, SPOTIFY_SERVICE};
+use app::services::spotify_service::{SpotifyService, SPOTIFY_SERVICE};
 use tokio::sync::Mutex;
 use vercel_runtime::{process_request, process_response, run_service, service_fn, Body, Error, Request, Response, ServiceBuilder};
 

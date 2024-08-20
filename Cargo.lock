@@ -42,6 +42,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "app"
+version = "0.1.0"
+dependencies = [
+ "base64",
+ "chrono",
+ "once_cell",
+ "reqwest",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "tokio",
+ "tracing",
+ "vercel_runtime",
+]
+
+[[package]]
 name = "async-stream"
 version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -871,10 +887,7 @@ checksum = "d231b230927b5e4ad203db57bbcbee2802f6bce620b1e4a9024a07d94e2907ec"
 name = "portfolio"
 version = "0.1.0"
 dependencies = [
- "base64",
- "chrono",
- "once_cell",
- "reqwest",
+ "app",
  "serde",
  "serde_derive",
  "serde_json",
