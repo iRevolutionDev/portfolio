@@ -5,10 +5,7 @@ edition = "2021"
 publish = false
 
 [dependencies]
-serde = { version = "1.0.208", features = ["derive"] }
-serde_derive = "1.0.208"
 serde_json = { version = "1.0.125", features = ["raw_value"] }
-signal-hook = "0.3.17"
 tokio = { version = "1.39.3", features = ["macros"] }
 tracing = { version = "0.1.40", features = ["log"] }
 vercel_runtime = "1.1.4"
