@@ -10,7 +10,7 @@ tokio = { version = "1.39.3", features = ["macros"] }
 tracing = { version = "0.1.40", features = ["log"] }
 vercel_runtime = "1.1.4"
 tracing-subscriber = "0.3.18"
-app = { path = "src-rs/app" }
+next_api = { path = "src-rs/next_api" }
 
 [[bin]]
 name = "me"
