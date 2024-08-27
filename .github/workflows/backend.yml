@@ -1,0 +1,21 @@
+name: 🚀 Backend Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shuttle-hq/deploy-action@main
+        with:
+          deploy-key: ${{ secrets.SHUTTLE_API_KEY }}
+          working-directory: "backend"
+          name: "revolution-portfolio"
+          allow-dirty: "true"
+          no-test: "true"
+          secrets: |
+            JWT_SECRET='${{ secrets.JWT_SECRET }}'
