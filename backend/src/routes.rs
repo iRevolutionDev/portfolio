@@ -1,5 +1,4 @@
-use crate::handlers::authentication::login;
-use crate::handlers::authentication::register::register;
+use crate::handlers::authentication::{login, register};
 use crate::handlers::posts::{create_post, delete_post, get_post, list_posts, update_post};
 use crate::AppState;
 use axum::http::StatusCode;

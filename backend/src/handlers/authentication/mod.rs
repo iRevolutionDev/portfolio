@@ -1,5 +1,8 @@
 use crate::domain::models::user::User;
+
 pub use login::login;
+pub use register::register;
+
 use serde::{Deserialize, Serialize};
 
 pub mod login;
