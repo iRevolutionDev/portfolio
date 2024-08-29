@@ -58,5 +58,4 @@ fn init_vars(secrets: SecretStore) {
     let jwt_secret = secrets.get("JWT_SECRET").expect("JWT_SECRET not found");
 
     std::env::set_var("JWT_SECRET", jwt_secret);
-    std::env::set_var("SQLX_OFFLINE", "true");
 }

@@ -20,5 +20,3 @@ jobs:
           no-test: "true"
           secrets: |
             JWT_SECRET='${{ secrets.JWT_SECRET }}'
-          env: |
-            SQLX_OFFLINE=true
