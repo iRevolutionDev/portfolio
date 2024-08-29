@@ -16,18 +16,12 @@ pub struct LoginRequest {
 }
 
 #[derive(Debug, Serialize)]
-pub struct AuthBody {
+pub struct LoginResponse {
+    pub id: i32,
+    pub username: String,
+    pub email: String,
     pub access_token: String,
     pub token_type: String,
-}
-
-impl AuthBody {
-    fn new(access_token: String) -> Self {
-        Self {
-            access_token,
-            token_type: "Bearer".to_string(),
-        }
-    }
 }
 
 #[derive(Debug, Deserialize)]

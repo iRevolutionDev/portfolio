@@ -1,5 +1,5 @@
 use crate::domain::models::authentication::AuthError;
-use crate::handlers::authentication::{AuthBody, LoginRequest};
+use crate::handlers::authentication::{LoginRequest, LoginResponse};
 use crate::infra::repositories::{authentication_repository, user_repository};
 use crate::utils::extractors::json_transformer::JsonExtractor;
 use crate::AppState;
@@ -9,7 +9,7 @@ use axum::Json;
 pub async fn login(
     State(state): State<AppState>,
     JsonExtractor(body): JsonExtractor<LoginRequest>,
-) -> Result<Json<AuthBody>, AuthError> {
+) -> Result<Json<LoginResponse>, AuthError> {
     if body.email.is_empty() || body.password.is_empty() {
         return Err(AuthError::MissingCredentials);
     }
@@ -26,6 +26,13 @@ pub async fn login(
         return Err(AuthError::WrongCredentials);
     }
 
-    authentication_repository::generate_token(user.clone())
-        .map(|token| Json(AuthBody::new(token)))
+    let token = authentication_repository::generate_token(user.clone())?;
+    
+    Ok(Json(LoginResponse {
+        id: user.id.unwrap(),
+        username: user.username,
+        email: user.email,
+        access_token: token,
+        token_type: "Bearer".to_string(),
+    }))
 }
