@@ -5,13 +5,13 @@ mod handlers;
 mod utils;
 mod errors;
 
-use shuttle_runtime::SecretStore;
 use crate::routes::app_router;
+use shuttle_runtime::SecretStore;
 use sqlx::PgPool;
 
 #[derive(Clone)]
 pub struct AppState {
-    pool: PgPool
+    pool: PgPool,
 }
 
 #[shuttle_runtime::main]
@@ -21,11 +21,9 @@ async fn main(
 ) -> shuttle_axum::ShuttleAxum {
     // init_tracing();
 
+    init_vars(secrets);
+
     run_migrations(&pool).await;
-    
-    
-    let jwt_secret = secrets.get("JWT_SECRET").expect("JWT_SECRET not found");
-    std::env::set_var("JWT_SECRET", jwt_secret);
 
     let state = AppState { pool };
 
@@ -54,4 +52,11 @@ async fn run_migrations(pool: &PgPool) {
         .run(pool)
         .await
         .expect("Failed to run migrations");
+}
+
+fn init_vars(secrets: SecretStore) {
+    let jwt_secret = secrets.get("JWT_SECRET").expect("JWT_SECRET not found");
+
+    std::env::set_var("JWT_SECRET", jwt_secret);
+    std::env::set_var("SQLX_OFFLINE", "true");
 }
