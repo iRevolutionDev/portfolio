@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint:next": "next lint",
-    "run": "concurrently -k -p \"[{name}]\" -n \"Next.js,Vercel CLI\" -c \"white.bold,cyan.bold\" \"next dev\" \"cross-env VERCEL_BUILDER_DEBUG=true vercel dev\"",
+    "run": "concurrently -k -p \"[{name}]\" -n \"Next.js,Vercel CLI,Backend\" -c \"white.bold,cyan.bold\" \"next dev\" \"cross-env VERCEL_BUILDER_DEBUG=true vercel dev\" \"cd backend && cargo shuttle run\"",
     "format": "bun run biome format --write ./src",
     "lint": "bun run biome lint ./src",
     "check": "bun run biome check --write ./src",
