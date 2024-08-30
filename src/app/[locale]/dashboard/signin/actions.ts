@@ -1,6 +1,7 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { DASHBOARD_HOME_PATH } from "@/constants/routes";
 import { AuthError } from "next-auth";
 
 export const signInAction = async (
@@ -11,16 +12,15 @@ export const signInAction = async (
 		await signIn("credentials", {
 			email,
 			password,
+			redirectTo: DASHBOARD_HOME_PATH,
 		});
 	} catch (error) {
 		if (error instanceof AuthError) {
 			switch (error.type) {
-				case "CredentialsSignin": {
+				case "CredentialsSignin":
 					return { message: "Invalid email or password" };
-				}
-				default: {
+				default:
 					return { message: "An error occurred" };
-				}
 			}
 		}
 

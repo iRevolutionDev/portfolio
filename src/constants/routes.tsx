@@ -1,3 +1,5 @@
+import { PostAdd } from "@mui/icons-material";
+
 export const Routes = [
 	{
 		name: "routes.home",
@@ -13,4 +15,13 @@ export const Routes = [
 	},
 ];
 
+export const DashboardRoutes = [
+	{
+		name: "routes.posts",
+		path: "/posts",
+		icon: <PostAdd />,
+	},
+];
+
+export const DASHBOARD_HOME_PATH = `/dashboard${DashboardRoutes[0].path}`;
 export const AUTH_REDIRECT = "/dashboard/signin";

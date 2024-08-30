@@ -24,6 +24,11 @@
         "terminal": "~/terminal"
       }
     },
+    "dashboard": {
+      "routes": {
+        "posts": "Posts"
+      }
+    },
     "spotifyWidget": {
       "status": {
         "notPlaying": "Nada tocando no momento.",

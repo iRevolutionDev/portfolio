@@ -10,7 +10,7 @@ import {
 	Typography,
 } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
-import { useState } from "react";
+import { useTransition } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -22,8 +22,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function SignIn() {
-	const [pending, setPending] = useState(false);
-	const [error, setError] = useState<string | null>(null);
+	const [pending, startTransition] = useTransition();
 
 	const {
 		register,
@@ -35,11 +34,11 @@ export default function SignIn() {
 	});
 
 	const onSubmit: SubmitHandler<FormData> = async ({ email, password }) => {
-		setPending(true);
-		const result = await signInAction(email, password);
-		setPending(false);
+		startTransition(async () => {
+			const error = await signInAction(email, password);
 
-		result && enqueueSnackbar(result.message, { variant: "error" });
+			error && enqueueSnackbar(error.message, { variant: "error" });
+		});
 	};
 
 	return (
