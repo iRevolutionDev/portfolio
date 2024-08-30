@@ -12,3 +12,5 @@ export const Routes = [
 		path: "/terminal",
 	},
 ];
+
+export const AUTH_REDIRECT = "/dashboard/signin";
