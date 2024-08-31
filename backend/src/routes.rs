@@ -5,12 +5,14 @@ use axum::http::StatusCode;
 use axum::response::IntoResponse;
 use axum::routing::{get, post};
 use axum::Router;
+use tower_http::cors::CorsLayer;
 
 pub fn app_router(state: AppState) -> Router<AppState> {
     Router::new()
         .route("/", get(root))
         .nest("/v1/auth", authentication_routes(state.clone()))
         .nest("/v1/posts", posts_routes(state.clone()))
+        .layer(CorsLayer::permissive())
         .fallback(handler_404)
 }
 
