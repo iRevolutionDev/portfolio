@@ -2,7 +2,7 @@
 
 import type { PostModel } from "@/@types/models/post-model";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Card, TextField, Typography } from "@mui/material";
+import { Button, Card, Switch, TextField, Typography } from "@mui/material";
 import Markdown from "markdown-to-jsx";
 import type { FC } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -18,6 +18,7 @@ type PostFormProps = {
 const schema = z.object({
 	title: z.string().min(5),
 	content: z.string().min(10),
+	published: z.boolean(),
 });
 
 export type PostFormData = z.infer<typeof schema>;
@@ -30,6 +31,7 @@ export const PostForm: FC<PostFormProps> = ({
 }) => {
 	const {
 		control,
+		register,
 		handleSubmit,
 		watch,
 		formState: { errors, isValid },
@@ -39,6 +41,7 @@ export const PostForm: FC<PostFormProps> = ({
 		defaultValues: {
 			title: post?.title,
 			content: post?.content,
+			published: post?.published,
 		},
 	});
 
@@ -90,6 +93,15 @@ export const PostForm: FC<PostFormProps> = ({
 							name="content"
 							control={control}
 						/>
+
+						<div className="flex items-center space-x-4">
+							<Typography variant="body1">Published</Typography>
+							<Switch
+								{...register("published")}
+								checked={watch("published")}
+								disabled={!onSubmit}
+							/>
+						</div>
 					</div>
 					<div className="flex justify-end">
 						{onSubmit && (

@@ -22,8 +22,12 @@ const EditPostPage: FC<EditPostPageProps> = ({ params: { id } }) => {
 	const { data, isLoading } = useGetPostQuery(id);
 	const router = useRouter();
 
-	const onSubmit: SubmitHandler<PostFormData> = async ({ title, content }) => {
-		editPost({ id, title, content })
+	const onSubmit: SubmitHandler<PostFormData> = async ({
+		title,
+		content,
+		published,
+	}) => {
+		editPost({ id, title, content, published })
 			.unwrap()
 			.then(() => {
 				enqueueSnackbar("Post updated successfully", { variant: "success" });

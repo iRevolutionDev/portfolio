@@ -10,8 +10,12 @@ export default function NewPostPage() {
 	const [createPost] = useCreatePostMutation();
 	const router = useRouter();
 
-	const onSubmit: SubmitHandler<PostFormData> = async ({ title, content }) => {
-		createPost({ title, content })
+	const onSubmit: SubmitHandler<PostFormData> = async ({
+		title,
+		content,
+		published,
+	}) => {
+		createPost({ title, content, published })
 			.unwrap()
 			.then(() => {
 				enqueueSnackbar("Post created successfully", { variant: "success" });
