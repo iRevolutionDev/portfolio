@@ -7,6 +7,10 @@ use axum::extract::State;
 use axum::Json;
 
 pub async fn register(State(state): State<AppState>, JsonExtractor(body): JsonExtractor<RegisterRequest>) -> Result<Json<RegisterResponse>, UserError> {
+    if body.key != state.secrets.get("REGISTER_KEY").unwrap() {
+        return Err(UserError::NotFound("Invalid key".to_string()));
+    }
+
     if body.email.is_empty() || body.password.is_empty() {
         return Err(UserError::NotFound("Email and password are required".to_string()));
     }
