@@ -34,6 +34,7 @@ jobs:
       - name: 🎭 Run Playwright tests
         run: bun run e2e:headless
         env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_SECRET_KEY: ${{ secrets.SPOTIFY_SECRET_KEY }}
           SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
