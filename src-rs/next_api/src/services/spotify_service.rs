@@ -120,15 +120,12 @@ impl SpotifyService {
         }
 
         let body = res.text().await.unwrap();
-        let current_playing: CurrentPlaying = serde_json::from_str(&body).unwrap();
-
-        if current_playing.item.is_none() {
-            return CurrentPlaying {
+        let current_playing: CurrentPlaying = serde_json::from_str(&body)
+            .map_or(CurrentPlaying {
                 item: None,
                 progress_ms: None,
                 is_playing: Option::from(false),
-            };
-        }
+            }, |v| v);
 
         self.current_playing_cache = Some(CurrentPlayingCache {
             current_playing: Some(current_playing.clone()),
