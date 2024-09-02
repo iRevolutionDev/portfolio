@@ -1,84 +1,155 @@
 {
-  "notFound": {
-    "title": "Not Found \uD83D\uDEAB",
-    "description": "The page you're looking for doesn't exist.",
-    "back": "Back to the home page"
-  },
-  "metadata": {
-    "pages": {
-      "home": {
-        "title": "Home",
-        "description": "Revolution is a software engineer, and he's passionate Reverse Engineering, C++, game development, and web development."
-      },
-      "projects": {
-        "title": "Projects",
-        "description": "Revolution has {projects} projects and {stars} stars on GitHub."
-      }
-    }
-  },
-  "layout": {
-    "navbar": {
-      "routes": {
-        "home": "/",
-        "projects": "~/projects",
-        "terminal": "~/terminal"
-      }
-    },
-    "spotifyWidget": {
-      "status": {
-        "notPlaying": "Nothing playing right now.",
-        "playing": "Currently playing"
-      }
-    }
-  },
-  "pages": {
-    "home": {
-      "title": "home",
-      "location": "Brazil - São Paulo",
-      "presentation": {
-        "title": "Hello, I'm",
-        "description": "I am a software engineer, and I'm passionate Reverse Engineering, C++, game development, and web development."
-      },
-      "technologies": {
-        "title": "Technologies",
-        "description": "I employ multiple tools during my development process to enhance the excellence of my code. The following is a list of technologies and languages that I have utilized in the past or am currently using."
-      },
-      "currentPositions": {
-        "title": "Current Positions",
-        "positions": [
-          {
-            "company": "Katsuhiro",
-            "description": "Katsuhiro is a software development company, specializing in high performance desktop and web applications.",
-            "position": "Software Engineer"
-          },
-          {
-            "company": "Função Sistemas",
-            "description": "Activities of information technology services.",
-            "position": "Software Engineer"
-          },
-          {
-            "company": "NovaLumina Studios",
-            "description": "NovaLumina Studios is a game development company, specializing in high-quality games with a focus on exploring innovation and incorporating cutting-edge technologies.",
-            "position": "Software Engineer"
-          },
-          {
-            "company": "Guarumidia",
-            "description": "Guarumidia is a company that develops institutional websites and software for the city of Guarulhos.",
-            "position": "Software Engineer"
-          }
-        ]
-      },
-      "footer": "Made with ❤ by Revolution © {year} • Software Engineer • All rights reserved"
-    },
-    "projects": {
-      "title": "Projects",
-      "card": {
-        "viewOnGitHub": "View on GitHub"
-      }
-    }
-  },
-  "languages": {
-    "en": "English",
-    "pt-br": "Portuguese (Brazil)"
-  }
+	"notFound": {
+		"title": "Not Found \uD83D\uDEAB",
+		"description": "The page you're looking for doesn't exist.",
+		"back": "Back to the home page"
+	},
+	"metadata": {
+		"pages": {
+			"home": {
+				"title": "Home",
+				"description": "Revolution is a software engineer, and he's passionate Reverse Engineering, C++, game development, and web development."
+			},
+			"projects": {
+				"title": "Projects",
+				"description": "Revolution has {projects} projects and {stars} stars on GitHub."
+			}
+		}
+	},
+	"layout": {
+		"navbar": {
+			"routes": {
+				"home": "/",
+				"projects": "~/projects",
+				"terminal": "~/terminal"
+			}
+		},
+		"dashboard": {
+			"routes": {
+				"posts": "Posts"
+			}
+		},
+		"spotifyWidget": {
+			"status": {
+				"notPlaying": "Nothing playing right now.",
+				"playing": "Currently playing"
+			}
+		}
+	},
+	"pages": {
+		"home": {
+			"title": "home",
+			"location": "Brazil - São Paulo",
+			"presentation": {
+				"title": "Hello, I'm",
+				"description": "I am a software engineer, and I'm passionate Reverse Engineering, C++, game development, and web development."
+			},
+			"technologies": {
+				"title": "Technologies",
+				"description": "I employ multiple tools during my development process to enhance the excellence of my code. The following is a list of technologies and languages that I have utilized in the past or am currently using."
+			},
+			"currentPositions": {
+				"title": "Current Positions",
+				"positions": [
+					{
+						"company": "Katsuhiro",
+						"description": "Katsuhiro is a software development company, specializing in high performance desktop and web applications.",
+						"position": "Software Engineer"
+					},
+					{
+						"company": "Função Sistemas",
+						"description": "Activities of information technology services.",
+						"position": "Software Engineer"
+					},
+					{
+						"company": "NovaLumina Studios",
+						"description": "NovaLumina Studios is a game development company, specializing in high-quality games with a focus on exploring innovation and incorporating cutting-edge technologies.",
+						"position": "Software Engineer"
+					},
+					{
+						"company": "Guarumidia",
+						"description": "Guarumidia is a company that develops institutional websites and software for the city of Guarulhos.",
+						"position": "Software Engineer"
+					}
+				]
+			},
+			"footer": "Made with ❤ by Revolution © {year} • Software Engineer • All rights reserved"
+		},
+		"projects": {
+			"title": "Projects",
+			"card": {
+				"viewOnGitHub": "View on GitHub"
+			}
+		},
+		"dashboard": {
+			"signIn": {
+				"title": "Sign In",
+				"email": {
+					"label": "Email",
+					"placeholder": "Enter your email",
+					"invalid": "Invalid email address"
+				},
+				"password": {
+					"label": "Password",
+					"placeholder": "Enter your password",
+					"required": "Password is required"
+				},
+				"submit": "Sign In"
+			},
+			"header": {
+				"title": "Dashboard"
+			},
+			"profile": {
+				"logout": "Logout"
+			},
+			"posts": {
+				"title": "Posts",
+				"description": "All posts will be displayed here",
+				"newPost": "New Post",
+				"noPosts": "No posts found.",
+				"grid": {
+					"title": "Title",
+					"author": "Author",
+					"publishedAt": "Published At",
+					"updatedAt": "Updated At",
+					"status": {
+						"title": "Status",
+						"published": "Published",
+						"draft": "Draft"
+					},
+					"actions": "Actions"
+				},
+				"new": {
+					"title": "New Post",
+					"submit": "Create Post"
+				},
+				"edit": {
+					"title": "Edit Post",
+					"submit": "Update Post"
+				},
+				"preview": {
+					"title": "Preview"
+				},
+				"form": {
+					"title": {
+						"label": "Title",
+						"placeholder": "Enter the title of the post",
+						"min": "Title must be at least {min} characters"
+					},
+					"content": {
+						"label": "Content",
+						"placeholder": "Enter the content of the post",
+						"min": "Content must be at least {min} characters"
+					},
+					"status": {
+						"label": "Published"
+					}
+				}
+			}
+		}
+	},
+	"languages": {
+		"en": "English",
+		"pt-br": "Portuguese (Brazil)"
+	}
 }

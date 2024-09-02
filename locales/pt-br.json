@@ -1,84 +1,155 @@
 {
-  "notFound": {
-    "title": "Não encontrado! \uD83D\uDEAB",
-    "description": "A página que você está procurando não existe.",
-    "back": "Voltar para a página inicial"
-  },
-  "metadata": {
-    "pages": {
-      "home": {
-        "title": "Home",
-        "description": "Revolution é um engenheiro de software apaixonado por Engenharia Reversa, C++, desenvolvimento de jogos e desenvolvimento web."
-      },
-      "projects": {
-        "title": "Projetos",
-        "description": "Revolution tem {projects} projetos e {stars} estrelas no GitHub."
-      }
-    }
-  },
-  "layout": {
-    "navbar": {
-      "routes": {
-        "home": "/",
-        "projects": "~/projetos",
-        "terminal": "~/terminal"
-      }
-    },
-    "spotifyWidget": {
-      "status": {
-        "notPlaying": "Nada tocando no momento.",
-        "playing": "Tocando agora"
-      }
-    }
-  },
-  "pages": {
-    "home": {
-      "title": "home",
-      "location": "Brasil - São Paulo",
-      "presentation": {
-        "title": "Olá, eu sou",
-        "description": "Eu sou um engenheiro de software apaixonado por Engenharia Reversa, C++, desenvolvimento de jogos e desenvolvimento web."
-      },
-      "technologies": {
-        "title": "Tecnologias",
-        "description": "Eu utilizo várias ferramentas durante meu processo de desenvolvimento para melhorar a excelência do meu código. A seguir está uma lista de tecnologias e linguagens que eu já utilizei ou estou utilizando atualmente."
-      },
-      "currentPositions": {
-        "title": "Posições atuais",
-        "positions": [
-          {
-            "company": "Katsuhiro",
-            "description": "Katsuhiro é uma empresa de desenvolvimento de software, especializada em aplicações desktop e web de alto desempenho.",
-            "position": "Engenheiro de Software"
-          },
-          {
-            "company": "Função Sistemas",
-            "description": "Atividades de serviços de tecnologia da informação.",
-            "position": "Engenheiro de Software"
-          },
-          {
-            "company": "NovaLumina Studios",
-            "description": "NovaLumina Studios é uma empresa de desenvolvimento de jogos, especializada em jogos de alta qualidade com foco em inovação e tecnologias de ponta.",
-            "position": "Engenheiro de Software"
-          },
-          {
-            "company": "Guarumidia",
-            "description": "Guarumidia é uma empresa que desenvolve sites institucionais e software para a cidade de Guarulhos.",
-            "position": "Engenheiro de Software"
-          }
-        ]
-      },
-      "footer": "Feito com ❤ por Revolution © {year} • Engenheiro de Software • Todos os direitos reservados"
-    },
-    "projects": {
-      "title": "Projetos",
-      "card": {
-        "viewOnGitHub": "Ver no GitHub"
-      }
-    }
-  },
-  "languages": {
-    "en": "Inglês",
-    "pt-br": "Português (Brasil)"
-  }
+	"notFound": {
+		"title": "Não encontrado! \uD83D\uDEAB",
+		"description": "A página que você está procurando não existe.",
+		"back": "Voltar para a página inicial"
+	},
+	"metadata": {
+		"pages": {
+			"home": {
+				"title": "Home",
+				"description": "Revolution é um engenheiro de software apaixonado por Engenharia Reversa, C++, desenvolvimento de jogos e desenvolvimento web."
+			},
+			"projects": {
+				"title": "Projetos",
+				"description": "Revolution tem {projects} projetos e {stars} estrelas no GitHub."
+			}
+		}
+	},
+	"layout": {
+		"navbar": {
+			"routes": {
+				"home": "/",
+				"projects": "~/projetos",
+				"terminal": "~/terminal"
+			}
+		},
+		"dashboard": {
+			"routes": {
+				"posts": "Posts"
+			}
+		},
+		"spotifyWidget": {
+			"status": {
+				"notPlaying": "Nada tocando no momento.",
+				"playing": "Tocando agora"
+			}
+		}
+	},
+	"pages": {
+		"home": {
+			"title": "home",
+			"location": "Brasil - São Paulo",
+			"presentation": {
+				"title": "Olá, eu sou",
+				"description": "Eu sou um engenheiro de software apaixonado por Engenharia Reversa, C++, desenvolvimento de jogos e desenvolvimento web."
+			},
+			"technologies": {
+				"title": "Tecnologias",
+				"description": "Eu utilizo várias ferramentas durante meu processo de desenvolvimento para melhorar a excelência do meu código. A seguir está uma lista de tecnologias e linguagens que eu já utilizei ou estou utilizando atualmente."
+			},
+			"currentPositions": {
+				"title": "Posições atuais",
+				"positions": [
+					{
+						"company": "Katsuhiro",
+						"description": "Katsuhiro é uma empresa de desenvolvimento de software, especializada em aplicações desktop e web de alto desempenho.",
+						"position": "Engenheiro de Software"
+					},
+					{
+						"company": "Função Sistemas",
+						"description": "Atividades de serviços de tecnologia da informação.",
+						"position": "Engenheiro de Software"
+					},
+					{
+						"company": "NovaLumina Studios",
+						"description": "NovaLumina Studios é uma empresa de desenvolvimento de jogos, especializada em jogos de alta qualidade com foco em inovação e tecnologias de ponta.",
+						"position": "Engenheiro de Software"
+					},
+					{
+						"company": "Guarumidia",
+						"description": "Guarumidia é uma empresa que desenvolve sites institucionais e software para a cidade de Guarulhos.",
+						"position": "Engenheiro de Software"
+					}
+				]
+			},
+			"footer": "Feito com ❤ por Revolution © {year} • Engenheiro de Software • Todos os direitos reservados"
+		},
+		"projects": {
+			"title": "Projetos",
+			"card": {
+				"viewOnGitHub": "Ver no GitHub"
+			}
+		},
+		"dashboard": {
+			"signIn": {
+				"title": "Entrar",
+				"email": {
+					"label": "Email",
+					"placeholder": "Digite seu email",
+					"invalid": "Endereço de email inválido"
+				},
+				"password": {
+					"label": "Senha",
+					"placeholder": "Digite sua senha",
+					"required": "Senha é obrigatória"
+				},
+				"submit": "Entrar"
+			},
+			"header": {
+				"title": "Painel"
+			},
+			"profile": {
+				"logout": "Sair"
+			},
+			"posts": {
+				"title": "Posts",
+				"description": "Todos os posts serão exibidos aqui",
+				"newPost": "Novo Post",
+				"noPosts": "Nenhum post encontrado.",
+				"grid": {
+					"title": "Título",
+					"author": "Autor",
+					"publishedAt": "Publicado em",
+					"updatedAt": "Atualizado em",
+					"status": {
+						"title": "Status",
+						"published": "Publicado",
+						"draft": "Rascunho"
+					},
+					"actions": "Ações"
+				},
+				"new": {
+					"title": "Novo Post",
+					"submit": "Criar Post"
+				},
+				"edit": {
+					"title": "Editar Post",
+					"submit": "Atualizar Post"
+				},
+				"preview": {
+					"title": "Pré-visualização"
+				},
+				"form": {
+					"title": {
+						"label": "Título",
+						"placeholder": "Digite o título do post",
+						"min": "O título deve ter pelo menos {min} caracteres"
+					},
+					"content": {
+						"label": "Conteúdo",
+						"placeholder": "Digite o conteúdo do post",
+						"min": "O conteúdo deve ter pelo menos {min} caracteres"
+					},
+					"status": {
+						"label": "Publicado"
+					}
+				}
+			}
+		}
+	},
+	"languages": {
+		"en": "Inglês",
+		"pt-br": "Português (Brasil)"
+	}
 }
