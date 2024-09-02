@@ -2,11 +2,14 @@
 
 import { PostForm, type PostFormData } from "@/components/post-form";
 import { useCreatePostMutation } from "@/redux/services/post-api";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import type { SubmitHandler } from "react-hook-form";
 
 export default function NewPostPage() {
+	const t = useTranslations("pages.dashboard.posts.new");
+
 	const [createPost] = useCreatePostMutation();
 	const router = useRouter();
 
@@ -29,8 +32,8 @@ export default function NewPostPage() {
 	return (
 		<main className="flex flex-col flex-1 overflow-y-auto space-y-5 h-full">
 			<PostForm
-				title="Create Post"
-				submitText="Create Post"
+				title={t("title")}
+				submitText={t("submit")}
 				onSubmit={onSubmit}
 			/>
 		</main>

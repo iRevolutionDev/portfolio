@@ -4,6 +4,7 @@ import type { PostModel } from "@/@types/models/post-model";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Card, Switch, TextField, Typography } from "@mui/material";
 import Markdown from "markdown-to-jsx";
+import { useTranslations } from "next-intl";
 import type { FC } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,8 +17,8 @@ type PostFormProps = {
 };
 
 const schema = z.object({
-	title: z.string().min(5),
-	content: z.string().min(10),
+	title: z.string().min(5, "title.min"),
+	content: z.string().min(10, "content.min"),
 	published: z.boolean(),
 });
 
@@ -29,6 +30,8 @@ export const PostForm: FC<PostFormProps> = ({
 	onSubmit,
 	post,
 }) => {
+	const t = useTranslations("pages.dashboard.posts.form");
+
 	const {
 		control,
 		register,
@@ -58,14 +61,19 @@ export const PostForm: FC<PostFormProps> = ({
 							render={({ field }) => {
 								return (
 									<TextField
-										label="Title"
+										label={t("title.label")}
 										variant="outlined"
 										fullWidth
-										placeholder="Enter the title of the post"
+										placeholder={t("title.placeholder")}
 										{...field}
 										disabled={!onSubmit}
 										error={!!errors.title}
-										helperText={errors.title?.message}
+										helperText={
+											errors.title?.message &&
+											t(errors.title.message as never, {
+												min: 5,
+											})
+										}
 									/>
 								);
 							}}
@@ -77,16 +85,21 @@ export const PostForm: FC<PostFormProps> = ({
 							render={({ field }) => {
 								return (
 									<TextField
-										label="Content"
+										label={t("content.label")}
 										variant="outlined"
 										fullWidth
 										multiline
 										rows={10}
-										placeholder="Enter the content of the post"
+										placeholder={t("content.placeholder")}
 										{...field}
 										disabled={!onSubmit}
 										error={!!errors.content}
-										helperText={errors.content?.message}
+										helperText={
+											errors.content?.message &&
+											t(errors.content.message as never, {
+												min: 10,
+											})
+										}
 									/>
 								);
 							}}
@@ -95,7 +108,7 @@ export const PostForm: FC<PostFormProps> = ({
 						/>
 
 						<div className="flex items-center space-x-4">
-							<Typography variant="body1">Published</Typography>
+							<Typography variant="body1">{t("status.label")}</Typography>
 							<Switch
 								{...register("published")}
 								checked={watch("published")}

@@ -3,19 +3,21 @@
 import { signInAction } from "@/app/[locale]/dashboard/signin/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, CircularProgress, TextField, Typography } from "@mui/material";
+import { useTranslations } from "next-intl";
 import { enqueueSnackbar } from "notistack";
 import { useTransition } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const schema = z.object({
-	email: z.string().email("Invalid email").min(1),
-	password: z.string().min(1, "Password is required"),
+	email: z.string().email("email.invalid").min(1),
+	password: z.string().min(1, "password.required"),
 });
 
 type FormData = z.infer<typeof schema>;
 
 export const SignInForm = () => {
+	const t = useTranslations("pages.dashboard.signIn");
 	const [pending, startTransition] = useTransition();
 
 	const {
@@ -42,21 +44,23 @@ export const SignInForm = () => {
 		>
 			<TextField
 				type="email"
-				label="Email"
-				placeholder="Enter your email"
+				label={t("email.label")}
+				placeholder={t("email.placeholder")}
 				variant="outlined"
 				{...register("email", { required: true })}
 				error={!!errors.email}
-				helperText={errors.email?.message}
+				helperText={errors.email?.message && t(errors.email.message as never)}
 			/>
 			<TextField
 				type="password"
-				label="Password"
-				placeholder="Enter your password"
+				label={t("password.label")}
+				placeholder={t("password.placeholder")}
 				variant="outlined"
 				{...register("password", { required: true })}
 				error={!!errors.password}
-				helperText={errors.password?.message}
+				helperText={
+					errors.password?.message && t(errors.password.message as never)
+				}
 			/>
 
 			<Button
@@ -66,7 +70,7 @@ export const SignInForm = () => {
 				className="mt-8"
 				disabled={!isValid || pending}
 			>
-				<Typography>Sign In</Typography>
+				<Typography>{t("submit")}</Typography>
 				{pending && <CircularProgress size={24} className="absolute" />}
 			</Button>
 		</form>

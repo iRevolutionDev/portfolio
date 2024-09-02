@@ -3,8 +3,15 @@ import { Link } from "@/components/link";
 import { PostsGrid } from "@/components/posts-grid";
 import { env } from "@/env";
 import { Button, Paper, Typography } from "@mui/material";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
-export default async function PostsPage() {
+export default async function PostsPage({
+	params: { locale },
+}: { params: { locale: string } }) {
+	unstable_setRequestLocale(locale);
+
+	const t = await getTranslations("pages.dashboard.posts");
+
 	const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/v1/posts/list`, {
 		next: {
 			revalidate: 1,
@@ -17,10 +24,8 @@ export default async function PostsPage() {
 			<Paper className="p-4 space-y-4">
 				<div className="flex items-center justify-between">
 					<div className="flex flex-col">
-						<Typography variant="h4">Posts</Typography>
-						<Typography variant="body1">
-							All posts will be displayed here
-						</Typography>
+						<Typography variant="h4">{t("title")}</Typography>
+						<Typography variant="body1">{t("description")}</Typography>
 					</div>
 					<div className="flex items-center space-x-2">
 						<Button
@@ -28,7 +33,7 @@ export default async function PostsPage() {
 							variant="contained"
 							href="/dashboard/posts/new"
 						>
-							Create New Post
+							{t("newPost")}
 						</Button>
 					</div>
 				</div>

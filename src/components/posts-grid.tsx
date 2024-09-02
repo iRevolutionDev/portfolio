@@ -6,6 +6,7 @@ import { useDeletePostMutation } from "@/redux/services/post-api";
 import { Delete, Edit } from "@mui/icons-material";
 import { Chip, IconButton, Paper } from "@mui/material";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
+import { useTranslations } from "next-intl";
 import { enqueueSnackbar } from "notistack";
 import type { FC } from "react";
 import { FaEye } from "react-icons/fa";
@@ -15,30 +16,34 @@ type PostsGridProps = {
 };
 
 export const PostsGrid: FC<PostsGridProps> = ({ posts }) => {
+	const t = useTranslations("pages.dashboard.posts");
+
 	const [deletePost] = useDeletePostMutation();
 
 	const columns: GridColDef<PostModel>[] = [
-		{ field: "title", headerName: "Title", flex: 1 },
-		{ field: "author", headerName: "Author", flex: 1 },
+		{ field: "title", headerName: t("grid.title"), flex: 1 },
+		{ field: "author", headerName: t("grid.author"), flex: 1 },
 		{
 			field: "created_at",
-			headerName: "Published At",
+			headerName: t("grid.publishedAt"),
 			renderCell: (params) => new Date(params.value).toLocaleDateString(),
 			flex: 1,
 		},
 		{
 			field: "updated_at",
-			headerName: "Updated At",
+			headerName: t("grid.updatedAt"),
 			renderCell: (params) => new Date(params.value).toLocaleDateString(),
 			flex: 1,
 		},
 		{
 			field: "published",
-			headerName: "Status",
+			headerName: t("grid.status.title"),
 			renderCell: (params) => {
 				return (
 					<Chip
-						label={params.value ? "Published" : "Draft"}
+						label={
+							params.value ? t("grid.status.published") : t("grid.status.draft")
+						}
 						color={params.value ? "primary" : "default"}
 					/>
 				);
@@ -47,7 +52,7 @@ export const PostsGrid: FC<PostsGridProps> = ({ posts }) => {
 		},
 		{
 			field: "actions",
-			headerName: "Actions",
+			headerName: t("grid.actions"),
 			width: 150,
 			renderCell: (params) => {
 				return (

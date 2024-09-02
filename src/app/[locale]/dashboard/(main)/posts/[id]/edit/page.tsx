@@ -6,6 +6,7 @@ import {
 	useUpdatePostMutation,
 } from "@/redux/services/post-api";
 import { CircularProgress } from "@mui/material";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import type { FC } from "react";
@@ -18,6 +19,8 @@ type EditPostPageProps = {
 };
 
 const EditPostPage: FC<EditPostPageProps> = ({ params: { id } }) => {
+	const t = useTranslations("pages.dashboard.posts.edit");
+
 	const [editPost] = useUpdatePostMutation();
 	const { data, isLoading } = useGetPostQuery(id);
 	const router = useRouter();
@@ -46,8 +49,8 @@ const EditPostPage: FC<EditPostPageProps> = ({ params: { id } }) => {
 				</div>
 			) : (
 				<PostForm
-					title="Edit Post"
-					submitText="Edit Post"
+					title={t("title")}
+					submitText={t("submit")}
 					onSubmit={onSubmit}
 					post={data}
 				/>

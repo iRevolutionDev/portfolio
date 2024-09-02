@@ -12,9 +12,12 @@ import {
 	Menu,
 } from "@mui/material";
 import type { Session } from "next-auth";
+import { useTranslations } from "next-intl";
 import { type FC, useState } from "react";
 
 export const ProfileMenu: FC<{ session: Session | null }> = ({ session }) => {
+	const t = useTranslations("pages.dashboard.profile");
+
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
 	return (
@@ -52,7 +55,7 @@ export const ProfileMenu: FC<{ session: Session | null }> = ({ session }) => {
 					<ListItemIcon>
 						<Logout />
 					</ListItemIcon>
-					<ListItemText primary="Logout" />
+					<ListItemText primary={t("logout")} />
 				</ListItemButton>
 			</Menu>
 		</>
