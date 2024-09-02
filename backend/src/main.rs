@@ -12,6 +12,7 @@ use sqlx::PgPool;
 #[derive(Clone)]
 pub struct AppState {
     pool: PgPool,
+    secrets: SecretStore,
 }
 
 #[shuttle_runtime::main]
@@ -21,11 +22,11 @@ async fn main(
 ) -> shuttle_axum::ShuttleAxum {
     // init_tracing();
 
-    init_vars(secrets);
+    init_vars(&secrets);
 
     run_migrations(&pool).await;
 
-    let state = AppState { pool };
+    let state = AppState { pool, secrets };
 
     let app = app_router(state.clone()).with_state(state);
 
@@ -54,7 +55,7 @@ async fn run_migrations(pool: &PgPool) {
         .expect("Failed to run migrations");
 }
 
-fn init_vars(secrets: SecretStore) {
+fn init_vars(secrets: &SecretStore) {
     let jwt_secret = secrets.get("JWT_SECRET").expect("JWT_SECRET not found");
 
     std::env::set_var("JWT_SECRET", jwt_secret);

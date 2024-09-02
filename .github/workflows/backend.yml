@@ -20,3 +20,4 @@ jobs:
           no-test: "true"
           secrets: |
             JWT_SECRET='${{ secrets.JWT_SECRET }}'
+            REGISTER_KEY='${{ secrets.REGISTER_KEY }}'
