@@ -30,7 +30,14 @@ const EditPostPage: FC<EditPostPageProps> = ({ params: { id } }) => {
 		content,
 		published,
 	}) => {
-		editPost({ id, title, content, published })
+		editPost({
+			id,
+			title,
+			content,
+			published,
+			created_at: data?.created_at ?? new Date().toISOString(),
+			updated_at: new Date().toISOString(),
+		})
 			.unwrap()
 			.then(() => {
 				enqueueSnackbar("Post updated successfully", { variant: "success" });

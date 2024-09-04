@@ -10,6 +10,10 @@ export const Routes = [
 		path: "/projects",
 	},
 	{
+		name: "routes.blog",
+		path: "/blog",
+	},
+	{
 		name: "routes.terminal",
 		path: "/terminal",
 	},
