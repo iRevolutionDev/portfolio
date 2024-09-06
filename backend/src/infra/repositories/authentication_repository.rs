@@ -58,7 +58,7 @@ pub fn generate_token(user: User) -> Result<String, AuthError> {
         .duration_since(SystemTime::UNIX_EPOCH)
         .unwrap()
         .as_secs()
-        + 300;
+        + 60 * 60 * 24 * 7;
 
     let claims = Claims {
         id: user.id.unwrap(),
