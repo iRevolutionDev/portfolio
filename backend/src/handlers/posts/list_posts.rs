@@ -1,10 +1,10 @@
 use crate::domain::models::post::PostError;
 use crate::handlers::posts::{ListPostsResponse, PostResponse};
-use crate::infra::repositories::post_repository;
+use crate::infra::repositories::post_repository::PostFilter;
+use crate::infra::repositories::{post_repository, user_repository};
 use crate::AppState;
 use axum::extract::{Query, State};
 use axum::Json;
-use crate::infra::repositories::post_repository::PostFilter;
 
 pub async fn list_posts(
     State(state): State<AppState>,
@@ -13,20 +13,30 @@ pub async fn list_posts(
     let posts = post_repository::get_all(&state.pool, query)
         .await
         .map_err(|_| PostError::InternalServerError)?;
-    
+
+    let mut posts_response = vec![];
+
+    for post in posts {
+        let user = user_repository::get(&state.pool, post.user_id)
+            .await
+            .map_err(|_| PostError::NotFound("User not found".to_string()))?;
+
+        let post_response = PostResponse {
+            id: post.id,
+            title: post.title,
+            content: post.content,
+            author: user.username,
+            published: post.published,
+            created_at: post.created_at,
+            updated_at: post.updated_at,
+        };
+
+        posts_response.push(post_response);
+    }
+
     let response = ListPostsResponse {
-        posts: posts.into_iter().map(|post| {
-            PostResponse {
-                id: post.id,
-                title: post.title,
-                content: post.content,
-                user_id: post.user_id,
-                published: post.published,
-                created_at: post.created_at,
-                updated_at: post.updated_at,
-            }
-        }).collect(),
+        posts: posts_response,
     };
-    
+
     Ok(Json(response))
 }

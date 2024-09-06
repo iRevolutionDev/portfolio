@@ -69,7 +69,15 @@ export default async function BlogMainPage() {
 									{post.content}
 								</Typography>
 							</div>
-							<CardActions className="flex justify-end p-4 mt-auto">
+							<CardActions className="flex justify-between p-4 mt-auto">
+								<Typography
+									variant="body2"
+									component="p"
+									className="text-sm opacity-70"
+								>
+									{t("postedBy")}:{" "}
+									<span className="font-bold">{post.author}</span>
+								</Typography>
 								<Button
 									component={Link}
 									href={`/blog/${post.id}`}

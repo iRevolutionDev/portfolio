@@ -36,7 +36,7 @@ pub struct PostResponse {
     id: i32,
     title: String,
     content: String,
-    user_id: i32,
+    author: String,
     published: Option<bool>,
     created_at: Option<DateTime<Utc>>,
     updated_at: Option<DateTime<Utc>>,

@@ -15,6 +15,20 @@ pub async fn find_by_email(pool: &sqlx::PgPool, email: &str) -> Result<Option<Us
     Ok(user)
 }
 
+pub async fn get(pool: &sqlx::PgPool, id: i32) -> Result<User, Error> {
+    let user = sqlx::query_as!(
+        User,
+        r#"
+        SELECT * FROM users WHERE id = $1
+        "#,
+        id
+    )
+        .fetch_one(pool)
+        .await?;
+
+    Ok(user)
+}
+
 pub async fn create(pool: &sqlx::PgPool, username: String, email: String, password: String) -> Result<User, Error> {
     let mut user = User {
         id: None,
@@ -24,10 +38,10 @@ pub async fn create(pool: &sqlx::PgPool, username: String, email: String, passwo
         created_at: None,
         updated_at: None,
     };
-    
+
     user.hash_password()
         .expect("Failed to hash password");
-    
+
     let user = sqlx::query_as!(
         User,
         r#"
@@ -39,6 +53,6 @@ pub async fn create(pool: &sqlx::PgPool, username: String, email: String, passwo
     )
         .fetch_one(pool)
         .await?;
-    
+
     Ok(user)
 }

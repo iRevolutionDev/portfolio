@@ -1,6 +1,6 @@
 use crate::domain::models::post::PostError;
 use crate::handlers::posts::PostResponse;
-use crate::infra::repositories::post_repository;
+use crate::infra::repositories::{post_repository, user_repository};
 use crate::utils::extractors::path_extractor::PathExtractor;
 use crate::AppState;
 use axum::extract::State;
@@ -14,11 +14,15 @@ pub async fn get_post(
         .await
         .map_err(|_| PostError::NotFound("Post not found".to_string()))?;
 
+    let user = user_repository::get(&state.pool, post.user_id)
+        .await
+        .map_err(|_| PostError::NotFound("User not found".to_string()))?;
+
     let response = PostResponse {
         id: post.id,
         title: post.title,
         content: post.content,
-        user_id: post.user_id,
+        author: user.username,
         published: post.published,
         created_at: post.created_at,
         updated_at: post.updated_at,
