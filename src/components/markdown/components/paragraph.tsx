@@ -7,7 +7,16 @@ export const Paragraph: FC<PropsWithChildren<TypographyProps>> = (
 	props,
 ) => {
 	return (
-		<Typography component="p" variant="body1" {...props}>
+		<Typography
+			component="p"
+			variant="body1"
+			sx={{
+				"&:not(:last-child)": {
+					mb: 2,
+				},
+			}}
+			{...props}
+		>
 			{children}
 		</Typography>
 	);
