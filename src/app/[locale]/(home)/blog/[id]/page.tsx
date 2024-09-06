@@ -2,11 +2,14 @@ import type { PostModel } from "@/@types/models/post-model";
 import { Markdown } from "@/components/markdown/markdown";
 import { env } from "@/env";
 import { Chip } from "@mui/material";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
 export default async function BlogPage({
 	params: { id },
 }: { params: { id: string } }) {
+	const t = await getTranslations("pages.blog");
+
 	const response = await fetch(
 		`${env.NEXT_PUBLIC_API_URL}/v1/posts/get/${id}`,
 		{
@@ -41,7 +44,7 @@ export default async function BlogPage({
 				<div className="w-full flex items-center justify-between">
 					<p className="text-ellipsis line-clamp-2 font-bold">
 						<Chip
-							label={`Read time: ${Math.ceil(
+							label={`${t("timeToRead")}: ${Math.ceil(
 								post.content.split(" ").length / 200,
 							)} min`}
 							color="primary"

@@ -82,6 +82,12 @@
 				"viewOnGitHub": "Ver no GitHub"
 			}
 		},
+		"blog": {
+			"title": "Blog",
+			"noPosts": "Nenhum post encontrado.",
+			"readMore": "Leia mais",
+			"timeToRead": "Tempo de leitura"
+		},
 		"dashboard": {
 			"signIn": {
 				"title": "Entrar",
