@@ -1,8 +1,8 @@
 use crate::domain::models::authentication::Claims;
 use crate::domain::models::post::PostError;
 use crate::handlers::posts::{CreatePostRequest, PostResponse};
-use crate::infra::repositories::post_repository;
 use crate::infra::repositories::post_repository::NewDbPost;
+use crate::infra::repositories::{post_repository, user_repository};
 use crate::utils::extractors::json_transformer::JsonExtractor;
 use crate::AppState;
 use axum::extract::State;
@@ -22,11 +22,15 @@ pub async fn create_post(
         .await
         .map_err(|_| PostError::InternalServerError)?;
 
+    let user = user_repository::get(&state.pool, created_post.user_id)
+        .await
+        .map_err(|_| PostError::NotFound("User not found".to_string()))?;
+
     let response = PostResponse {
         id: created_post.id,
         title: created_post.title,
         content: created_post.content,
-        user_id: created_post.user_id,
+        author: user.username,
         published: created_post.published,
         created_at: created_post.created_at,
         updated_at: created_post.updated_at,

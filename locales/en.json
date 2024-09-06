@@ -84,6 +84,7 @@
 		},
 		"blog": {
 			"title": "Blog",
+			"postedBy": "Posted by",
 			"noPosts": "No posts found.",
 			"readMore": "Read more",
 			"timeToRead": "Reading time"

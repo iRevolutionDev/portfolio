@@ -1,13 +1,13 @@
-use axum::extract::State;
-use axum::Json;
-use crate::AppState;
 use crate::domain::models::authentication::Claims;
 use crate::domain::models::post::PostError;
 use crate::handlers::posts::{PostResponse, UpdatePostRequest};
-use crate::infra::repositories::post_repository;
 use crate::infra::repositories::post_repository::NewDbPost;
+use crate::infra::repositories::{post_repository, user_repository};
 use crate::utils::extractors::json_transformer::JsonExtractor;
 use crate::utils::extractors::path_extractor::PathExtractor;
+use crate::AppState;
+use axum::extract::State;
+use axum::Json;
 
 pub async fn update_post(
     claims: Claims,
@@ -24,11 +24,15 @@ pub async fn update_post(
         .await
         .map_err(|_| PostError::InternalServerError)?;
 
+    let user = user_repository::get(&state.pool, updated_post.user_id)
+        .await
+        .map_err(|_| PostError::NotFound("User not found".to_string()))?;
+
     let response = PostResponse {
         id: updated_post.id,
         title: updated_post.title,
         content: updated_post.content,
-        user_id: updated_post.user_id,
+        author: user.username,
         published: updated_post.published,
         created_at: updated_post.created_at,
         updated_at: updated_post.updated_at,
