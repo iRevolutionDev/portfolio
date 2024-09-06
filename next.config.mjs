@@ -1,5 +1,5 @@
 import createNextIntlPlugin from 'next-intl/plugin';
-import { fileURLToPath } from "node:url";
+import {fileURLToPath} from "node:url";
 import createJiti from "jiti";
 
 const jiti = createJiti(fileURLToPath(import.meta.url));
@@ -19,6 +19,10 @@ const nextConfig = {
             {
                 hostname: 'i.scdn.co',
                 protocol: 'https',
+            },
+            {
+                hostname: "random-image-pepebigotes.vercel.app",
+                protocol: "https",
             }
         ]
     }

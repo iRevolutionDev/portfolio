@@ -18,7 +18,13 @@ export default function NewPostPage() {
 		content,
 		published,
 	}) => {
-		createPost({ title, content, published })
+		createPost({
+			title,
+			content,
+			published,
+			created_at: new Date().toISOString(),
+			updated_at: new Date().toISOString(),
+		})
 			.unwrap()
 			.then(() => {
 				enqueueSnackbar("Post created successfully", { variant: "success" });

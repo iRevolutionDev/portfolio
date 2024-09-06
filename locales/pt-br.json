@@ -21,6 +21,7 @@
 			"routes": {
 				"home": "/",
 				"projects": "~/projetos",
+				"blog": "~/blog",
 				"terminal": "~/terminal"
 			}
 		},
