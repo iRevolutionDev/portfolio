@@ -36,7 +36,7 @@ export const postApi = createApi({
 				},
 			}),
 		}),
-		updatePost: builder.mutation<PostModel, PostModel>({
+		updatePost: builder.mutation<PostModel, Omit<PostModel, "author">>({
 			query: (post) => ({
 				url: `/update/${post.id}`,
 				options: {
