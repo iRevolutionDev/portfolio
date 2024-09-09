@@ -2,8 +2,47 @@ import type { PostModel } from "@/@types/models/post-model";
 import { Markdown } from "@/components/markdown/markdown";
 import { env } from "@/env";
 import { Chip } from "@mui/material";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
+
+export const generateMetadata = async ({
+	params: { id },
+}: {
+	params: { id: string };
+}): Promise<Metadata> => {
+	const response = await fetch(
+		`${env.NEXT_PUBLIC_API_URL}/v1/posts/get/${id}`,
+		{
+			next: {
+				revalidate: 1,
+			},
+		},
+	);
+
+	const post = (await response.json()) as PostModel;
+
+	return {
+		title: post.title,
+		description: post.content,
+		openGraph: {
+			type: "article",
+			title: post.title,
+			description: post.content,
+			publishedTime: post.created_at,
+			modifiedTime: post.updated_at,
+			authors: [post.author],
+			images: [
+				{
+					url: "https://random-image-pepebigotes.vercel.app/api/random-image",
+					width: 500,
+					height: 500,
+					alt: post.title,
+				},
+			],
+		},
+	};
+};
 
 export default async function BlogPage({
 	params: { id },

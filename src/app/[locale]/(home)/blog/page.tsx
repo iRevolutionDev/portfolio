@@ -7,10 +7,24 @@ import {
 	CardActions,
 	Typography,
 } from "@mui/material";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
+
+export const generateMetadata = async ({
+	params: { locale },
+}: {
+	params: { locale: string };
+}): Promise<Metadata> => {
+	const t = await getTranslations({ locale, namespace: "metadata" });
+
+	return {
+		title: t("pages.blog.title"),
+		description: t("pages.blog.description"),
+	};
+};
 
 export default async function BlogMainPage() {
 	const t = await getTranslations("pages.blog");
@@ -21,7 +35,9 @@ export default async function BlogMainPage() {
 		},
 	});
 
-	const { posts } = (await response.json()) as Posts;
+	const { posts } = (await response
+		.json()
+		.catch(() => ({ posts: [] }))) as Posts;
 
 	return (
 		<main className="flex flex-col items-center justify-center w-full h-full">

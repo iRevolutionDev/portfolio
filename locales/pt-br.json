@@ -13,6 +13,10 @@
 			"projects": {
 				"title": "Projetos",
 				"description": "Revolution tem {projects} projetos e {stars} estrelas no GitHub."
+			},
+			"blog": {
+				"title": "Blog",
+				"description": "Revolution escreve sobre engenharia de software, engenharia reversa, desenvolvimento de jogos e desenvolvimento web."
 			}
 		}
 	},

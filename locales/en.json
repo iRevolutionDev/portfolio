@@ -13,6 +13,10 @@
 			"projects": {
 				"title": "Projects",
 				"description": "Revolution has {projects} projects and {stars} stars on GitHub."
+			},
+			"blog": {
+				"title": "Blog",
+				"description": "Revolution writes about software engineering, reverse engineering, game development, and web development."
 			}
 		}
 	},
