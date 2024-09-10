@@ -4,6 +4,7 @@ use serde::Deserialize;
 pub struct NewDbPost {
     pub title: String,
     pub content: String,
+    pub image_url: Option<String>,
     pub user_id: i32,
     pub published: bool,
 }
@@ -20,10 +21,11 @@ pub async fn create(pool: &sqlx::PgPool, post: NewDbPost) -> Result<Post, PostEr
     let post = sqlx::query_as!(
         Post,
         r#"
-        INSERT INTO posts (title, content, user_id, published) VALUES ($1, $2, $3, $4) RETURNING *
+        INSERT INTO posts (title, content, image_url, user_id, published) VALUES ($1, $2, $3, $4, $5) RETURNING *
         "#,
         post.title,
         post.content,
+        post.image_url,
         post.user_id,
         post.published
     )

@@ -11,6 +11,7 @@ pub struct Post {
     pub id: i32,
     pub title: String,
     pub content: String,
+    pub image_url: Option<String>,
     pub user_id: i32,
     pub published: Option<bool>,
     pub created_at: Option<DateTime<Utc>>,

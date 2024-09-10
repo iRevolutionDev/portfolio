@@ -8,7 +8,7 @@ import {
 	Typography,
 } from "@mui/material";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
@@ -26,7 +26,12 @@ export const generateMetadata = async ({
 	};
 };
 
-export default async function BlogMainPage() {
+export default async function BlogMainPage({
+	params: { locale },
+}: {
+	params: { locale: string };
+}) {
+	unstable_setRequestLocale(locale);
 	const t = await getTranslations("pages.blog");
 
 	const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/v1/posts/list`, {
@@ -62,7 +67,7 @@ export default async function BlogMainPage() {
 					>
 						<Card key={post.id} className="w-full h-full flex flex-col">
 							<Image
-								src="https://random-image-pepebigotes.vercel.app/api/random-image"
+								src={post.image_url ?? ""}
 								alt="Random image"
 								key={post.id}
 								className="h-48 w-full object-cover"

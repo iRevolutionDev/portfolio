@@ -65,7 +65,7 @@ export default async function BlogPage({
 			<div className="flex flex-col w-full h-full">
 				<div className="h-96 w-full rounded-2xl mb-4 overflow-hidden relative">
 					<Image
-						src="https://random-image-pepebigotes.vercel.app/api/random-image"
+						src={post.image_url ?? ""}
 						alt="Random image"
 						key={post.id}
 						className="h-full w-full object-cover absolute top-0 left-0"

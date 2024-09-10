@@ -23,6 +23,7 @@ pub async fn get_post(
         title: post.title,
         content: post.content,
         author: user.username,
+        image_url: post.image_url,
         published: post.published,
         created_at: post.created_at,
         updated_at: post.updated_at,

@@ -18,6 +18,7 @@ pub async fn update_post(
     let updated_post = post_repository::update(&state.pool, post_id, NewDbPost {
         title: post.title,
         content: post.content,
+        image_url: post.image_url,
         user_id: claims.id,
         published: post.published.unwrap_or(false),
     })
@@ -33,6 +34,7 @@ pub async fn update_post(
         title: updated_post.title,
         content: updated_post.content,
         author: user.username,
+        image_url: updated_post.image_url,
         published: updated_post.published,
         created_at: updated_post.created_at,
         updated_at: updated_post.updated_at,

@@ -3,6 +3,7 @@ export type PostModel = {
 	title: string;
 	content: string;
 	author: string;
+	image_url?: string;
 	published: boolean;
 	created_at: string;
 	updated_at: string;

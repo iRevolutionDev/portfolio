@@ -17,12 +17,15 @@ mod update_post;
 pub struct CreatePostRequest {
     title: String,
     content: String,
+    image_url: Option<String>,
+    published: Option<bool>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct UpdatePostRequest {
     title: String,
     content: String,
+    image_url: Option<String>,
     published: Option<bool>,
 }
 
@@ -37,6 +40,7 @@ pub struct PostResponse {
     title: String,
     content: String,
     author: String,
+    image_url: Option<String>,
     published: Option<bool>,
     created_at: Option<DateTime<Utc>>,
     updated_at: Option<DateTime<Utc>>,

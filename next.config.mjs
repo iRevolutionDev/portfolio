@@ -21,7 +21,7 @@ const nextConfig = {
                 protocol: 'https',
             },
             {
-                hostname: "random-image-pepebigotes.vercel.app",
+                hostname: "fastly.picsum.photos",
                 protocol: "https",
             }
         ]
