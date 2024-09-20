@@ -17,7 +17,7 @@
 		}
 	},
 	"files": {
-		"include": ["**/*.ts", "**/*.tsx", "locales/**/*.{json}"],
+		"include": ["**/*.ts", "**/*.tsx", "locales/**/*.json"],
 		"ignore": ["node_modules", ".next"]
 	}
 }

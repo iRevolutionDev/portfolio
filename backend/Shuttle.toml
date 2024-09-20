@@ -1,0 +1,2 @@
+name = "revolution-portfolio"
+assets = ["migrations/0001_init.sql"]

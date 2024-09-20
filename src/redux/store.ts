@@ -2,6 +2,7 @@ import storage from "@/redux/custom-storage";
 import { menuReducer } from "@/redux/features/menu-slice";
 import { pageReducer } from "@/redux/features/page-slice";
 import { terminalReducer } from "@/redux/features/terminal-slice";
+import { postApi } from "@/redux/services/post-api";
 import { spotifyApi } from "@/redux/services/spotify-api";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
@@ -22,6 +23,7 @@ export const rootReducers = combineReducers({
 	terminal: terminalReducer,
 	page: pageReducer,
 	[spotifyApi.reducerPath]: spotifyApi.reducer,
+	[postApi.reducerPath]: postApi.reducer,
 });
 
 const persistConfig: PersistConfig<ReturnType<typeof rootReducers>> = {
@@ -41,7 +43,7 @@ export const store = configureStore({
 			serializableCheck: {
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
 			},
-		}).concat([spotifyApi.middleware]),
+		}).concat([spotifyApi.middleware, postApi.middleware]),
 });
 
 setupListeners(store.dispatch);
