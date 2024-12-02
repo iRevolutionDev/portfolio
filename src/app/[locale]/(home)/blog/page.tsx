@@ -8,16 +8,18 @@ import {
 	Typography,
 } from "@mui/material";
 import type { Metadata } from "next";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
 
-export const generateMetadata = async ({
-	params: { locale },
-}: {
-	params: { locale: string };
+export const generateMetadata = async (props: {
+	params: Promise<{ locale: string }>;
 }): Promise<Metadata> => {
+	const params = await props.params;
+
+	const { locale } = params;
+
 	const t = await getTranslations({ locale, namespace: "metadata" });
 
 	return {
@@ -26,12 +28,14 @@ export const generateMetadata = async ({
 	};
 };
 
-export default async function BlogMainPage({
-	params: { locale },
-}: {
-	params: { locale: string };
+export default async function BlogMainPage(props: {
+	params: Promise<{ locale: string }>;
 }) {
-	unstable_setRequestLocale(locale);
+	const params = await props.params;
+
+	const { locale } = params;
+
+	setRequestLocale(locale);
 	const t = await getTranslations("pages.blog");
 
 	const response = await fetch(`${env.NEXT_PUBLIC_API_URL}/v1/posts/list`, {

@@ -3,7 +3,7 @@ import {fileURLToPath} from "node:url";
 import createJiti from "jiti";
 
 const jiti = createJiti(fileURLToPath(import.meta.url));
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin("src/i18n/request.ts");
 
 if (process.env.NODE_ENV !== "test") jiti("./src/env");
 

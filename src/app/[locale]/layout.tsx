@@ -1,24 +1,26 @@
-import { locales } from "@/i18n/i18n.config";
 import { Providers } from "@/providers/providers";
-import { unstable_setRequestLocale } from "next-intl/server";
-import type React from "react";
+import type { ReactNode } from "react";
 import "./globals.css";
+import type { Locale } from "@/i18n/i18n.config";
+import { routing } from "@/i18n/routing";
+import { notFound } from "next/navigation";
 
-export function generateStaticParams() {
-	return locales.map((locale) => ({ locale }));
-}
+type Props = {
+	children: ReactNode;
+	params: Promise<{ locale: string }>;
+};
 
-export default function IntlRootLayout({
-	children,
-	params: { locale },
-}: {
-	children: React.ReactNode;
-	params: { locale: string };
-}) {
-	unstable_setRequestLocale(locale);
+export default async function IntlRootLayout(props: Props) {
+	const params = await props.params;
+
+	const { children } = props;
+
+	if (!routing.locales.includes(params.locale as Locale)) {
+		notFound();
+	}
 
 	return (
-		<html lang={locale}>
+		<html lang={params.locale}>
 			<body>
 				<Providers>{children}</Providers>
 			</body>

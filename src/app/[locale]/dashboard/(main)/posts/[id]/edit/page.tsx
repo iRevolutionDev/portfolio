@@ -1,4 +1,5 @@
 "use client";
+import { use } from "react";
 
 import { PostForm, type PostFormData } from "@/components/post-form";
 import {
@@ -18,7 +19,11 @@ type EditPostPageProps = {
 	};
 };
 
-const EditPostPage: FC<EditPostPageProps> = ({ params: { id } }) => {
+const EditPostPage: FC<EditPostPageProps> = (props) => {
+	const params = use(props.params);
+
+	const { id } = params;
+
 	const t = useTranslations("pages.dashboard.posts.edit");
 
 	const [editPost] = useUpdatePostMutation();

@@ -1,12 +1,13 @@
 import { ReduxProvider } from "@/providers/redux-provider";
+import { SessionProvider } from "@/providers/session-provider";
 import { SnackbarProvider } from "@/providers/snackbar-provider";
 import ThemeRegistry from "@/theme/theme-registry";
-import { SessionProvider } from "next-auth/react";
-import { NextIntlClientProvider, useMessages } from "next-intl";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import type { FC, PropsWithChildren } from "react";
 
-export const Providers: FC<PropsWithChildren> = ({ children }) => {
-	const messages = useMessages();
+export const Providers: FC<PropsWithChildren> = async ({ children }) => {
+	const messages = await getMessages();
 
 	return (
 		<NextIntlClientProvider messages={messages}>

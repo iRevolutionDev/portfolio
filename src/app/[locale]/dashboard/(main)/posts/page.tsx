@@ -3,12 +3,16 @@ import { Link } from "@/components/link";
 import { PostsGrid } from "@/components/posts-grid";
 import { env } from "@/env";
 import { Button, Paper, Typography } from "@mui/material";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-export default async function PostsPage({
-	params: { locale },
-}: { params: { locale: string } }) {
-	unstable_setRequestLocale(locale);
+export default async function PostsPage(props: {
+	params: Promise<{ locale: string }>;
+}) {
+	const params = await props.params;
+
+	const { locale } = params;
+
+	setRequestLocale(locale);
 
 	const t = await getTranslations("pages.dashboard.posts");
 

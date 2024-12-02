@@ -6,8 +6,9 @@ import Navbar from "@/templates/navbar/navbar";
 import { Container } from "@mui/material";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import type { PropsWithChildren } from "react";
+import { use } from "react";
 
 export const metadata: Metadata = {
 	metadataBase: SEO.metadataBase,
@@ -15,11 +16,16 @@ export const metadata: Metadata = {
 	openGraph: SEO.openGraph,
 };
 
-export default function Layout({
-	children,
-	params: { locale },
-}: PropsWithChildren<{ params: { locale: string } }>) {
-	unstable_setRequestLocale(locale);
+export default function Layout(
+	props: PropsWithChildren<{ params: Promise<{ locale: string }> }>,
+) {
+	const params = use(props.params);
+
+	const { locale } = params;
+
+	const { children } = props;
+
+	setRequestLocale(locale);
 
 	const t = useTranslations("layout.navbar");
 
@@ -28,7 +34,7 @@ export default function Layout({
 			<LoadingWidget />
 			<Navbar>
 				{Routes.map((route) => (
-					<Navbar.Item key="route" href={route.path}>
+					<Navbar.Item key={`route-${route.name}`} href={route.path}>
 						{t(route.name as never)}
 					</Navbar.Item>
 				))}

@@ -10,14 +10,18 @@ import {
 	Typography,
 } from "@mui/material";
 import type { Metadata } from "next";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { BiGitRepoForked } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 
-export const generateMetadata = async ({
-	params: { locale },
-}: { params: { locale: string } }): Promise<Metadata> => {
+export const generateMetadata = async (props: {
+	params: Promise<{ locale: string }>;
+}): Promise<Metadata> => {
+	const params = await props.params;
+
+	const { locale } = params;
+
 	const t = await getTranslations({ locale, namespace: "metadata" });
 	const response = await fetch(
 		"https://api.github.com/users/irevolutiondev/repos",
@@ -47,10 +51,14 @@ export const generateMetadata = async ({
 	};
 };
 
-export default async function ProjectsPage({
-	params: { locale },
-}: { params: { locale: string } }) {
-	unstable_setRequestLocale(locale);
+export default async function ProjectsPage(props: {
+	params: Promise<{ locale: string }>;
+}) {
+	const params = await props.params;
+
+	const { locale } = params;
+
+	setRequestLocale(locale);
 
 	const response = await fetch(
 		"https://api.github.com/users/irevolutiondev/repos",

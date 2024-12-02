@@ -1,7 +1,7 @@
 import type { User } from "@/@types/user";
 import { env } from "@/env";
-import Credentials from "@auth/core/providers/credentials";
 import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
 	providers: [
@@ -16,7 +16,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 					type: "password",
 				},
 			},
-			authorize: async ({ email, password }) => {
+			authorize: async (credentials) => {
 				const response = await fetch(
 					`${env.NEXT_PUBLIC_API_URL}/v1/auth/login`,
 					{
@@ -24,9 +24,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: JSON.stringify({ email, password }),
+						body: JSON.stringify({ ...credentials }),
 					},
 				);
+
+				console.log(response);
 
 				if (!response.ok) {
 					return null;
@@ -76,7 +78,7 @@ declare module "next-auth" {
 	}
 }
 
-declare module "@auth/core/jwt" {
+declare module "next-auth/jwt" {
 	interface JWT {
 		access_token: string;
 	}

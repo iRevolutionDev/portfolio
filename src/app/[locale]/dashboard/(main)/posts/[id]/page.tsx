@@ -1,19 +1,23 @@
 import type { PostModel } from "@/@types/models/post-model";
 import { PostForm } from "@/components/post-form";
 import { env } from "@/env";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 type PostPreviewViewPageProps = {
-	params: {
+	params: Promise<{
 		id: string;
 		locale: string;
-	};
+	}>;
 };
 
-export default async function PostPreviewViewPage({
-	params: { id, locale },
-}: PostPreviewViewPageProps) {
-	unstable_setRequestLocale(locale);
+export default async function PostPreviewViewPage(
+	props: PostPreviewViewPageProps,
+) {
+	const params = await props.params;
+
+	const { id, locale } = params;
+
+	setRequestLocale(locale);
 
 	const t = await getTranslations("pages.dashboard.posts.preview");
 

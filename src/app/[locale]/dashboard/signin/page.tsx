@@ -2,13 +2,17 @@ import { auth } from "@/auth";
 import { SignInForm } from "@/components/signin-form";
 import { DASHBOARD_HOME_PATH } from "@/constants/routes";
 import { Card } from "@mui/material";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { RedirectType, redirect } from "next/navigation";
 
-export default async function SignIn({
-	params: { locale },
-}: { params: { locale: string } }) {
-	unstable_setRequestLocale(locale);
+export default async function SignIn(props: {
+	params: Promise<{ locale: string }>;
+}) {
+	const params = await props.params;
+
+	const { locale } = params;
+
+	setRequestLocale(locale);
 
 	const t = await getTranslations("pages.dashboard.signIn");
 	const session = await auth();

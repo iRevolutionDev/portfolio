@@ -7,12 +7,15 @@ import { TitleWithColor } from "@/components/title-with-color";
 import { LocationOn } from "@mui/icons-material";
 import { Divider, Stack, Typography } from "@mui/material";
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-export const generateMetadata = async ({
-	params: { locale },
-}: { params: { locale: string } }): Promise<Metadata> => {
+export const generateMetadata = async (props: {
+	params: Promise<{ locale: string }>;
+}): Promise<Metadata> => {
+	const params = await props.params;
+
+	const { locale } = params;
+
 	const t = await getTranslations({ locale, namespace: "metadata" });
 
 	return {
@@ -25,12 +28,16 @@ export const generateMetadata = async ({
 	};
 };
 
-export default function Page({
-	params: { locale },
-}: { params: { locale: string } }) {
-	unstable_setRequestLocale(locale);
+export default async function Page(props: {
+	params: Promise<{ locale: string }>;
+}) {
+	const params = await props.params;
 
-	const t = useTranslations("pages.home");
+	const { locale } = params;
+
+	setRequestLocale(locale);
+
+	const t = await getTranslations("pages.home");
 
 	return (
 		<Stack direction="column" spacing={4}>

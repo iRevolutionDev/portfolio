@@ -6,11 +6,13 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-export const generateMetadata = async ({
-	params: { id },
-}: {
-	params: { id: string };
+export const generateMetadata = async (props: {
+	params: Promise<{ id: string }>;
 }): Promise<Metadata> => {
+	const params = await props.params;
+
+	const { id } = params;
+
 	const response = await fetch(
 		`${env.NEXT_PUBLIC_API_URL}/v1/posts/get/${id}`,
 		{
@@ -44,9 +46,13 @@ export const generateMetadata = async ({
 	};
 };
 
-export default async function BlogPage({
-	params: { id },
-}: { params: { id: string } }) {
+export default async function BlogPage(props: {
+	params: Promise<{ id: string }>;
+}) {
+	const params = await props.params;
+
+	const { id } = params;
+
 	const t = await getTranslations("pages.blog");
 
 	const response = await fetch(
