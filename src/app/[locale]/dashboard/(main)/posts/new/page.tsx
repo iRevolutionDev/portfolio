@@ -22,8 +22,6 @@ export default function NewPostPage() {
 			title,
 			content,
 			published,
-			created_at: new Date().toISOString(),
-			updated_at: new Date().toISOString(),
 		})
 			.unwrap()
 			.then(() => {

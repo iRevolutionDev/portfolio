@@ -1,5 +1,5 @@
 "use client";
-import { use } from "react";
+import type { FC } from "react";
 
 import { PostForm, type PostFormData } from "@/components/post-form";
 import {
@@ -10,17 +10,14 @@ import { CircularProgress } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
-import type { FC } from "react";
 import type { SubmitHandler } from "react-hook-form";
 
 type EditPostPageProps = {
-	params: {
-		id: string;
-	};
+	params: Promise<{ id: string }>;
 };
 
-const EditPostPage: FC<EditPostPageProps> = (props) => {
-	const params = use(props.params);
+const EditPostPage: FC<EditPostPageProps> = async (props) => {
+	const params = await props.params;
 
 	const { id } = params;
 

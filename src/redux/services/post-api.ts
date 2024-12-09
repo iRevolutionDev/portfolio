@@ -24,7 +24,10 @@ export const postApi = createApi({
 		listPost: builder.query<Posts, void>({
 			query: () => ({ url: "/list" }),
 		}),
-		createPost: builder.mutation<PostModel, Omit<PostModel, "id" | "author">>({
+		createPost: builder.mutation<
+			PostModel,
+			Omit<PostModel, "id" | "author" | "created_at" | "updated_at">
+		>({
 			query: (post) => ({
 				url: "/create",
 				options: {
