@@ -5,7 +5,7 @@ import type { Terminal } from "@/features/terminal/terminal";
 
 export class TerminalStorage {
 	constructor(private terminal: Terminal) {
-		this.setup().catch((e) => this.terminal.error(e.message));
+		this.setup().catch((e: Error) => this.terminal.error(e.message));
 	}
 
 	private async setup() {
