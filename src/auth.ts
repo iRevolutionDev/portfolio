@@ -53,6 +53,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 		async session({ session, token }) {
 			const signedIn = !!token;
 
+			console.log(env.NEXT_PUBLIC_API_URL);
+
 			if (signedIn) {
 				// @ts-ignore - This is a hack to get around the fact that the session object is not typed
 				session.user = token as User;
