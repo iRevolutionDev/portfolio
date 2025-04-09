@@ -1,4 +1,3 @@
-import { Circle } from "@/components/circle";
 import {
 	JobContainer,
 	JobItem,
@@ -50,7 +49,7 @@ const Item: FC<PropsWithChildren<JobDetailsCardItemProps>> = ({
 						alignItems="center"
 						sx={{ padding: 2 }}
 					>
-						<Circle />
+						<span className="w-2 h-2 rounded-full bg-primary" />
 						<Typography variant="body1" className="opacity-60">
 							{position}
 						</Typography>
