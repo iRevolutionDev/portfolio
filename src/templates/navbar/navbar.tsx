@@ -31,19 +31,19 @@ const Navbar: FC<PropsWithChildren> & Extensions = ({ children }) => {
 	return (
 		<>
 			<nav className="my-5 hidden md:block">
-				<Stack direction="row">
+				<Stack direction="row" justifyContent="space-between">
 					<Stack direction="row" spacing={2}>
 						{children}
 					</Stack>
 
 					<Grid container justifyContent="flex-end" spacing={2}>
-						<Grid item>
+						<Grid>
 							<SpotifyWatcher />
 						</Grid>
-						<Grid item>
+						<Grid>
 							<ToggleThemeButton />
 						</Grid>
-						<Grid item>
+						<Grid>
 							<LanguageSwitch />
 						</Grid>
 					</Grid>
@@ -55,7 +55,7 @@ const Navbar: FC<PropsWithChildren> & Extensions = ({ children }) => {
 					<Toolbar>
 						<MenuButton />
 						<Grid container justifyContent="flex-end">
-							<Grid item>
+							<Grid>
 								<SpotifyWatcher />
 							</Grid>
 						</Grid>

@@ -3,7 +3,6 @@ import { JobDetailsCard } from "@/components/job-details-card/job-details-card";
 import { Location } from "@/components/location-card/location-card";
 import { SocialLinks } from "@/components/social-links";
 import { TechnologyList } from "@/components/technology-list";
-import { TitleWithColor } from "@/components/title-with-color";
 import { LocationOn } from "@mui/icons-material";
 import { Divider, Stack, Typography } from "@mui/material";
 import type { Metadata } from "next";
@@ -70,7 +69,10 @@ export default async function Page(props: {
 					>
 						<h3 className="text-4xl md:text-6xl font-bold">
 							{t("presentation.title")} <br />
-							<TitleWithColor>Revolution</TitleWithColor>.
+							<span className="text-4xl md:text-6xl font-bold text-primary">
+								Revolution
+							</span>
+							.
 						</h3>
 						<h2 className="text-4xl md:text-6xl font-bold">👋</h2>
 					</Stack>

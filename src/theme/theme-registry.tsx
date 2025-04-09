@@ -1,5 +1,5 @@
 import { theme } from "@/theme/theme-colors";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
 import InitColorSchemeScript from "@mui/system/InitColorSchemeScript";

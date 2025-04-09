@@ -114,7 +114,7 @@ export default async function ProjectsPage(props: {
 														{repo.language}
 													</Typography>
 													<Grid container spacing={1} alignItems="center">
-														<Grid item>
+														<Grid>
 															<Stack
 																direction="row"
 																spacing={1}
@@ -129,7 +129,7 @@ export default async function ProjectsPage(props: {
 																</Typography>
 															</Stack>
 														</Grid>
-														<Grid item>
+														<Grid>
 															<Stack
 																direction="row"
 																spacing={1}

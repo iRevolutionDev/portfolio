@@ -1,8 +1,11 @@
 "use client";
 
-import { extendTheme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
-export const theme = extendTheme({
+export const theme = createTheme({
+	cssVariables: {
+		colorSchemeSelector: "class",
+	},
 	colorSchemes: {
 		light: {
 			palette: {
