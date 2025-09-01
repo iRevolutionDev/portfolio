@@ -20,7 +20,7 @@ async fn main(
     #[shuttle_shared_db::Postgres()] pool: PgPool,
     #[shuttle_runtime::Secrets()] secrets: SecretStore,
 ) -> shuttle_axum::ShuttleAxum {
-    // init_tracing();
+    //init_tracing();
 
     init_vars(&secrets);
 
