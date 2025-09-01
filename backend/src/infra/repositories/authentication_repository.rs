@@ -2,13 +2,15 @@ use crate::domain::models::authentication::{AuthError, Claims};
 use crate::domain::models::user::User;
 use axum::extract::FromRequestParts;
 use axum::http::request::Parts;
-use axum::{async_trait, RequestPartsExt};
+use axum::RequestPartsExt;
 use axum_extra::headers::authorization::Bearer;
 use axum_extra::headers::Authorization;
 use axum_extra::TypedHeader;
 use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
 use once_cell::sync::Lazy;
+use std::future::Future;
 use std::time::SystemTime;
+use shuttle_runtime::async_trait;
 
 static KEYS: Lazy<Keys> = Lazy::new(|| {
     let secret = std::env::var("JWT_SECRET").expect("JWT_SECRET must be set");
@@ -34,18 +36,20 @@ impl<S> FromRequestParts<S> for Claims
 where
     S: Send + Sync,
 {
-    type Rejection = AuthError;
-
-    async fn from_request_parts(parts: &mut Parts, _state: &S) -> Result<Self, Self::Rejection> {
-        let TypedHeader(Authorization(bearer)) = parts
-            .extract::<TypedHeader<Authorization<Bearer>>>()
-            .await
-            .map_err(|_| AuthError::InvalidToken)?;
-
-        let token_data = decode::<Claims>(bearer.token(), &KEYS.decoding, &Validation::default())
-            .map_err(|_| AuthError::InvalidToken)?;
-
-        Ok(token_data.claims)
+    type Rejection = AuthError;    
+    
+    fn from_request_parts(parts: &mut Parts, _state: &S) -> impl Future<Output = Result<Self, Self::Rejection>> + Send {
+        async move {
+            let TypedHeader(Authorization(bearer)) = parts
+                .extract::<TypedHeader<Authorization<Bearer>>>()
+                .await
+                .map_err(|_| AuthError::InvalidToken)?;
+        
+            let token_data = decode::<Claims>(bearer.token(), &KEYS.decoding, &Validation::default())
+                .map_err(|_| AuthError::InvalidToken)?;
+        
+            Ok(token_data.claims)
+        }
     }
 }
 

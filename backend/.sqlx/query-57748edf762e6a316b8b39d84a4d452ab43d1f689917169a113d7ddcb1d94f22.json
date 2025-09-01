@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        SELECT * FROM posts WHERE id = $1\n        ",
+  "query": "\n        SELECT id, title, content, image_url, user_id, published, created_at, updated_at\n        FROM posts\n        WHERE ($1::text IS NULL OR title ILIKE $1)\n        AND ($2::text IS NULL OR content ILIKE $2)\n        LIMIT $3 OFFSET $4\n        ",
   "describe": {
     "columns": [
       {
@@ -21,7 +21,7 @@
       {
         "ordinal": 3,
         "name": "image_url",
-        "type_info": "Varchar"
+        "type_info": "Text"
       },
       {
         "ordinal": 4,
@@ -46,7 +46,10 @@
     ],
     "parameters": {
       "Left": [
-        "Int4"
+        "Text",
+        "Text",
+        "Int8",
+        "Int8"
       ]
     },
     "nullable": [
@@ -60,5 +63,5 @@
       true
     ]
   },
-  "hash": "af5af589e2d0297b2e7b35d28c3abcdf0491b4ade969b0231450f462dfff7c91"
+  "hash": "57748edf762e6a316b8b39d84a4d452ab43d1f689917169a113d7ddcb1d94f22"
 }

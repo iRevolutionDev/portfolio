@@ -34,9 +34,9 @@ fn authentication_routes(state: AppState) -> Router<AppState> {
 fn posts_routes(state: AppState) -> Router<AppState> {
     Router::new()
         .route("/create", post(create_post))
-        .route("/delete/:post_id", post(delete_post))
-        .route("/update/:post_id", post(update_post))
-        .route("/get/:post_id", get(get_post))
+        .route("/delete/{post_id}", post(delete_post))
+        .route("/update/{post_id}", post(update_post))
+        .route("/get/{post_id}", get(get_post))
         .route("/list", get(list_posts))
         .with_state(state)
 }

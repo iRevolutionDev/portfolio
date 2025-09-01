@@ -1,5 +1,6 @@
 use crate::domain::models::post::{Post, PostError};
 use serde::Deserialize;
+use tracing::log;
 
 pub struct NewDbPost {
     pub title: String,
@@ -21,7 +22,9 @@ pub async fn create(pool: &sqlx::PgPool, post: NewDbPost) -> Result<Post, PostEr
     let post = sqlx::query_as!(
         Post,
         r#"
-        INSERT INTO posts (title, content, image_url, user_id, published) VALUES ($1, $2, $3, $4, $5) RETURNING *
+        INSERT INTO posts (title, content, image_url, user_id, published) 
+        VALUES ($1, $2, $3, $4, $5) 
+        RETURNING id, title, content, image_url, user_id, published, created_at, updated_at
         "#,
         post.title,
         post.content,
@@ -31,6 +34,7 @@ pub async fn create(pool: &sqlx::PgPool, post: NewDbPost) -> Result<Post, PostEr
     )
         .fetch_one(pool)
         .await
+        .inspect_err(|err| log::error!("Failed to create post: {}", err.to_string()))
         .map_err(|_| PostError::InternalServerError)?;
 
     Ok(post)
@@ -40,7 +44,8 @@ pub async fn get(pool: &sqlx::PgPool, post_id: i32) -> Result<Post, PostError> {
     let post = sqlx::query_as!(
         Post,
         r#"
-        SELECT * FROM posts WHERE id = $1
+        SELECT id, title, content, image_url, user_id, published, created_at, updated_at 
+        FROM posts WHERE id = $1
         "#,
         post_id
     )
@@ -55,10 +60,12 @@ pub async fn update(pool: &sqlx::PgPool, post_id: i32, post: NewDbPost) -> Resul
     let post = sqlx::query_as!(
         Post,
         r#"
-        UPDATE posts SET title = $1, content = $2, user_id = $3, published = $4 WHERE id = $5 RETURNING *
+        UPDATE posts SET title = $1, content = $2, image_url = $3, user_id = $4, published = $5 WHERE id = $6 
+        RETURNING id, title, content, image_url, user_id, published, created_at, updated_at
         "#,
         post.title,
         post.content,
+        post.image_url,
         post.user_id,
         post.published,
         post_id
@@ -88,7 +95,8 @@ pub async fn get_all(pool: &sqlx::PgPool, filter: PostFilter) -> Result<Vec<Post
     let posts = sqlx::query_as!(
         Post,
         r#"
-        SELECT * FROM posts
+        SELECT id, title, content, image_url, user_id, published, created_at, updated_at
+        FROM posts
         WHERE ($1::text IS NULL OR title ILIKE $1)
         AND ($2::text IS NULL OR content ILIKE $2)
         LIMIT $3 OFFSET $4
@@ -100,6 +108,7 @@ pub async fn get_all(pool: &sqlx::PgPool, filter: PostFilter) -> Result<Vec<Post
     )
         .fetch_all(pool)
         .await
+        .inspect_err(|err| log::error!("Failed to fetch posts: {}", err.to_string()))
         .map_err(|_| PostError::InternalServerError)?;
 
     Ok(posts)

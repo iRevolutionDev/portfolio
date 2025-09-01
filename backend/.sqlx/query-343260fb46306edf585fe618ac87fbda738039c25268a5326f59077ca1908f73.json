@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        SELECT * FROM posts\n        WHERE ($1::text IS NULL OR title ILIKE $1)\n        AND ($2::text IS NULL OR content ILIKE $2)\n        LIMIT $3 OFFSET $4\n        ",
+  "query": "\n        UPDATE posts SET title = $1, content = $2, image_url = $3, user_id = $4, published = $5 WHERE id = $6 \n        RETURNING id, title, content, image_url, user_id, published, created_at, updated_at\n        ",
   "describe": {
     "columns": [
       {
@@ -21,7 +21,7 @@
       {
         "ordinal": 3,
         "name": "image_url",
-        "type_info": "Varchar"
+        "type_info": "Text"
       },
       {
         "ordinal": 4,
@@ -46,10 +46,12 @@
     ],
     "parameters": {
       "Left": [
+        "Varchar",
         "Text",
         "Text",
-        "Int8",
-        "Int8"
+        "Int4",
+        "Bool",
+        "Int4"
       ]
     },
     "nullable": [
@@ -63,5 +65,5 @@
       true
     ]
   },
-  "hash": "288e1b2b4285c0e2a997d435102e9e674d49cf0cae0a80e18eb93a8c5c95bc96"
+  "hash": "343260fb46306edf585fe618ac87fbda738039c25268a5326f59077ca1908f73"
 }

@@ -7,6 +7,7 @@ use crate::utils::extractors::json_transformer::JsonExtractor;
 use crate::AppState;
 use axum::extract::State;
 use axum::Json;
+use tracing::log;
 
 pub async fn create_post(
     claims: Claims,
@@ -17,12 +18,18 @@ pub async fn create_post(
 
     if image_url.is_none() {
         let random_image = reqwest::get("https://picsum.photos/800/600")
-            .await
-            .map_err(|_| PostError::InternalServerError)?
-            .url()
-            .to_string();
-
-        image_url = Some(random_image);
+            .await;
+        
+        image_url = match random_image {
+            Ok(response) => {
+                if response.status().is_success() {
+                    Some(response.url().to_string())
+                } else {
+                    None
+                }
+            }
+            Err(_) => None,
+        };
     }
 
     let created_post = post_repository::create(&state.pool, NewDbPost {
@@ -33,6 +40,7 @@ pub async fn create_post(
         published: post.published.unwrap_or(false),
     })
         .await
+        .inspect_err(|err| log::error!("{:?}", err))
         .map_err(|_| PostError::InternalServerError)?;
 
     let user = user_repository::get(&state.pool, created_post.user_id)
