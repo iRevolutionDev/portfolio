@@ -1,4 +1,3 @@
-import type { Technology } from "@/@types/technology";
 import {
 	BiLogoCPlusPlus,
 	BiLogoFlutter,
@@ -11,11 +10,13 @@ import {
 	BiLogoTypescript,
 } from "react-icons/bi";
 import { FaJava } from "react-icons/fa";
-import { SiCsharp, SiKotlin, SiLua, SiRust } from "react-icons/si";
+import { SiKotlin, SiLua, SiRust } from "react-icons/si";
+import { TbBrandCSharp } from "react-icons/tb";
+import type { Technology } from "@/@types/technology";
 
 export const Technologies: Technology[] = [
 	{ name: "C++", icon: <BiLogoCPlusPlus fontSize={40} /> },
-	{ name: "C#", icon: <SiCsharp fontSize={32} /> },
+	{ name: "C#", icon: <TbBrandCSharp fontSize={32} /> },
 	{ name: "Rust", icon: <SiRust fontSize={32} /> },
 	{ name: "Java", icon: <FaJava fontSize={32} /> },
 	{ name: "Kotlin", icon: <SiKotlin fontSize={32} /> },
